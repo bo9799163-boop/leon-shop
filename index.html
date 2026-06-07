@@ -7,511 +7,460 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg-color: #05020c;
-            --card-bg: #0d061f;
-            --primary-purple: #7c3aed;
-            --neon-glow: #a855f7;
-            --neon-blue: #00f0ff;
-            --text-color: #ffffff;
-            --neon-green: #39ff14;
-            --container-padding: 40px;
+            --bg-dark: #06020f;
+            --bg-card: rgba(20, 10, 38, 0.65);
+            --border-purple: #4c1d95;
+            --neon-purple: #bf5af2;
+            --neon-blue: #0a84ff;
+            --neon-green: #30d158;
+            --text-main: #ffffff;
+            --text-muted: #a29bfe;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            background-color: var(--bg-dark);
+            background-image: radial-gradient(circle at 50% 0%, #1e0b36 0%, var(--bg-dark) 70%);
+            color: var(--text-main);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
             overflow-x: hidden;
-            transition: all 0.3s ease;
         }
 
-        /* شريط التنقل */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 5%;
-            background-color: rgba(13, 6, 31, 0.98);
-            border-bottom: 2px solid var(--primary-purple);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .logo {
-            font-size: 2rem;
-            font-weight: 900;
-            color: var(--text-color);
-            text-shadow: 0 0 15px var(--neon-glow);
-            cursor: pointer;
+        /* 🌌 الهيدر العلوي الفخم */
+        .hero-header {
+            text-align: center;
+            padding: 60px 20px 40px 20px;
             position: relative;
         }
-        .logo span { color: var(--neon-glow); }
-        .logo::after {
-            content: 'فاهمني';
-            position: absolute;
-            bottom: -12px;
-            left: 0;
-            font-size: 0.75rem;
-            color: var(--neon-blue);
-            text-shadow: 0 0 5px var(--neon-blue);
+        .hero-logo {
+            font-size: 2.8rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px var(--neon-purple);
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+        .hero-logo span { color: var(--neon-purple); }
+        .hero-subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+        .hero-tags {
+            display: inline-block;
+            background: rgba(191, 90, 242, 0.15);
+            border: 1px solid var(--neon-purple);
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            color: #e5c7ff;
         }
 
-        nav ul { display: flex; list-style: none; gap: 25px; margin: 0; padding: 0; }
-        nav ul li a { color: #e2e8f0; text-decoration: none; font-weight: bold; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: var(--container-padding) 20px; }
-        
-        .section-title { 
-            font-size: 1.8rem; 
-            margin-bottom: 30px; 
-            display: flex; 
-            align-items: center; 
-            gap: 15px; 
-            border-right: 5px solid var(--neon-blue); 
-            padding-right: 15px;
-        }
-
-        /* شريط العروض الأفقي */
-        .offers-slider {
+        /* 🟣 شريط العروض العلوي النيون */
+        .section-divider {
+            text-align: center;
+            margin: 40px 0 25px 0;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--text-main);
+            position: relative;
             display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        .section-divider::before, .section-divider::after {
+            content: '';
+            html: '';
+            height: 2px;
+            width: 80px;
+            background: linear-gradient(90deg, transparent, var(--neon-purple), transparent);
+        }
+
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 20px;
-            overflow-x: auto;
-            padding-bottom: 20px;
             margin-bottom: 40px;
         }
-        .offer-card { 
-            min-width: 340px; 
-            background: linear-gradient(135deg, #2e1065, #12092e); 
-            border: 2px solid var(--neon-glow); 
-            border-radius: 15px; 
-            padding: 30px; 
+        .offer-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-purple);
+            border-radius: 12px;
+            padding: 20px;
             text-align: center;
-            background-size: cover;
-            background-position: center;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
         }
-
-        /* 🌟 شبكة المكعبات الأربعة الرئيسية الفخمة */
-        .categories-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 60px;
-        }
-
-        .category-card {
-            background: linear-gradient(135deg, #13092e, #0d061f);
-            border: 2px solid var(--primary-purple);
-            border-radius: 15px;
-            padding: 30px 20px;
-            text-align: center;
-            transition: 0.3s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .category-card:hover { 
-            transform: translateY(-10px); 
-            border-color: var(--neon-blue); 
-            box-shadow: 0 0 30px rgba(0, 240, 255, 0.4); 
-        }
-        
-        .cube-img {
-            width: 100%;
-            height: 150px;
-            border-radius: 10px;
-            background-size: cover;
-            background-position: center;
-            margin-bottom: 15px;
-            border: 1px solid rgba(0, 240, 255, 0.2);
-        }
-
-        .category-card i { font-size: 2.5rem; color: var(--neon-blue); margin-bottom: 15px; text-shadow: 0 0 10px var(--neon-blue); }
-        .category-card h3 { margin: 0 0 10px 0; font-size: 1.3rem; color: #fff; }
-        .category-card p { font-size: 0.9rem; color: #cbd5e1; margin-bottom: 15px; line-height: 1.4; flex-grow: 1; }
-        .cube-price { font-size: 1.4rem; color: var(--neon-green); font-weight: bold; margin-bottom: 15px; text-shadow: 0 0 5px rgba(57, 255, 20, 0.3); }
-
-        .btn-neon {
-            background: linear-gradient(45deg, var(--primary-purple), var(--neon-glow));
+        .badge-discount {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--neon-purple);
             color: white;
-            border: none;
-            padding: 12px 25px;
+            font-size: 0.8rem;
             font-weight: bold;
-            border-radius: 20px;
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+
+        /* 🎮 شبكة المكعبات الأربعة الرئيسية الفخمة */
+        .cubes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(48%, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+        @media (max-width: 768px) { .cubes-grid { grid-template-columns: 1fr; } }
+
+        .cube-item {
+            background: linear-gradient(135deg, rgba(25, 12, 48, 0.8), rgba(13, 6, 26, 0.8));
+            border: 1px solid var(--border-purple);
+            border-radius: 16px;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .cube-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 25px rgba(191, 90, 242, 0.25);
+        }
+        .cube-right-content { flex: 1; padding-left: 15px; }
+        .cube-right-content h3 { margin: 0 0 8px 0; font-size: 1.4rem; color: #fff; }
+        .cube-right-content p { margin: 0 0 15px 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; }
+        
+        /* أيقونات الأقسام الكبيرة */
+        .cube-left-icon {
+            font-size: 3.5rem;
+            color: var(--neon-purple);
+            opacity: 0.8;
+            margin-right: 15px;
+            min-width: 80px;
+            text-align: center;
+        }
+        /* لون خاص لشعار سوني البلايستيشن */
+        .sony-blue-icon {
+            color: #003087 !important;
+            text-shadow: 0 0 15px rgba(0, 48, 135, 0.6);
+        }
+
+        .btn-browse {
+            background: rgba(191, 90, 242, 0.12);
+            border: 1px solid var(--neon-purple);
+            color: #f3e8ff;
+            padding: 8px 20px;
+            border-radius: 8px;
             cursor: pointer;
-            box-shadow: 0 0 15px var(--primary-purple);
-            width: 100%;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-browse:hover {
+            background: var(--neon-purple);
+            color: white;
         }
 
-        /* مربع الآراء والوصف بالأسفل */
-        .interactive-section {
-            background: linear-gradient(135deg, #180b3a, #0d061f);
-            padding: 40px;
-            border-radius: 20px;
-            border: 2px solid var(--primary-purple);
-            margin-top: 40px;
+        /* 📋 شريط المميزات الأربعة الصغير */
+        .features-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            background: rgba(13, 6, 26, 0.8);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            text-align: center;
         }
-        .interactive-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
-        .interactive-card { background-color: rgba(13, 6, 31, 0.7); padding: 25px; border-radius: 12px; border: 1px solid var(--neon-glow); text-align: center; }
-        .interactive-card h4 { margin: 0 0 10px 0; color: var(--neon-blue); font-size: 1.2rem; }
+        .feature-box i { color: var(--neon-purple); font-size: 1.3rem; margin-bottom: 8px; }
+        .feature-box div { font-size: 0.85rem; color: #fff; font-weight: bold; }
+        .feature-box span { font-size: 0.75rem; color: var(--text-muted); }
 
-        /* 📄 الشاشة الثانية: صفحة الشراء المستقلة وتعبئة البيانات */
+        /* 📄 صفحة الشراء المستقلة الثانية */
         #purchaseView {
             display: none;
-            max-width: 600px;
+            max-width: 550px;
             margin: 60px auto;
-            padding: 40px;
-            background-color: var(--card-bg);
-            border-radius: 20px;
-            border: 2px solid var(--neon-blue);
-            box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
+            padding: 35px;
+            background-color: #0d061a;
+            border-radius: 16px;
+            border: 1px solid var(--neon-purple);
+            box-shadow: 0 0 30px rgba(191, 90, 242, 0.2);
         }
-        .purchase-header { text-align: center; margin-bottom: 30px; }
-        .purchase-header h2 { color: var(--neon-blue); margin: 0; }
-        .product-summary-box { background: #05020c; padding: 20px; border-radius: 10px; border: 1px dashed var(--primary-purple); margin-bottom: 25px; }
         .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; color: #d8b4fe; font-weight: bold; }
-        .form-group input, .form-group select { width: 100%; padding: 14px; background-color: #05020c; border: 1px solid var(--primary-purple); border-radius: 8px; color: white; box-sizing: border-box; }
-        .btn-submit-order { background: linear-gradient(45deg, #28a745, var(--neon-green)); color: black; font-weight: bold; font-size: 1.1rem; border: none; padding: 15px; width: 100%; border-radius: 8px; cursor: pointer; box-shadow: 0 0 15px var(--neon-green); }
-        .btn-back-store { background: transparent; color: #cbd5e1; border: 1px solid #cbd5e1; padding: 10px; width: 100%; border-radius: 8px; cursor: pointer; margin-top: 10px; }
-
-        /* 📊 شاشة الإدارة الاحترافية الكاملة */
-        #adminView {
-            display: none;
-            padding: 50px 8%;
-            background-color: #04020a;
-            min-height: 100vh;
+        .form-group label { display: block; margin-bottom: 8px; color: var(--text-muted); font-size: 0.9rem; }
+        .form-group input, .form-group select { width: 100%; padding: 12px; background: #05020a; border: 1px solid var(--border-purple); border-radius: 8px; color: white; box-sizing: border-box; }
+        
+        /* 💳 فوتر طرق الدفع الصغير والأنيق جداً */
+        footer {
+            background: #030107;
+            padding: 30px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            margin-top: 60px;
         }
-        .admin-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--neon-blue); padding-bottom: 20px; margin-bottom: 40px; }
-        .management-section { background-color: var(--card-bg); border-radius: 15px; padding: 35px; border: 2px solid rgba(168, 85, 247, 0.4); margin-bottom: 40px; }
-        .file-label { display: inline-block; background: #251442; color: #00f0ff; padding: 12px 25px; border-radius: 8px; cursor: pointer; border: 1px solid var(--neon-blue); font-weight: bold; }
+        .payment-section-title {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+        .payment-logos-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            opacity: 0.75;
+        }
+        .payment-logos-container img {
+            height: 18px; /* تصغير حجم الشعارات لتكون متناسقة وأنيقة */
+            object-fit: contain;
+        }
+        .footer-credits { font-size: 0.8rem; color: rgba(255,255,255,0.3); }
 
-        footer { text-align: center; padding: 40px; background-color: #020105; border-top: 2px solid rgba(124, 58, 237, 0.2); color: #64748b; margin-top: 50px; }
+        /* لوحة التحكم */
+        #adminView { display: none; padding: 40px; background: #05020c; min-height: 100vh; }
     </style>
 </head>
 <body>
 
     <div id="storeView">
-        <nav>
-            <div class="logo" id="secretLogo">🦁 LEON<span>SHOP</span></div>
-            <ul>
-                <li><a href="#">الرئيسية</a></li>
-                <li><a href="#categoriesSection">المكعبات الرئيسية</a></li>
-                <li><a href="#reviewsSection">الآراء والشروط</a></li>
-            </ul>
-        </nav>
+        <header class="hero-header">
+            <div class="hero-logo" id="secretLogo">LEON <span>SHOP</span></div>
+            <div class="hero-subtitle">متجر متخصص في بيع حسابات فورتنايت وروكيت ليك</div>
+            <div class="hero-tags">العروض والعملات الآمنة 100%</div>
+        </header>
 
         <div class="container">
             
-            <div class="section-title"><i class="fa-solid fa-fire"></i> عروض متجر ليون المضيئة اليومية</div>
-            <div class="offers-slider" id="offersContainer">
-                <div class="offer-card" style="background-image: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url('https://cdn2.unrealengine.com/fortnite-battle-royale-v24-40-update-key-art-1920x1080-496677943.jpg');">
-                    <h3>شحن العملات الفوري والمضمون</h3>
-                    <p>أرخص أسعار الـ V-Bucks والـ Robux بالخليج مع ضمان كامل</p>
-                    <div style="color: var(--neon-blue); font-weight: bold;">تسليم تلقائي فاهمني؟</div>
+            <div class="section-divider">💥 العروض المتوفرة حالياً</div>
+            <div class="offers-grid">
+                <div class="offer-box">
+                    <span class="badge-discount">خصم 10%</span>
+                    <h4 style="margin: 10px 0 5px 0;">حساب روكيت ليك ميميز</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0 0 10px 0;">سيارات نادرة وعناصر مميزة</p>
+                    <div style="color: var(--neon-green); font-weight: bold; font-size: 1.1rem;">44 SAR</div>
+                </div>
+                <div class="offer-box">
+                    <span class="badge-discount">خصم 15%</span>
+                    <h4 style="margin: 10px 0 5px 0;">حساب فورتنايت نادر</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin: 0 0 10px 0;">سكنات نادرة ورقصات قديمة</p>
+                    <div style="color: var(--neon-green); font-weight: bold; font-size: 1.1rem;">84 SAR</div>
                 </div>
             </div>
 
-            <div class="section-title" id="categoriesSection"><i class="fa-solid fa-cubes"></i> مكعبات المنتجات والأقسام الحالية</div>
-            <div class="categories-grid">
+            <div class="section-divider">🗂️ تصنيفات وأقسام المتجر</div>
+            <div class="cubes-grid">
                 
-                <div class="category-card" id="cubeCard_1">
-                    <div>
-                        <div class="cube-img" id="cubeImg_1" style="background-image: url('https://cdn2.unrealengine.com/14br-consoles-xbox-social-featured-image-1920x1080-809989802.jpg');"></div>
-                        <i class="fa-solid fa-shield-halved" id="cubeIcon_1"></i>
-                        <h3 id="cubeTitle_1">حسابات أساسية مضمونة</h3>
-                        <p id="cubeDesc_1">حسابات فورتنايت أصلية مع إيميلها الأساسي كامل البيانات وضمان شامل ضد السحب فاهمني؟</p>
+                <div class="cube-item">
+                    <div class="cube-right-content">
+                        <h3 id="cubeTitle_1">حسابات روكيت ليك</h3>
+                        <p id="cubeDesc_1">حسابات روكيت ليك بمستويات عالية وعناصر وسيارات نادرة غير مرتبطة.</p>
+                        <button class="btn-browse" onclick="openPurchase('1')">تصفح الحسابات <i class="fa-solid fa-chevron-left"></i></button>
                     </div>
-                    <div>
-                        <div class="cube-price" id="cubePrice_1">120 ر.س</div>
-                        <button class="btn-neon" onclick="triggerCubePurchase(1)">شراء الآن 🎮</button>
-                    </div>
+                    <div class="cube-left-icon"><i class="fa-solid fa-car" id="cubeIcon_1"></i></div>
                 </div>
 
-                <div class="category-card" id="cubeCard_2">
-                    <div>
-                        <div class="cube-img" id="cubeImg_2" style="background-image: url('https://cdn2.unrealengine.com/fortnite-chapter-4-season-2-mega-1920x1080-606041724.jpg');"></div>
-                        <i class="fa-solid fa-square-share-nodes" id="cubeIcon_2"></i>
-                        <h3 id="cubeTitle_2">حسابات مربوطة بـ Epic Games</h3>
-                        <p id="cubeDesc_2">حسابات جاهزة ومربوطة مباشرة على منصة Epic Games لضمان تشغيلها على البي سي والمنصات الأخرى فوراً.</p>
+                <div class="cube-item">
+                    <div class="cube-right-content">
+                        <h3 id="cubeTitle_2">حسابات أساسية</h3>
+                        <p id="cubeDesc_2">حسابات فورتنايت أساسية غير مرتبطة وجاهزة للاستخدام الفوري المباشر.</p>
+                        <button class="btn-browse" onclick="openPurchase('2')">تصفح الحسابات <i class="fa-solid fa-chevron-left"></i></button>
                     </div>
-                    <div>
-                        <div class="cube-price" id="cubePrice_2">95 ر.س</div>
-                        <button class="btn-neon" onclick="triggerCubePurchase(2)">شراء الآن 🎮</button>
-                    </div>
+                    <div class="cube-left-icon"><i class="fa-solid fa-user-shield" id="cubeIcon_2"></i></div>
                 </div>
 
-                <div class="category-card" id="cubeCard_3">
-                    <div>
-                        <div class="cube-img" id="cubeImg_3" style="background-image: url('https://img.redbull.com/images/c_limit,w_1500,h_1000,f_auto,q_auto/redbullcom/2020/4/28/vj98p87eyb9fzwskkndv/rocket-league');"></div>
-                        <i class="fa-solid fa-car-burst" id="cubeIcon_3"></i>
-                        <h3 id="cubeTitle_3">حسابات Rocket League</h3>
-                        <p id="cubeDesc_3">حسابات روكيت ليق أسطورية تحتوي على سيارات نادرة، مخططات، وألقاب وعناصر تضمن هيبتك بالملعب.</p>
+                <div class="cube-item">
+                    <div class="cube-right-content">
+                        <h3 id="cubeTitle_3">الأخرى V-Bucks وأكثر</h3>
+                        <p id="cubeDesc_3">شحن وهدايا V-Box وسكنات وعروض مخصصة للألعاب الرقمية الأخرى المتنوعة.</p>
+                        <button class="btn-browse" onclick="openPurchase('3')">تصفح العروض <i class="fa-solid fa-chevron-left"></i></button>
                     </div>
-                    <div>
-                        <div class="cube-price" id="cubePrice_3">80 ر.س</div>
-                        <button class="btn-neon" onclick="triggerCubePurchase(3)">شراء الآن 🎮</button>
-                    </div>
+                    <div class="cube-left-icon"><i class="fa-solid fa-coins" id="cubeIcon_3"></i></div>
                 </div>
 
-                <div class="category-card" id="cubeCard_4">
-                    <div>
-                        <div class="cube-img" id="cubeImg_4" style="background-image: url('https://progameguides.com/wp-content/uploads/2021/11/Featured-Roblox-How-to-get-Robux.jpg');"></div>
-                        <i class="fa-solid fa-coins" id="cubeIcon_4"></i>
-                        <h3 id="cubeTitle_4">قسم العملات الرقمية والشحن</h3>
-                        <p id="cubeDesc_4">شحن عملات الألعاب المباشر والأخرى المتنوعة مثل V-Bucks و Robux بأفضل الأسعار الرسمية الآمنة.</p>
+                <div class="cube-item">
+                    <div class="cube-right-content">
+                        <h3 id="cubeTitle_4">حسابات مربوطة بسوني</h3>
+                        <p id="cubeDesc_4">حسابات جاهزة ومربوطة بشكل كامل ومباشر على منصة PlayStation / Sony مع ضمان أمان تام.</p>
+                        <button class="btn-browse" onclick="openPurchase('4')">تصفح الحسابات <i class="fa-solid fa-chevron-left"></i></button>
                     </div>
-                    <div>
-                        <div class="cube-price" id="cubePrice_4">45 ر.س</div>
-                        <button class="btn-neon" onclick="triggerCubePurchase(4)">شراء الآن 🎮</button>
-                    </div>
+                    <div class="cube-left-icon sony-blue-icon"><i class="fa-brands fa-playstation" id="cubeIcon_4"></i></div>
                 </div>
 
             </div>
 
-            <div class="interactive-section" id="reviewsSection">
-                <div class="section-title" style="border-right-color: var(--neon-glow);"><i class="fa-solid fa-star"></i> آراء العملاء وتفاصيل الضمان الواضحة</div>
-                <div class="interactive-grid">
-                    <div class="interactive-card">
-                        <h4>⭐ آراء وتقييمات زبائننا</h4>
-                        <p>تثق بنا أكثر من 1,200 عائلة ولاعب في الخليج لسرعة تسليمنا وأمان حساباتنا.</p>
-                    </div>
-                    <div class="interactive-card">
-                        <h4>📜 شروط وقوانين التعويض النظيف</h4>
-                        <p>في حال واجهتك أي مشكلة بالحساب المستلم، يتم استبداله تلقائياً أو إعادة المبلغ لحسابك البنكي.</p>
-                    </div>
+            <div class="features-bar">
+                <div class="feature-box">
+                    <i class="fa-solid fa-bolt"></i>
+                    <div>توصيل فوري</div>
+                    <span>بعد إتمام الطلب مباشرة</span>
+                </div>
+                <div class="feature-box">
+                    <i class="fa-solid fa-shield-cat"></i>
+                    <div>ضمان كامل</div>
+                    <span>على جميع أنواع الحسابات</span>
+                </div>
+                <div class="feature-box">
+                    <i class="fa-solid fa-tags"></i>
+                    <div>أسعار تنافسية</div>
+                    <span>أفضل الأسعار المتوفرة بالسوق</span>
+                </div>
+                <div class="feature-box">
+                    <i class="fa-solid fa-headset"></i>
+                    <div>دعم 24/7</div>
+                    <span>خدمة عملاء متواجدة دائماً</span>
                 </div>
             </div>
 
         </div>
-        <footer>جميع الحقوق محفوظة © 2026 لـ متجر Leon Shop - فاهمني؟</footer>
-    </div>
 
+        <footer>
+            <div class="payment-section-title">طرق الدفع الآمنة</div>
+            <div class="payment-logos-container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/Mada_Logo.svg" alt="Mada">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Apple_Pay_logo.svg" alt="Apple Pay">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/STC_Pay_Logo.svg" alt="STC Pay">
+            </div>
+            <div class="footer-credits">جميع الحقوق محفوظة © 2026 لـ متجر Leon Shop - فاهمني؟</div>
+        </footer>
+    </div>
 
     <div id="purchaseView">
-        <div class="purchase-header">
-            <h2>🛒 صفحة تفاصيل طلبك وإتمام الشراء</h2>
-            <p>أنت الآن تقوم بشراء منتج من متجر ليون شوب</p>
-        </div>
+        <h2 style="color: var(--neon-purple); text-align: center; margin-top: 0;">🛒 إتمام طلبك الآن</h2>
+        <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem;">الرجاء إدخال البيانات المطلوبة لإتمام عملية الربط والتسليم</p>
         
-        <div class="product-summary-box">
-            <div style="font-weight: bold; color: var(--neon-blue); font-size: 1.2rem;" id="purchaseProdName">اسم القسم المعين</div>
-            <div style="margin-top: 10px; color: #cbd5e1; font-size: 0.95rem;" id="purchaseProdDesc">الوصف...</div>
-            <div style="margin-top: 15px; color: var(--neon-green); font-size: 1.5rem; font-weight: bold;" id="purchaseProdPrice">0 ر.س</div>
+        <div style="background: rgba(255,255,255,0.02); padding: 15px; border-radius: 8px; border-right: 4px solid var(--neon-purple); margin-bottom: 25px;">
+            <div id="pName" style="font-weight: bold; font-size: 1.1rem; color: #fff;">اسم القسم</div>
+            <div id="pDesc" style="font-size: 0.85rem; color: var(--text-muted); margin-top: 5px;">الوصف المختار يظهر هنا...</div>
         </div>
 
         <div class="form-group">
-            <label>اسمك الكريم بالكامل:</label>
-            <input type="text" id="buyerName" placeholder="اكتب اسمك هنا...">
+            <label>الاسم الكامل:</label>
+            <input type="text" id="bName" placeholder="اكتب اسمك الثلاثي...">
         </div>
         <div class="form-group">
-            <label>رقم الجوال أو الواتساب للتسليم:</label>
-            <input type="tel" id="buyerPhone" placeholder="مثال: +966500000000">
-        </div>
-        <div class="form-group">
-            <label>اختر نوع بطاقة الدفع البنكي الخاص بك:</label>
-            <select id="paymentMethod">
-                <option value="mada">💳 بطاقة مدى البنكية الفورية</option>
-                <option value="visa">💳 فيزا / ماستركارد (Visa/MasterCard)</option>
-                <option value="apple">🍏 Apple Pay (الدفع السريع)</option>
-            </select>
+            <label>رقم الجوال أو الواتساب (مهم جداً للتسليم):</label>
+            <input type="tel" id="bPhone" placeholder="+966500000000">
         </div>
 
-        <button class="btn-submit-order" onclick="submitFinalOrder()">💳 تأكيد وإتمام عملية الدفع والتحويل التلقائي</button>
-        <button class="btn-back-store" onclick="closePurchasePage()">↩️ إلغاء والعودة لمتجر ليون</button>
+        <button onclick="confirmOrder()" style="background: var(--neon-purple); color: white; border: none; padding: 14px; width: 100%; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; box-shadow: 0 0 15px rgba(191, 90, 242, 0.4);">💳 الانتقال للدفع الفوري والتسليم التلقائي</button>
+        <button onclick="closePurchase()" style="background: transparent; color: var(--text-muted); border: 1px solid rgba(255,255,255,0.1); padding: 10px; width: 100%; border-radius: 8px; margin-top: 10px; cursor: pointer;">العودة للمتجر</button>
     </div>
 
-
     <div id="adminView">
-        <div class="admin-header">
-            <h2>🛡️ لوحة التحكم بالمكعبات الأربعة والخطوط</h2>
-            <button onclick="closeAdminView()" style="background:#dc3545; color:white; border:none; padding:10px 20px; border-radius:8px; cursor:pointer; font-weight:bold;">🚪 خروج والعودة للمتجر</button>
-        </div>
-
-        <div class="management-section">
-            <h3>🎛️ خاصية التحكم وتغيير أسماء ومحتوى المكعبات الأربعة</h3>
-            
+        <h2 style="color: var(--neon-purple); border-bottom: 2px solid var(--border-purple); padding-bottom: 15px;">🛡️ إدارة واجهة المكعبات المستمرة</h2>
+        <div style="background: #110722; padding: 25px; border-radius: 12px; border: 1px solid var(--border-purple);">
             <div class="form-group">
-                <label>اختر المكعب المراد تغيير اسمه ومحتواه الآن:</label>
-                <select id="selectCubeToEdit">
-                    <option value="1">المكعب 1 (فوق يمين)</option>
-                    <option value="2">المكعب 2 (فوق يسار)</option>
-                    <option value="3">المكعب 3 (تحت يمين)</option>
-                    <option value="4">المكعب 4 (تحت يسار)</option>
+                <label>اختر رقم المكعب لتعديل اسمه ومحتوياته:</label>
+                <select id="cubeSelect">
+                    <option value="1">المكعب 1 (روكيت ليك حالياً)</option>
+                    <option value="2">المكعب 2 (حسابات أساسية حالياً)</option>
+                    <option value="3">المكعب 3 (العملات والأخرى حالياً)</option>
+                    <option value="4">المكعب 4 (حسابات سوني حالياً)</option>
                 </select>
             </div>
-            
             <div class="form-group">
-                <label>تغيير اسم المكعب (العنوان الرئيسي):</label>
-                <input type="text" id="editCubeTitle" placeholder="اكتب الاسم الجديد للمكعب هنا...">
+                <label>اسم المكعب الجديد (العنوان الرئيسي للقسم):</label>
+                <input type="text" id="cubeTitleInput" placeholder="اكتب العنوان الجديد للتصنيف...">
             </div>
-
             <div class="form-group">
-                <label>الوصف التفصيلي للمنتج داخل المكعب:</label>
-                <input type="text" id="editCubeDesc" placeholder="اكتب ميزات ووصف الحساب أو العملة هنا...">
+                <label>الوصف الجديد التابع للمكعب:</label>
+                <input type="text" id="cubeDescInput" placeholder="اكتب سطر وصفي جذاب هنا...">
             </div>
-
-            <div class="form-group">
-                <label>السعر الجديد (بالريال السعودي):</label>
-                <input type="number" id="editCubePrice" placeholder="السعر...">
-            </div>
-
-            <div class="form-group">
-                <label>صورة المنتج الجديدة (من ألبوم تليفونك):</label>
-                <input type="file" id="editCubeFile" accept="image/*" style="display:none;">
-                <label for="editCubeFile" class="file-label">📱 افتح الألبوم واختر صورة</label>
-                <span id="cubeFileStatus" style="margin-right:15px; color:var(--neon-blue); font-weight:bold;"></span>
-            </div>
-
-            <button class="btn-action" id="btnApplyCubeEdits" style="background: linear-gradient(45deg, #00f0ff, #a855f7); color: white;">تحديث وحفظ اسم المكعب فوراً 💾</button>
-        </div>
-
-        <div class="management-section">
-            <h3>🎨 التحكم الإضافي بالخط</h3>
-            <div class="form-group">
-                <label>📁 ارفع ملف الخط الخاص بك (TTF / WOFF) من تليفونك:</label>
-                <input type="file" id="fontFileSelector" accept=".ttf,.woff,.woff2" style="display:none;">
-                <label for="fontFileSelector" class="file-label">📱 اختر الخط من ملفاتك</label>
-                <span id="fontUploadStatus" style="margin-right:15px; color:var(--neon-blue); font-weight:bold;"></span>
-            </div>
+            <button onclick="saveCubeEdits()" style="background: var(--neon-purple); color: white; border: none; padding: 12px 25px; border-radius: 8px; font-weight: bold; cursor: pointer;">حفظ وتثبيت البيانات فوراً 💾</button>
+            <button onclick="closeAdmin()" style="background: transparent; color: #fff; border: 1px solid #fff; padding: 12px 25px; border-radius: 8px; margin-right: 10px; cursor: pointer;">خروج</button>
         </div>
     </div>
 
     <script>
-        let clickCount = 0;
-        let tempCubeImgUrl = "";
+        let secretCounter = 0;
 
-        // حفظ وتحديث بيانات المكعبات في الذاكرة لتبقى مستمرة حتى بعد التحديث
+        // تحميل البيانات المحفوظة للمكعبات لضمان استمراريتها الدائمة
         window.addEventListener('DOMContentLoaded', () => {
             for (let i = 1; i <= 4; i++) {
-                if(localStorage.getItem(`cubeTitle_${i}`)) document.getElementById(`cubeTitle_${i}`).innerText = localStorage.getItem(`cubeTitle_${i}`);
-                if(localStorage.getItem(`cubeDesc_${i}`)) document.getElementById(`cubeDesc_${i}`).innerText = localStorage.getItem(`cubeDesc_${i}`);
-                if(localStorage.getItem(`cubePrice_${i}`)) document.getElementById(`cubePrice_${i}`).innerText = localStorage.getItem(`cubePrice_${i}`);
-                if(localStorage.getItem(`cubeImg_${i}`)) {
-                    document.getElementById(`cubeImg_${i}`).style.backgroundImage = `url('${localStorage.getItem(`cubeImg_${i}`)}')`;
-                    document.getElementById(`cubeIcon_${i}`).style.display = 'none';
-                }
+                if(localStorage.getItem(`cTitle_${i}`)) document.getElementById(`cubeTitle_${i}`).innerText = localStorage.getItem(`cTitle_${i}`);
+                if(localStorage.getItem(`cDesc_${i}`)) document.getElementById(`cubeDesc_${i}`).innerText = localStorage.getItem(`cDesc_${i}`);
             }
         });
 
-        function triggerCubePurchase(cubeId) {
-            const title = document.getElementById(`cubeTitle_${cubeId}`).innerText;
-            const desc = document.getElementById(`cubeDesc_${cubeId}`).innerText;
-            const price = document.getElementById(`cubePrice_${cubeId}`).innerText;
-
+        function openPurchase(id) {
             document.getElementById('storeView').style.display = 'none';
             document.getElementById('purchaseView').style.display = 'block';
-            
-            document.getElementById('purchaseProdName').innerText = title;
-            document.getElementById('purchaseProdDesc').innerText = desc;
-            document.getElementById('purchaseProdPrice').innerText = price;
-            window.scrollTo(0, 0);
+            document.getElementById('pName').innerText = document.getElementById(`cubeTitle_${id}`).innerText;
+            document.getElementById('pDesc').innerText = document.getElementById(`cubeDesc_${id}`).innerText;
+            window.scrollTo(0,0);
         }
 
-        function closePurchasePage() {
+        function closePurchase() {
             document.getElementById('purchaseView').style.display = 'none';
             document.getElementById('storeView').style.display = 'block';
         }
 
-        function submitFinalOrder() {
-            const name = document.getElementById('buyerName').value;
-            const phone = document.getElementById('buyerPhone').value;
-            const pMethod = document.getElementById('paymentMethod').value;
-
+        function confirmOrder() {
+            const name = document.getElementById('bName').value;
+            const phone = document.getElementById('bPhone').value;
             if(!name || !phone) {
-                alert("⚠️ فضلاً، يرجى تعبئة اسمك ورقم جوالك بالكامل لإتمام الطلب وسحب الحساب!");
+                alert("⚠️ فضلاً، أدخل اسمك ورقم جوالك ليتصل بك سيستم التسليم التلقائي!");
                 return;
             }
-            alert(`🎉 كفو يا ${name}! تم توجيه طلبك عبر بوابة [${pMethod}] بنجاح، وسيتم الشراء التلقائي من المتجر الروسي وتحويل الحساب لك فاهمني؟`);
-            closePurchasePage();
+            alert(`🎉 تسلم يا ${name}! تم تحويلك بنجاح للربط البنكي، وسيتم سحب المنتج من المتجر الروسي فوراً وتسليمه لك.`);
+            closePurchase();
         }
 
+        // الدخول للإدارة عبر الضغط 3 مرات سريعة على اللوجو الرئيسي
         document.getElementById('secretLogo').addEventListener('click', () => {
-            clickCount++;
-            if (clickCount === 3) {
-                clickCount = 0;
-                let passwordInput = prompt("أدخل الرمز التعريفي لمالك المتجر (Admin ID):");
-                if (passwordInput === "leon2007") {
-                    document.getElementById('storeView').style.display = "none";
-                    document.getElementById('purchaseView').style.display = "none";
-                    document.getElementById('adminView').style.display = "block";
-                    window.scrollTo(0, 0);
-                } else { alert("❌ الرمز التعريفي خطأ!"); }
+            secretCounter++;
+            if(secretCounter === 3) {
+                secretCounter = 0;
+                let pass = prompt("أدخل كود المالك (Admin Password):");
+                if(pass === "leon2007") {
+                    document.getElementById('storeView').style.display = 'none';
+                    document.getElementById('adminView').style.display = 'block';
+                } else { alert("❌ الكود خاطئ!"); }
             }
-            setTimeout(() => { clickCount = 0; }, 2000);
+            setTimeout(() => { secretCounter = 0; }, 2000);
         });
 
-        function closeAdminView() {
-            document.getElementById('adminView').style.display = "none";
-            document.getElementById('storeView').style.display = "block";
+        function closeAdmin() {
+            document.getElementById('adminView').style.display = 'none';
+            document.getElementById('storeView').style.display = 'block';
         }
 
-        document.getElementById('editCubeFile').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if(file) {
-                document.getElementById('cubeFileStatus').innerText = "✅ تم تجهيز الصورة";
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    tempCubeImgUrl = event.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        });
+        // ميزة حفظ وتحديث أسماء المكعبات وعناوينها الأساسية للاستمرار المستقبلي
+        function saveCubeEdits() {
+            const id = document.getElementById('cubeSelect').value;
+            const title = document.getElementById('cubeTitleInput').value;
+            const desc = document.getElementById('cubeDescInput').value;
 
-        // سيستم تحديث وحفظ اسم المكعب ومحتوياته بشكل دائم وثابت
-        document.getElementById('btnApplyCubeEdits').addEventListener('click', () => {
-            const cubeId = document.getElementById('selectCubeToEdit').value;
-            const titleInput = document.getElementById('editCubeTitle').value;
-            const descInput = document.getElementById('editCubeDesc').value;
-            const priceInput = document.getElementById('editCubePrice').value;
-
-            if(titleInput) {
-                document.getElementById(`cubeTitle_${cubeId}`).innerText = titleInput;
-                localStorage.setItem(`cubeTitle_${cubeId}`, titleInput);
+            if(title) {
+                document.getElementById(`cubeTitle_${id}`).innerText = title;
+                localStorage.setItem(`cTitle_${id}`, title);
             }
-            if(descInput) {
-                document.getElementById(`cubeDesc_${cubeId}`).innerText = descInput;
-                localStorage.setItem(`cubeDesc_${cubeId}`, descInput);
-            }
-            if(priceInput) {
-                document.getElementById(`cubePrice_${cubeId}`).innerText = `${priceInput} ر.س`;
-                localStorage.setItem(`cubePrice_${cubeId}`, `${priceInput} ر.س`);
-            }
-            if(tempCubeImgUrl) {
-                document.getElementById(`cubeImg_${cubeId}`).style.backgroundImage = `url('${tempCubeImgUrl}')`;
-                document.getElementById(`cubeIcon_${cubeId}`).style.display = 'none';
-                localStorage.setItem(`cubeImg_${cubeId}`, tempCubeImgUrl);
+            if(desc) {
+                document.getElementById(`cubeDesc_${id}`).innerText = desc;
+                localStorage.setItem(`cDesc_${id}`, desc);
             }
 
-            alert(`✅ تم تحديث وحفظ اسم وبيانات المكعب رقم [${cubeId}] بشكل دائم!`);
-            
-            document.getElementById('editCubeTitle').value = '';
-            document.getElementById('editCubeDesc').value = '';
-            document.getElementById('editCubePrice').value = '';
-            document.getElementById('cubeFileStatus').innerText = '';
-            tempCubeImgUrl = "";
-        });
-
-        document.getElementById('fontFileSelector').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if(file) {
-                document.getElementById('fontUploadStatus').innerText = "⏳ جاري تطبيق خطك المخصص...";
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    const fontData = event.target.result;
-                    const newFont = new FontFace('CustomLeonFont', fontData);
-                    newFont.load().then(function(loadedFont) {
-                        document.fonts.add(loadedFont);
-                        document.body.style.fontFamily = 'CustomLeonFont, sans-serif';
-                        document.getElementById('fontUploadStatus').innerText = "✅ تم تطبيق الخط الخاص بك على كامل المتجر!";
-                    });
-                };
-                reader.readAsArrayBuffer(file);
-            }
-        });
+            alert(`✅ تم حفظ وتحديث اسم ومحتوى المكعب رقم [${id}] بنجاح دائم!`);
+            document.getElementById('cubeTitleInput').value = '';
+            document.getElementById('cubeDescInput').value = '';
+        }
     </script>
 </body>
 </html>
