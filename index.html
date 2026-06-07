@@ -1,1 +1,269 @@
-<h1>Leon Shop</h1>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leon Shop | متجر ليون</title>
+    <style>
+        /* ألوان الجيمينج الفخمة - بنفسجي وأزرق نيون */
+        body {
+            background-color: #0b0c10;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* الهيدر (رأس الموقع) */
+        header {
+            background: linear-gradient(90deg, #1f2833, #451254);
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(111, 66, 193, 0.5);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            color: #66fcf1;
+            text-shadow: 0 0 10px #66fcf1;
+        }
+
+        header p {
+            margin: 5px 0 0 0;
+            color: #c5a1ff;
+        }
+
+        /* الحاوية الرئيسية للموقع */
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* عنوان القسم */
+        .section-title {
+            font-size: 1.8rem;
+            color: #6f42c1;
+            border-bottom: 2px solid #66fcf1;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 5px rgba(111, 66, 193, 0.3);
+        }
+
+        /* نظام المكعبات اللي تنزل تحت بعض (Vertical Grid) */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 5px;
+        }
+
+        /* تصميم المكعب الواحد (حساب الفورتنايت) */
+        .product-card {
+            background-color: #1f2833;
+            border: 2px solid #451254;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: #66fcf1;
+            box-shadow: 0 5px 20px rgba(102, 252, 241, 0.4);
+        }
+
+        .product-card h3 {
+            margin: 10px 0;
+            color: #ffffff;
+        }
+
+        .product-card .price {
+            font-size: 1.4rem;
+            color: #66fcf1;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .buy-btn {
+            background: linear-gradient(45deg, #451254, #6f42c1);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            transition: background 0.3s;
+        }
+
+        .buy-btn:hover {
+            background: linear-gradient(45deg, #6f42c1, #66fcf1);
+            color: #0b0c10;
+        }
+
+        /* قسم الإدارة الخاص بك (محمي بباسورد) */
+        .admin-section {
+            background-color: #12141c;
+            border: 2px dashed #6f42c1;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 60px;
+            box-shadow: 0 0 15px rgba(111, 66, 193, 0.2);
+        }
+
+        .admin-section h2 {
+            color: #66fcf1;
+            margin-top: 0;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #c5a1ff;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            background-color: #1f2833;
+            border: 1px solid #451254;
+            border-radius: 5px;
+            color: white;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus {
+            border-color: #66fcf1;
+            outline: none;
+        }
+
+        .admin-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+        }
+
+        .admin-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- الهيدر باسم المتجر ليون شوب -->
+    <header>
+        <h1>Leon Shop 🎮</h1>
+        <p>المتجر الأول لحسابات فورتنايت والخدمات الرقمية</p>
+    </header>
+
+    <div class="container">
+        <!-- قسم الحسابات الأساسية -->
+        <h2 class="section-title">🔒 قسم الحسابات الأساسية (ترتيب رأسي)</h2>
+        
+        <!-- المكعبات تحت بعض ومن فوق لتحت -->
+        <div class="products-grid" id="productsContainer">
+            
+            <!-- حساب 1 -->
+            <div class="product-card">
+                <h3>حساب فورتنايت شيطون (بنت الطيارة)</h3>
+                <p>الحساب أساسي كامل الأمان مع الإيميل الأساسي</p>
+                <div class="price">150 ر.س</div>
+                <button class="buy-btn">شراء الآن</button>
+            </div>
+
+            <!-- حساب 2 -->
+            <div class="product-card">
+                <h3>حساب فورتنايت النادر (بلاك نايت)</h3>
+                <p>يحتوي على سكنات من السيزون الثاني كاملة</p>
+                <div class="price">280 ر.س</div>
+                <button class="buy-btn">شراء الآن</button>
+            </div>
+
+            <!-- حساب 3 -->
+            <div class="product-card">
+                <h3>حساب عشوائي مميز (ضمان ذهبي)</h3>
+                <p>حسابات مشحونة وخرافية مضمونة من المتجر</p>
+                <div class="price">45 ر.س</div>
+                <button class="buy-btn">شراء الآن</button>
+            </div>
+
+        </div>
+
+        <!-- لوحة التحكم الخاصة بالإدارة -->
+        <div class="admin-section">
+            <h2>🛡️ لوحة التحكم الإدارية (إضافة منتج جديد)</h2>
+            <p style="color: #ff4d4d; font-size: 0.9rem;">* تنبيه: لن يتم نشر المنتج إلا إذا كان الرمز التعريفي صحيحاً.</p>
+            
+            <form id="adminForm">
+                <div class="form-group">
+                    <label>الرمز التعريفي الخاص بمالك المتجر (الباسورد):</label>
+                    <input type="password" id="adminPassword" placeholder="أدخل رمز الأمان هنا..." required>
+                </div>
+                <div class="form-group">
+                    <label>اسم حساب الفورتنايت (المنتج):</label>
+                    <input type="text" id="prodName" placeholder="مثال: حساب شيطون نادر" required>
+                </div>
+                <div class="form-group">
+                    <label>وصف الحساب والمميزات:</label>
+                    <input type="text" id="prodDesc" placeholder="مثال: أساسي مع الإيميل، 50 سكن" required>
+                </div>
+                <div class="form-group">
+                    <label>السعر (بالريال):</label>
+                    <input type="number" id="prodPrice" placeholder="مثال: 100" required>
+                </div>
+                <button type="submit" class="admin-btn">إضافة المنتج للمتجر فوراً</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- كود الجافا سكربت لتشغيل لوحة الإدارة يدوياً لحين بناء السيرفر مستقبلاً -->
+    <script>
+        document.getElementById('adminForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // الباسورد اللي تبيه (تقدر تغيره من هنا، حطيته الحين 1234)
+            const correctPassword = "1234"; 
+            const enteredPassword = document.getElementById('adminPassword').value;
+
+            if(enteredPassword !== correctPassword) {
+                alert('❌ الرمز التعريفي خطأ! لا يمكنك إضافة منتجات.');
+                return;
+            }
+
+            // إذا الباسورد صح، يضيف المكعب فوراً في المتجر فوق
+            const name = document.getElementById('prodName').value;
+            const desc = document.getElementById('prodDesc').value;
+            const price = document.getElementById('prodPrice').value;
+
+            const container = document.getElementById('productsContainer');
+            
+            const newCard = document.createElement('div');
+            newCard.className = 'product-card';
+            newCard.innerHTML = `
+                <h3>${name}</h3>
+                <p>${desc}</p>
+                <div class="price">${price} ر.س</div>
+                <button class="buy-btn">شراء الآن</button>
+            `;
+            
+            container.appendChild(newCard);
+            alert('✅ تم التحقق من الرمز بنجاح واضافة الحساب للمتجر!');
+            document.getElementById('adminForm').reset();
+        });
+    </script>
+</body>
+</html>
+
