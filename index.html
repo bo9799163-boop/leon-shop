@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leon Shop | متجر ليون الأسطوري</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style id="customStyles">
-        /* الهوية البصرية الأساسية قابلة للتعديل من لوحة الإدارة */
+    <style>
         :root {
             --bg-color: #05020c;
             --card-bg: #0d061f;
@@ -16,7 +15,6 @@
             --text-color: #ffffff;
             --neon-green: #39ff14;
             --container-padding: 40px;
-            --card-gap: 30px;
         }
 
         body {
@@ -29,7 +27,7 @@
             transition: all 0.3s ease;
         }
 
-        /* شريط التنقل العلوي */
+        /* شريط التنقل */
         nav {
             display: flex;
             justify-content: space-between;
@@ -42,17 +40,14 @@
             z-index: 1000;
         }
 
-        /* اللوجو الأسطوري مع هيبة الأسد وكلمة فاهمني خلفه */
         .logo {
             font-size: 2rem;
             font-weight: 900;
             color: var(--text-color);
             text-shadow: 0 0 15px var(--neon-glow);
             cursor: pointer;
-            user-select: none;
             position: relative;
         }
-        .logo i { color: var(--neon-blue); margin-left: 8px; }
         .logo span { color: var(--neon-glow); }
         .logo::after {
             content: 'فاهمني';
@@ -65,44 +60,12 @@
         }
 
         nav ul { display: flex; list-style: none; gap: 25px; margin: 0; padding: 0; }
-        nav ul li a { color: #e2e8f0; text-decoration: none; font-size: 1rem; font-weight: bold; transition: 0.3s; padding: 8px 16px; border-radius: 8px; }
-        nav ul li a:hover { color: var(--neon-blue); background: rgba(0, 240, 255, 0.1); }
-
-        /* شاشة المتجر الرئيسية */
-        #storeView { display: block; }
-
-        .hero {
-            background: linear-gradient(rgba(5, 2, 12, 0.75), var(--bg-color)), url('https://cdn2.unrealengine.com/fortnite-battle-royale-v24-40-update-key-art-1920x1080-496677943.jpg') center/cover;
-            height: 420px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .hero h1 { font-size: 3.5rem; margin: 0; text-shadow: 0 0 25px var(--primary-purple); }
-        .hero p { color: #d8b4fe; font-size: 1.2rem; margin: 15px 0 30px 0; }
-
-        .btn-neon {
-            background: linear-gradient(45deg, var(--primary-purple), var(--neon-glow));
-            color: white;
-            border: none;
-            padding: 14px 45px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            border-radius: 30px;
-            cursor: pointer;
-            box-shadow: 0 0 20px var(--primary-purple);
-            transition: 0.3s;
-        }
-        .btn-neon:hover { transform: scale(1.05); box-shadow: 0 0 30px var(--neon-blue); }
+        nav ul li a { color: #e2e8f0; text-decoration: none; font-weight: bold; }
 
         .container { max-width: 1200px; margin: 0 auto; padding: var(--container-padding) 20px; }
         
         .section-title { 
-            font-size: 2rem; 
+            font-size: 1.8rem; 
             margin-bottom: 30px; 
             display: flex; 
             align-items: center; 
@@ -111,11 +74,30 @@
             padding-right: 15px;
         }
 
-        /* المكعبات الأربعة الرئيسية */
+        /* شريط العروض الأفقي */
+        .offers-slider {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+        .offer-card { 
+            min-width: 340px; 
+            background: linear-gradient(135deg, #2e1065, #12092e); 
+            border: 2px solid var(--neon-glow); 
+            border-radius: 15px; 
+            padding: 30px; 
+            text-align: center;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* 🌟 شبكة المكعبات الأربعة الرئيسية الفخمة */
         .categories-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
             margin-bottom: 60px;
         }
 
@@ -123,256 +105,330 @@
             background: linear-gradient(135deg, #13092e, #0d061f);
             border: 2px solid var(--primary-purple);
             border-radius: 15px;
-            padding: 25px;
+            padding: 30px 20px;
             text-align: center;
-            cursor: pointer;
             transition: 0.3s;
-        }
-        .category-card:hover { transform: translateY(-10px); border-color: var(--neon-blue); box-shadow: 0 0 25px rgba(0, 240, 255, 0.3); }
-        .category-card i { font-size: 3rem; color: var(--neon-blue); margin-bottom: 15px; }
-
-        /* العروض الأفقية */
-        .offers-slider {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
             display: flex;
-            gap: 20px;
-            overflow-x: auto;
-            padding-bottom: 20px;
+            flex-direction: column;
+            justify-content: space-between;
         }
-        .offer-card { 
-            min-width: 320px; 
-            background: linear-gradient(135deg, #2e1065, #12092e); 
-            border: 2px solid var(--neon-glow); 
-            border-radius: 15px; 
-            padding: 30px; 
-            text-align: center; 
+        .category-card:hover { 
+            transform: translateY(-10px); 
+            border-color: var(--neon-blue); 
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.4); 
         }
-
-        /* شبكة المنتجات والحسابات */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--card-gap);
-            margin-bottom: 60px;
-        }
-
-        .product-card {
-            background-color: var(--card-bg);
-            border: 2px solid rgba(124, 58, 237, 0.3);
-            border-radius: 15px;
-            overflow: hidden;
-            transition: 0.3s;
-            position: relative;
-        }
-        .product-card:hover { border-color: var(--neon-blue); box-shadow: 0 0 25px rgba(0, 240, 255, 0.2); }
-
-        .product-img { width: 100%; height: 220px; background-size: cover; background-position: center; }
-        .product-info { padding: 25px; text-align: center; }
         
-        .badge {
-            background-color: #ef4444;
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            position: absolute;
-            top: 15px;
-            right: 15px;
+        .cube-img {
+            width: 100%;
+            height: 150px;
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+            margin-bottom: 15px;
+            border: 1px solid rgba(0, 240, 255, 0.2);
         }
 
-        .price-tag { font-size: 1.6rem; color: var(--neon-blue); font-weight: bold; margin: 15px 0; }
+        .category-card i { font-size: 2.5rem; color: var(--neon-blue); margin-bottom: 15px; text-shadow: 0 0 10px var(--neon-blue); }
+        .category-card h3 { margin: 0 0 10px 0; font-size: 1.3rem; color: #fff; }
+        .category-card p { font-size: 0.9rem; color: #cbd5e1; margin-bottom: 15px; line-height: 1.4; flex-grow: 1; }
+        .cube-price { font-size: 1.4rem; color: var(--neon-green); font-weight: bold; margin-bottom: 15px; text-shadow: 0 0 5px rgba(57, 255, 20, 0.3); }
 
+        .btn-neon {
+            background: linear-gradient(45deg, var(--primary-purple), var(--neon-glow));
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-weight: bold;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 0 0 15px var(--primary-purple);
+            width: 100%;
+        }
+
+        /* مربع الآراء والوصف بالأسفل */
         .interactive-section {
             background: linear-gradient(135deg, #180b3a, #0d061f);
             padding: 40px;
             border-radius: 20px;
             border: 2px solid var(--primary-purple);
+            margin-top: 40px;
         }
         .interactive-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
         .interactive-card { background-color: rgba(13, 6, 31, 0.7); padding: 25px; border-radius: 12px; border: 1px solid var(--neon-glow); text-align: center; }
+        .interactive-card h4 { margin: 0 0 10px 0; color: var(--neon-blue); font-size: 1.2rem; }
 
-        /* ------------------------------------------------------------- */
-        /* 📊 شاشة الإدارة الاحترافية الكاملة الجديدة مستقلة 100% */
+        /* 📄 الشاشة الثانية: صفحة الشراء المستقلة وتعبئة البيانات */
+        #purchaseView {
+            display: none;
+            max-width: 600px;
+            margin: 60px auto;
+            padding: 40px;
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            border: 2px solid var(--neon-blue);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
+        }
+        .purchase-header { text-align: center; margin-bottom: 30px; }
+        .purchase-header h2 { color: var(--neon-blue); margin: 0; }
+        .product-summary-box { background: #05020c; padding: 20px; border-radius: 10px; border: 1px dashed var(--primary-purple); margin-bottom: 25px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; color: #d8b4fe; font-weight: bold; }
+        .form-group input, .form-group select { width: 100%; padding: 14px; background-color: #05020c; border: 1px solid var(--primary-purple); border-radius: 8px; color: white; box-sizing: border-box; }
+        .btn-submit-order { background: linear-gradient(45deg, #28a745, var(--neon-green)); color: black; font-weight: bold; font-size: 1.1rem; border: none; padding: 15px; width: 100%; border-radius: 8px; cursor: pointer; box-shadow: 0 0 15px var(--neon-green); }
+        .btn-back-store { background: transparent; color: #cbd5e1; border: 1px solid #cbd5e1; padding: 10px; width: 100%; border-radius: 8px; cursor: pointer; margin-top: 10px; }
+
+        /* 📊 شاشة الإدارة الاحترافية الكاملة */
         #adminView {
             display: none;
             padding: 50px 8%;
             background-color: #04020a;
             min-height: 100vh;
         }
-
-        .admin-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 3px solid var(--neon-blue);
-            padding-bottom: 20px;
-            margin-bottom: 40px;
-        }
-
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; margin-bottom: 40px; }
-        .stat-card { background-color: var(--card-bg); border: 2px solid var(--primary-purple); border-radius: 15px; padding: 25px; text-align: center; }
-        .stat-card .number { font-size: 2.3rem; font-weight: bold; color: var(--neon-blue); margin-top: 10px; }
-
+        .admin-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--neon-blue); padding-bottom: 20px; margin-bottom: 40px; }
         .management-section { background-color: var(--card-bg); border-radius: 15px; padding: 35px; border: 2px solid rgba(168, 85, 247, 0.4); margin-bottom: 40px; }
-        .management-section h3 { color: var(--neon-blue); margin-top: 0; margin-bottom: 25px; }
-
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; color: #d8b4fe; font-weight: bold; }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 14px; background-color: #05020c; border: 1px solid var(--primary-purple); border-radius: 8px; color: white; box-sizing: border-box; }
-        
         .file-label { display: inline-block; background: #251442; color: #00f0ff; padding: 12px 25px; border-radius: 8px; cursor: pointer; border: 1px solid var(--neon-blue); font-weight: bold; }
 
-        .btn-action { background: linear-gradient(45deg, #28a745, var(--neon-green)); color: black; border: none; padding: 14px; font-weight: bold; font-size: 1.1rem; border-radius: 8px; cursor: pointer; width: 100%; }
-
-        footer { text-align: center; padding: 40px; background-color: #020105; border-top: 2px solid rgba(124, 58, 237, 0.2); color: #64748b; }
+        footer { text-align: center; padding: 40px; background-color: #020105; border-top: 2px solid rgba(124, 58, 237, 0.2); color: #64748b; margin-top: 50px; }
     </style>
 </head>
 <body>
 
     <div id="storeView">
         <nav>
-            <div class="logo" id="secretLogo"><i class="fa-solid fa-lion">🦁</i>LEON<span>SHOP</span></div>
+            <div class="logo" id="secretLogo">🦁 LEON<span>SHOP</span></div>
             <ul>
-                <li><a href="#categories">الأقسام</a></li>
-                <li><a href="#mainSection">الحسابات</a></li>
-                <li><a href="#interactive">التقييمات</a></li>
+                <li><a href="#">الرئيسية</a></li>
+                <li><a href="#categoriesSection">المكعبات الرئيسية</a></li>
+                <li><a href="#reviewsSection">الآراء والشروط</a></li>
             </ul>
         </nav>
 
-        <div class="hero">
-            <h1 id="storeTitleName">متجر LEON SHOP لحسابات فورتنايت</h1>
-            <p>مكعبات نيون احترافية - أمان تام وحسابات أسطورية فاهمني؟</p>
-            <button class="btn-neon" onclick="document.getElementById('categories').scrollIntoView({behavior: 'smooth'});">تسوق الآن 🎮</button>
-        </div>
-
         <div class="container">
-            <div class="section-title" id="categories"><i class="fa-solid fa-gamepad"></i> الأقسام الرئيسية</div>
-            <div class="categories-grid">
-                <div class="category-card" onclick="document.getElementById('mainSection').scrollIntoView({behavior: 'smooth'});">
-                    <i class="fa-solid fa-shield-halved"></i>
-                    <h3>حسابات أساسية مضمونة</h3>
-                </div>
-                <div class="category-card" onclick="document.getElementById('mainSection').scrollIntoView({behavior: 'smooth'});">
-                    <i class="fa-solid fa-dice"></i>
-                    <h3>حسابات فورتنايت عشوائية</h3>
+            
+            <div class="section-title"><i class="fa-solid fa-fire"></i> عروض متجر ليون المضيئة اليومية</div>
+            <div class="offers-slider" id="offersContainer">
+                <div class="offer-card" style="background-image: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)), url('https://cdn2.unrealengine.com/fortnite-battle-royale-v24-40-update-key-art-1920x1080-496677943.jpg');">
+                    <h3>شحن العملات الفوري والمضمون</h3>
+                    <p>أرخص أسعار الـ V-Bucks والـ Robux بالخليج مع ضمان كامل</p>
+                    <div style="color: var(--neon-blue); font-weight: bold;">تسليم تلقائي فاهمني؟</div>
                 </div>
             </div>
 
-            <div class="section-title" id="mainSection"><i class="fa-solid fa-lock"></i> الحسابات المتوفرة حالياً</div>
-            <div class="products-grid" id="productsContainer">
-                <div class="product-card" id="prod_1">
-                    <span class="badge" id="badge_1">الأكثر مبيعاً</span>
-                    <div class="product-img" id="img_1" style="background-image: url('https://cdn2.unrealengine.com/14br-consoles-xbox-social-featured-image-1920x1080-809989802.jpg');"></div>
-                    <div class="product-info">
-                        <h3 id="name_1">حساب شيطون كامل الأمان (إيميل أساسي)</h3>
-                        <p id="desc_1">سكنات نادرة جداً | يربط جميع المنصات | ضمان مدى الحياة</p>
-                        <div class="price-tag" id="price_1">150 ر.س</div>
-                        <button class="btn-neon" style="width: 100%;" id="btnBuy_1" onclick="simulateSale(150)">شراء الآن</button>
+            <div class="section-title" id="categoriesSection"><i class="fa-solid fa-cubes"></i> مكعبات المنتجات والأقسام الحالية</div>
+            <div class="categories-grid">
+                
+                <div class="category-card" id="cubeCard_1">
+                    <div>
+                        <div class="cube-img" id="cubeImg_1" style="background-image: url('https://cdn2.unrealengine.com/14br-consoles-xbox-social-featured-image-1920x1080-809989802.jpg');"></div>
+                        <i class="fa-solid fa-shield-halved" id="cubeIcon_1"></i>
+                        <h3 id="cubeTitle_1">حسابات أساسية مضمونة</h3>
+                        <p id="cubeDesc_1">حسابات فورتنايت أصلية مع إيميلها الأساسي كامل البيانات وضمان شامل ضد السحب فاهمني؟</p>
+                    </div>
+                    <div>
+                        <div class="cube-price" id="cubePrice_1">120 ر.س</div>
+                        <button class="btn-neon" onclick="triggerCubePurchase(1)">شراء الآن 🎮</button>
+                    </div>
+                </div>
+
+                <div class="category-card" id="cubeCard_2">
+                    <div>
+                        <div class="cube-img" id="cubeImg_2" style="background-image: url('https://cdn2.unrealengine.com/fortnite-chapter-4-season-2-mega-1920x1080-606041724.jpg');"></div>
+                        <i class="fa-solid fa-square-share-nodes" id="cubeIcon_2"></i>
+                        <h3 id="cubeTitle_2">حسابات مربوطة بـ Epic Games</h3>
+                        <p id="cubeDesc_2">حسابات جاهزة ومربوطة مباشرة على منصة Epic Games لضمان تشغيلها على البي سي والمنصات الأخرى فوراً.</p>
+                    </div>
+                    <div>
+                        <div class="cube-price" id="cubePrice_2">95 ر.س</div>
+                        <button class="btn-neon" onclick="triggerCubePurchase(2)">شراء الآن 🎮</button>
+                    </div>
+                </div>
+
+                <div class="category-card" id="cubeCard_3">
+                    <div>
+                        <div class="cube-img" id="cubeImg_3" style="background-image: url('https://img.redbull.com/images/c_limit,w_1500,h_1000,f_auto,q_auto/redbullcom/2020/4/28/vj98p87eyb9fzwskkndv/rocket-league');"></div>
+                        <i class="fa-solid fa-car-burst" id="cubeIcon_3"></i>
+                        <h3 id="cubeTitle_3">حسابات Rocket League</h3>
+                        <p id="cubeDesc_3">حسابات روكيت ليق أسطورية تحتوي على سيارات نادرة، مخططات، وألقاب وعناصر تضمن هيبتك بالملعب.</p>
+                    </div>
+                    <div>
+                        <div class="cube-price" id="cubePrice_3">80 ر.س</div>
+                        <button class="btn-neon" onclick="triggerCubePurchase(3)">شراء الآن 🎮</button>
+                    </div>
+                </div>
+
+                <div class="category-card" id="cubeCard_4">
+                    <div>
+                        <div class="cube-img" id="cubeImg_4" style="background-image: url('https://progameguides.com/wp-content/uploads/2021/11/Featured-Roblox-How-to-get-Robux.jpg');"></div>
+                        <i class="fa-solid fa-coins" id="cubeIcon_4"></i>
+                        <h3 id="cubeTitle_4">قسم العملات الرقمية والشحن</h3>
+                        <p id="cubeDesc_4">شحن عملات الألعاب المباشر والأخرى المتنوعة مثل V-Bucks و Robux بأفضل الأسعار الرسمية الآمنة.</p>
+                    </div>
+                    <div>
+                        <div class="cube-price" id="cubePrice_4">45 ر.س</div>
+                        <button class="btn-neon" onclick="triggerCubePurchase(4)">شراء الآن 🎮</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="interactive-section" id="reviewsSection">
+                <div class="section-title" style="border-right-color: var(--neon-glow);"><i class="fa-solid fa-star"></i> آراء العملاء وتفاصيل الضمان الواضحة</div>
+                <div class="interactive-grid">
+                    <div class="interactive-card">
+                        <h4>⭐ آراء وتقييمات زبائننا</h4>
+                        <p>تثق بنا أكثر من 1,200 عائلة ولاعب في الخليج لسرعة تسليمنا وأمان حساباتنا.</p>
+                    </div>
+                    <div class="interactive-card">
+                        <h4>📜 شروط وقوانين التعويض النظيف</h4>
+                        <p>في حال واجهتك أي مشكلة بالحساب المستلم، يتم استبداله تلقائياً أو إعادة المبلغ لحسابك البنكي.</p>
                     </div>
                 </div>
             </div>
 
-            <div class="interactive-section" id="interactive">
-                <div class="interactive-grid">
-                    <div class="interactive-card"><h4>⭐ تقييمات عملائنا</h4><p>أكثر من 500 تقييم موثق لمتجر ليون</p></div>
-                    <div class="interactive-card"><h4>📜 شروط المتجر</h4><p>ضمان كامل وتعويض فوري في حال المشاكل</p></div>
-                </div>
-            </div>
         </div>
-        <footer>جميع الحقوق محفوظة © 2026 لـ متجر Leon Shop</footer>
+        <footer>جميع الحقوق محفوظة © 2026 لـ متجر Leon Shop - فاهمني؟</footer>
     </div>
+
+
+    <div id="purchaseView">
+        <div class="purchase-header">
+            <h2>🛒 صفحة تفاصيل طلبك وإتمام الشراء</h2>
+            <p>أنت الآن تقوم بشراء منتج من متجر ليون شوب</p>
+        </div>
+        
+        <div class="product-summary-box">
+            <div style="font-weight: bold; color: var(--neon-blue); font-size: 1.2rem;" id="purchaseProdName">اسم القسم المعين</div>
+            <div style="margin-top: 10px; color: #cbd5e1; font-size: 0.95rem;" id="purchaseProdDesc">الوصف...</div>
+            <div style="margin-top: 15px; color: var(--neon-green); font-size: 1.5rem; font-weight: bold;" id="purchaseProdPrice">0 ر.س</div>
+        </div>
+
+        <div class="form-group">
+            <label>اسمك الكريم بالكامل:</label>
+            <input type="text" id="buyerName" placeholder="اكتب اسمك هنا...">
+        </div>
+        <div class="form-group">
+            <label>رقم الجوال أو الواتساب للتسليم:</label>
+            <input type="tel" id="buyerPhone" placeholder="مثال: +966500000000">
+        </div>
+        <div class="form-group">
+            <label>اختر نوع بطاقة الدفع البنكي الخاص بك:</label>
+            <select id="paymentMethod">
+                <option value="mada">💳 بطاقة مدى البنكية الفورية</option>
+                <option value="visa">💳 فيزا / ماستركارد (Visa/MasterCard)</option>
+                <option value="apple">🍏 Apple Pay (الدفع السريع)</option>
+            </select>
+        </div>
+
+        <button class="btn-submit-order" onclick="submitFinalOrder()">💳 تأكيد وإتمام عملية الدفع والتحويل التلقائي</button>
+        <button class="btn-back-store" onclick="closePurchasePage()">↩️ إلغاء والعودة لمتجر ليون</button>
+    </div>
+
 
     <div id="adminView">
         <div class="admin-header">
-            <h2><i class="fa-solid fa-user-gear"></i> لوحة التحكم المتقدمة والمبيعات الواقعية</h2>
-            <button class="btn-logout" id="btnLogout" style="background:#dc3545; color:white; border:none; padding:12px 30px; border-radius:8px; font-weight:bold; cursor:pointer;">🚪 العودة للمتجر</button>
-        </div>
-
-        <div class="stats-grid">
-            <div class="stat-card"><h3>إجمالي الأرباح الواقعية</h3><div class="number" id="revenueStat">0 ر.س</div></div>
-            <div class="stat-card"><h3>عدد الحسابات المباعة حقيقةً</h3><div class="number" id="salesStat">0</div></div>
-            <div class="stat-card"><h3>المنتجات المعروضة</h3><div class="number" id="productsCountStat">1</div></div>
+            <h2>🛡️ لوحة التحكم بالمكعبات الأربعة والخطوط</h2>
+            <button onclick="closeAdminView()" style="background:#dc3545; color:white; border:none; padding:10px 20px; border-radius:8px; cursor:pointer; font-weight:bold;">🚪 خروج والعودة للمتجر</button>
         </div>
 
         <div class="management-section">
-            <h3><i class="fa-solid fa-paint-roller"></i> خيار: تغيير الخط، اسم المتجر، المظهر والحشوة</h3>
+            <h3>🎛️ خاصية التحكم وتغيير أسماء ومحتوى المكعبات الأربعة</h3>
+            
             <div class="form-group">
-                <label>تعديل اسم المتجر الرئيسي:</label>
-                <input type="text" id="changeStoreName" placeholder="اكتب الاسم الجديد للمتجر هنا...">
+                <label>اختر المكعب المراد تغيير اسمه ومحتواه الآن:</label>
+                <select id="selectCubeToEdit">
+                    <option value="1">المكعب 1 (فوق يمين)</option>
+                    <option value="2">المكعب 2 (فوق يسار)</option>
+                    <option value="3">المكعب 3 (تحت يمين)</option>
+                    <option value="4">المكعب 4 (تحت يسار)</option>
+                </select>
             </div>
+            
             <div class="form-group">
-                <label>📱 رفع ملف خط خاص بك (TTF / WOFF) من ملفات جوالك:</label>
+                <label>تغيير اسم المكعب (العنوان الرئيسي):</label>
+                <input type="text" id="editCubeTitle" placeholder="اكتب الاسم الجديد للمكعب هنا...">
+            </div>
+
+            <div class="form-group">
+                <label>الوصف التفصيلي للمنتج داخل المكعب:</label>
+                <input type="text" id="editCubeDesc" placeholder="اكتب ميزات ووصف الحساب أو العملة هنا...">
+            </div>
+
+            <div class="form-group">
+                <label>السعر الجديد (بالريال السعودي):</label>
+                <input type="number" id="editCubePrice" placeholder="السعر...">
+            </div>
+
+            <div class="form-group">
+                <label>صورة المنتج الجديدة (من ألبوم تليفونك):</label>
+                <input type="file" id="editCubeFile" accept="image/*" style="display:none;">
+                <label for="editCubeFile" class="file-label">📱 افتح الألبوم واختر صورة</label>
+                <span id="cubeFileStatus" style="margin-right:15px; color:var(--neon-blue); font-weight:bold;"></span>
+            </div>
+
+            <button class="btn-action" id="btnApplyCubeEdits" style="background: linear-gradient(45deg, #00f0ff, #a855f7); color: white;">تحديث وحفظ اسم المكعب فوراً 💾</button>
+        </div>
+
+        <div class="management-section">
+            <h3>🎨 التحكم الإضافي بالخط</h3>
+            <div class="form-group">
+                <label>📁 ارفع ملف الخط الخاص بك (TTF / WOFF) من تليفونك:</label>
                 <input type="file" id="fontFileSelector" accept=".ttf,.woff,.woff2" style="display:none;">
-                <label for="fontFileSelector" class="file-label">📁 اختر ملف الخط من تليفونك</label>
+                <label for="fontFileSelector" class="file-label">📱 اختر الخط من ملفاتك</label>
                 <span id="fontUploadStatus" style="margin-right:15px; color:var(--neon-blue); font-weight:bold;"></span>
             </div>
-            <div class="form-group">
-                <label>تغيير لون خلفية الموقع كاملة:</label>
-                <input type="color" id="bgBackgroundColorPicker" value="#05020c">
-            </div>
-            <div class="form-group">
-                <label>التحكم في حشوة الفواصل للموقع (Padding):</label>
-                <select id="paddingControllerSelect">
-                    <option value="20px">حشوة صغيرة ومتقاربة (20px)</option>
-                    <option value="40px" selected>حشوة متوسطة ومتناسقة (40px)</option>
-                    <option value="60px">حشوة ضخمة ومتباعدة (60px)</option>
-                </select>
-            </div>
-            <button class="btn-action" id="btnApplyDesignChanges">تطبيق المظهر والخط الجديد فوراً</button>
-        </div>
-
-        <div class="management-section">
-            <h3><i class="fa-solid fa-plus"></i> خيار: إضافة حساب فورتنايت جديد من ألبوم الكاميرا</h3>
-            <div class="form-group"><label>العنوان:</label><input type="text" id="newProdName"></div>
-            <div class="form-group"><label>المميزات والوصف:</label><input type="text" id="newProdDesc"></div>
-            <div class="form-group"><label>السعر:</label><input type="number" id="newProdPrice"></div>
-            <div class="form-group">
-                <input type="file" id="newProdFile" accept="image/*" style="display:none;"><label for="newProdFile" class="file-label">📱 صورة الحساب من تليفونك</label>
-                <span id="fileStatus" style="margin-right:15px; color:var(--neon-blue);"></span>
-            </div>
-            <button class="btn-action" id="btnAddProduct">نشر الحساب بالموقع</button>
-        </div>
-
-        <div class="management-section">
-            <h3><i class="fa-solid fa-pen"></i> خيار: تعديل منتج وحالة نفاد الكمية</h3>
-            <div class="form-group">
-                <select id="updateSelect"><option value="1">حساب شيطون كامل الأمان</option></select>
-            </div>
-            <div class="form-group">
-                <select id="updateStatus">
-                    <option value="available">✅ متوفر للبيع</option>
-                    <option value="sold">⚠️ نفذت الكمية (قفل الشراء والشارة)</option>
-                </select>
-            </div>
-            <button class="btn-action" id="btnUpdateProduct" style="background:orange;">تطبيق التعديل</button>
         </div>
     </div>
 
     <script>
         let clickCount = 0;
-        let productCounter = 1;
-        let tempProdImgUrl = 'https://cdn2.unrealengine.com/14br-consoles-xbox-social-featured-image-1920x1080-809989802.jpg';
+        let tempCubeImgUrl = "";
 
-        // تحميل الإحصائيات الواقعية المخزنة من ذاكرة المتصفح الثابتة (Local Storage)
-        let totalRevenue = localStorage.getItem('totalRevenue') ? parseInt(localStorage.getItem('totalRevenue')) : 0;
-        let totalSales = localStorage.getItem('totalSales') ? parseInt(localStorage.getItem('totalSales')) : 0;
+        // حفظ وتحديث بيانات المكعبات في الذاكرة لتبقى مستمرة حتى بعد التحديث
+        window.addEventListener('DOMContentLoaded', () => {
+            for (let i = 1; i <= 4; i++) {
+                if(localStorage.getItem(`cubeTitle_${i}`)) document.getElementById(`cubeTitle_${i}`).innerText = localStorage.getItem(`cubeTitle_${i}`);
+                if(localStorage.getItem(`cubeDesc_${i}`)) document.getElementById(`cubeDesc_${i}`).innerText = localStorage.getItem(`cubeDesc_${i}`);
+                if(localStorage.getItem(`cubePrice_${i}`)) document.getElementById(`cubePrice_${i}`).innerText = localStorage.getItem(`cubePrice_${i}`);
+                if(localStorage.getItem(`cubeImg_${i}`)) {
+                    document.getElementById(`cubeImg_${i}`).style.backgroundImage = `url('${localStorage.getItem(`cubeImg_${i}`)}')`;
+                    document.getElementById(`cubeIcon_${i}`).style.display = 'none';
+                }
+            }
+        });
 
-        function updateStatsDisplay() {
-            document.getElementById('revenueStat').innerText = totalRevenue + " ر.س";
-            document.getElementById('salesStat').innerText = totalSales;
+        function triggerCubePurchase(cubeId) {
+            const title = document.getElementById(`cubeTitle_${cubeId}`).innerText;
+            const desc = document.getElementById(`cubeDesc_${cubeId}`).innerText;
+            const price = document.getElementById(`cubePrice_${cubeId}`).innerText;
+
+            document.getElementById('storeView').style.display = 'none';
+            document.getElementById('purchaseView').style.display = 'block';
+            
+            document.getElementById('purchaseProdName').innerText = title;
+            document.getElementById('purchaseProdDesc').innerText = desc;
+            document.getElementById('purchaseProdPrice').innerText = price;
+            window.scrollTo(0, 0);
         }
-        updateStatsDisplay();
 
-        // محاكاة عملية شراء واقعية ثابتة عند ضغط المشري على "شراء الآن"
-        function simulateSale(price) {
-            totalRevenue += price;
-            totalSales += 1;
-            localStorage.setItem('totalRevenue', totalRevenue);
-            localStorage.setItem('totalSales', totalSales);
-            updateStatsDisplay();
-            alert("🛍️ تمت عملية الشراء الافتراضية بنجاح، ودخلت الفلوس في الإحصائيات الواقعية للوحة التحكم!");
+        function closePurchasePage() {
+            document.getElementById('purchaseView').style.display = 'none';
+            document.getElementById('storeView').style.display = 'block';
         }
 
-        // نظام الدخول الآمن: 3 ضغطات سريعة على اللوجو يفتح الإدارة بالكامل بالرمز leon2007
+        function submitFinalOrder() {
+            const name = document.getElementById('buyerName').value;
+            const phone = document.getElementById('buyerPhone').value;
+            const pMethod = document.getElementById('paymentMethod').value;
+
+            if(!name || !phone) {
+                alert("⚠️ فضلاً، يرجى تعبئة اسمك ورقم جوالك بالكامل لإتمام الطلب وسحب الحساب!");
+                return;
+            }
+            alert(`🎉 كفو يا ${name}! تم توجيه طلبك عبر بوابة [${pMethod}] بنجاح، وسيتم الشراء التلقائي من المتجر الروسي وتحويل الحساب لك فاهمني؟`);
+            closePurchasePage();
+        }
+
         document.getElementById('secretLogo').addEventListener('click', () => {
             clickCount++;
             if (clickCount === 3) {
@@ -380,6 +436,7 @@
                 let passwordInput = prompt("أدخل الرمز التعريفي لمالك المتجر (Admin ID):");
                 if (passwordInput === "leon2007") {
                     document.getElementById('storeView').style.display = "none";
+                    document.getElementById('purchaseView').style.display = "none";
                     document.getElementById('adminView').style.display = "block";
                     window.scrollTo(0, 0);
                 } else { alert("❌ الرمز التعريفي خطأ!"); }
@@ -387,102 +444,72 @@
             setTimeout(() => { clickCount = 0; }, 2000);
         });
 
-        document.getElementById('btnLogout').addEventListener('click', () => {
+        function closeAdminView() {
             document.getElementById('adminView').style.display = "none";
             document.getElementById('storeView').style.display = "block";
+        }
+
+        document.getElementById('editCubeFile').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if(file) {
+                document.getElementById('cubeFileStatus').innerText = "✅ تم تجهيز الصورة";
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    tempCubeImgUrl = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
         });
 
-        // سيستم رفع وقراءة ملف الخطوط المباشر من التلفون
+        // سيستم تحديث وحفظ اسم المكعب ومحتوياته بشكل دائم وثابت
+        document.getElementById('btnApplyCubeEdits').addEventListener('click', () => {
+            const cubeId = document.getElementById('selectCubeToEdit').value;
+            const titleInput = document.getElementById('editCubeTitle').value;
+            const descInput = document.getElementById('editCubeDesc').value;
+            const priceInput = document.getElementById('editCubePrice').value;
+
+            if(titleInput) {
+                document.getElementById(`cubeTitle_${cubeId}`).innerText = titleInput;
+                localStorage.setItem(`cubeTitle_${cubeId}`, titleInput);
+            }
+            if(descInput) {
+                document.getElementById(`cubeDesc_${cubeId}`).innerText = descInput;
+                localStorage.setItem(`cubeDesc_${cubeId}`, descInput);
+            }
+            if(priceInput) {
+                document.getElementById(`cubePrice_${cubeId}`).innerText = `${priceInput} ر.س`;
+                localStorage.setItem(`cubePrice_${cubeId}`, `${priceInput} ر.س`);
+            }
+            if(tempCubeImgUrl) {
+                document.getElementById(`cubeImg_${cubeId}`).style.backgroundImage = `url('${tempCubeImgUrl}')`;
+                document.getElementById(`cubeIcon_${cubeId}`).style.display = 'none';
+                localStorage.setItem(`cubeImg_${cubeId}`, tempCubeImgUrl);
+            }
+
+            alert(`✅ تم تحديث وحفظ اسم وبيانات المكعب رقم [${cubeId}] بشكل دائم!`);
+            
+            document.getElementById('editCubeTitle').value = '';
+            document.getElementById('editCubeDesc').value = '';
+            document.getElementById('editCubePrice').value = '';
+            document.getElementById('cubeFileStatus').innerText = '';
+            tempCubeImgUrl = "";
+        });
+
         document.getElementById('fontFileSelector').addEventListener('change', function(e) {
             const file = e.target.files[0];
             if(file) {
-                document.getElementById('fontUploadStatus').innerText = "✅ جاري معالجة الخط وتطبيقه...";
+                document.getElementById('fontUploadStatus').innerText = "⏳ جاري تطبيق خطك المخصص...";
                 const reader = new FileReader();
                 reader.onload = function(event) {
                     const fontData = event.target.result;
-                    const newFont = new FontFace('CustomAdminFont', fontData);
+                    const newFont = new FontFace('CustomLeonFont', fontData);
                     newFont.load().then(function(loadedFont) {
                         document.fonts.add(loadedFont);
-                        document.body.style.fontFamily = 'CustomAdminFont, sans-serif';
-                        document.getElementById('fontUploadStatus').innerText = "✅ تم تطبيق خطك الخاص بنجاح على كامل الموقع!";
+                        document.body.style.fontFamily = 'CustomLeonFont, sans-serif';
+                        document.getElementById('fontUploadStatus').innerText = "✅ تم تطبيق الخط الخاص بك على كامل المتجر!";
                     });
                 };
                 reader.readAsArrayBuffer(file);
-            }
-        });
-
-        // كود تطبيق تغييرات المظهر، الخلفية والحشوة والاسم
-        document.getElementById('btnApplyDesignChanges').addEventListener('click', () => {
-            const storeNameInput = document.getElementById('changeStoreName').value;
-            const bgColorInput = document.getElementById('bgBackgroundColorPicker').value;
-            const paddingInput = document.getElementById('paddingControllerSelect').value;
-
-            if(storeNameInput) document.getElementById('storeTitleName').innerText = storeNameInput;
-            
-            // تطبيق تعديلات الـ CSS والحشوة والخلفية فوراً
-            document.documentElement.style.setProperty('--bg-color', bgColorInput);
-            document.documentElement.style.setProperty('--container-padding', paddingInput);
-
-            alert("🎨 تم تحديث الخط والخلفية والحشوة بنجاح طبقاً لأوامرك!");
-        });
-
-        // قراءة صورة السكن من تليفونك
-        document.getElementById('newProdFile').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if(file) {
-                document.getElementById('fileStatus').innerText = "✅ تم تحديد صورة السكن";
-                tempProdImgUrl = URL.createObjectURL(file);
-            }
-        });
-
-        // إضافة الحساب الجديد
-        document.getElementById('btnAddProduct').addEventListener('click', () => {
-            const name = document.getElementById('newProdName').value;
-            const desc = document.getElementById('newProdDesc').value;
-            const price = parseInt(document.getElementById('newProdPrice').value);
-
-            if(!name || !price) { alert("تأكد من تعبئة الخانات!"); return; }
-            productCounter++;
-
-            const productsContainer = document.getElementById('productsContainer');
-            const newCard = document.createElement('div');
-            newCard.className = 'product-card';
-            newCard.id = `prod_${productCounter}`;
-            newCard.innerHTML = `
-                <span class="badge" id="badge_${productCounter}">جديد</span>
-                <div class="product-img" id="img_${productCounter}" style="background-image: url('${tempProdImgUrl}');"></div>
-                <div class="product-info">
-                    <h3 id="name_${productCounter}">${name}</h3>
-                    <p id="desc_${productCounter}">${desc}</p>
-                    <div class="price-tag" id="price_${productCounter}">${price} ر.س</div>
-                    <button class="btn-neon" style="width: 100%;" id="btnBuy_${productCounter}" onclick="simulateSale(${price})">شراء الآن</button>
-                </div>
-            `;
-            productsContainer.appendChild(newCard);
-
-            const updateSelect = document.getElementById('updateSelect');
-            const opt = document.createElement('option'); opt.value = productCounter; opt.text = name;
-            updateSelect.add(opt);
-
-            document.getElementById('productsCountStat').innerText = updateSelect.options.length;
-            alert("✅ تم نشر الحساب الجديد من ألبوم جوالك!");
-        });
-
-        // تعديل النفاد وقفل الشراء
-        document.getElementById('btnUpdateProduct').addEventListener('click', () => {
-            const id = document.getElementById('updateSelect').value;
-            const status = document.getElementById('updateStatus').value;
-            const badge = document.getElementById(`badge_${id}`);
-            const btn = document.getElementById(`btnBuy_${id}`);
-
-            if(status === "sold") {
-                if(badge) { badge.innerText = "نفذت الكمية ⚠️"; badge.style.backgroundColor = "#4b5563"; }
-                if(btn) { btn.innerText = "غير متوفر حالياً"; btn.style.background = "#4b5563"; btn.disabled = true; }
-                alert("⚠️ تم إعلان نفاد الكمية وقفل الشراء للمنتج!");
-            } else {
-                if(badge) { badge.innerText = "متوفر"; badge.style.backgroundColor = "#ef4444"; }
-                if(btn) { btn.innerText = "شراء الآن"; btn.style.background = "linear-gradient(45deg, var(--primary-purple), var(--neon-glow))"; btn.disabled = false; }
-                alert("✅ تم إتاحة الحساب للبيع مجدداً!");
             }
         });
     </script>
