@@ -3,709 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leon Shop | النظام الفضائي</title>
+    <title>Leon Shop | ليون ستور</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            background-color: #02000a;
-            color: #ffffff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        /* إعدادات الألوان والفخامة المستوحاة من الشعار */
+        :root {
+            --bg-dark: #0b0b0b;
+            --bg-card: #141414;
+            --gold: #d4af37;
+            --gold-glow: #f3e5ab;
+            --text-main: #ffffff;
+            --text-muted: #aaaaaa;
+        }
+
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
             overflow-x: hidden;
         }
 
-        /* 🌌 حركة انعدام الجاذبية للشعارات الثلاثة */
-        @keyframes floatEffect {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+        /* الهيدر العلوي */
+        header {
+            background-color: rgba(20, 20, 20, 0.95);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 15px 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
         }
 
-        .space-header {
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* تصميم الشعار المطور بشكل دائري فخم */
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+            background-color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--gold);
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            background: linear-gradient(45deg, var(--gold), var(--gold-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        /* البنر الترحيبي العريض */
+        .hero-section {
             text-align: center;
             padding: 60px 20px;
-            position: relative;
+            background: radial-gradient(circle, rgba(40,30,10,1) 0%, rgba(11,11,11,1) 70%);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
         }
 
-        /* تنسيق الشعارات الثلاثة المكررة */
-        .triple-logos {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .lion-logo {
-            font-size: 3rem;
-            color: #bf5af2;
-            text-shadow: 0 0 20px #bf5af2;
-            animation: floatEffect 4s ease-in-out infinite;
-        }
-
-        /* تأخير الحركة للشعار الثاني والثالث لإعطاء تأثير تموج */
-        .lion-logo:nth-child(2) { animation-delay: 1s; color: #0a84ff; text-shadow: 0 0 20px #0a84ff; }
-        .lion-logo:nth-child(3) { animation-delay: 2s; }
-    </style>
-</head>
-<body>
-
-    <header class="space-header">
-        <div class="triple-logos">
-            <div class="lion-logo"><i class="fa-solid fa-shield-cat"></i></div>
-            <div class="lion-logo"><i class="fa-solid fa-shield-cat"></i></div>
-            <div class="lion-logo"><i class="fa-solid fa-shield-cat"></i></div>
-        </div>
-        <h1 style="font-size: 3.5rem; margin: 0; text-shadow: 0 0 30px #bf5af2;">LEON SHOP 🚀</h1>
-        <p style="color: #a29bfe;">متجر المستقبل المطور بنظام التحكم الذكي</p>
-    </header>
-
-</body>
-</html>let clickCount = 0;
-
-function lionClick() {
-    clickCount++;
-    
-    // إذا ضغط المستخدم 3 مرات
-    if (clickCount === 3) {
-        openSystem(); // دالة تفتح لوحة التحكم
-        clickCount = 0; // إعادة تصغير العداد لمرة أخرى
-    }
-    
-    // إعادة تصفير العداد إذا مر وقت طويل بين الضغطات (مثلاً ثانيتين)
-    setTimeout(() => { clickCount = 0; }, 2000);
-}<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leon Shop | النظام الفضائي المطور</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* 🌌 ألوان الثيم الفضائي الثقيل المستوحى من الصورة */
-        :root {
-            --bg-dark: #02000a;
-            --neon-purple: #bf5af2;
-            --neon-blue: #0a84ff;
-            --text-main: #ffffff;
-            --card-purple: rgba(19, 9, 41, 0.85);
-            --border-glow: 0 0 25px rgba(191, 90, 242, 0.5);
-        }
-
-        body {
-            background-color: var(--bg-dark);
-            background-image: 
-                radial-gradient(circle at 15% 20%, rgba(191, 90, 242, 0.15) 0%, transparent 45%),
-                radial-gradient(circle at 85% 75%, rgba(10, 132, 255, 0.15) 0%, transparent 45%);
-            color: var(--text-main);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
-
-        /* 🪐 حركات انعدام الجاذبية والوميض للشعارات */
-        @keyframes floatSpace {
-            0% { transform: translateY(0px) scale(1); }
-            50% { transform: translateY(-12px) scale(1.05); }
-            100% { transform: translateY(0px) scale(1); }
-        }
-
-        .space-header {
-            text-align: center;
-            padding: 80px 20px 40px 20px;
-            position: relative;
-        }
-
-        /* تنسيق الشعارات الثلاثة المكررة */
-        .triple-lions {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            margin-bottom: 25px;
-        }
-
-        .lion-item {
-            font-size: 3.5rem;
-            color: var(--neon-purple);
-            text-shadow: 0 0 25px var(--neon-purple);
-            animation: floatSpace 4s ease-in-out infinite;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        /* الشعار الأوسط بلون مختلف وهو مفتاح السر لفتح السيستم */
-        .lion-item:nth-child(2) {
-            color: var(--neon-blue);
-            text-shadow: 0 0 25px var(--neon-blue);
-            animation-delay: 1s;
-        }
-        .lion-item:nth-child(3) { animation-delay: 2s; }
-
-        .store-title {
-            font-size: 4rem;
-            font-weight: 900;
-            margin: 0;
-            text-shadow: 0 0 35px var(--neon-purple);
-        }
-
-        .main-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        /* 📦 شبكة المنتجات والأقسام الثقيلة */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .product-card {
-            background: var(--card-purple);
-            border: 2px solid rgba(191, 90, 242, 0.25);
-            border-radius: 24px;
-            padding: 30px 20px;
-            text-align: center;
-            backdrop-filter: blur(15px);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s, border-color 0.4s;
-            position: relative;
-        }
-
-        /* تأثير التكبير والتوهج الثقيل عند مرور الماوس */
-        .product-card:hover {
-            transform: scale(1.07);
-            border-color: var(--neon-purple);
-            box-shadow: var(--border-glow);
-        }
-
-        .badge-discount {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: linear-gradient(45deg, #ff4757, #ff6b81);
-            padding: 5px 12px;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            box-shadow: 0 0 10px rgba(255, 71, 87, 0.5);
-        }
-
-        .card-icon {
-            font-size: 4rem;
+        .hero-section h1 {
+            font-size: 40px;
             margin-bottom: 15px;
-            color: var(--neon-blue);
-            text-shadow: 0 0 15px var(--neon-blue);
+            color: #fff;
         }
 
-        .price-tag {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #2ed573;
-            margin: 15px 0;
-            text-shadow: 0 0 10px rgba(46, 213, 115, 0.3);
+        .hero-section h1 span {
+            color: var(--gold);
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
         }
 
-        /* ⚙️ لوحة تحكم النظام المخفية (Secret System Panel) */
-        .system-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(2, 0, 10, 0.95);
-            backdrop-filter: blur(20px);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .system-panel {
-            background: #0f0724;
-            border: 2px solid var(--neon-blue);
-            box-shadow: 0 0 40px rgba(10, 132, 255, 0.4);
-            border-radius: 24px;
-            width: 100%;
+        .hero-section p {
+            color: var(--text-muted);
+            font-size: 18px;
             max-width: 600px;
-            padding: 40px;
-            box-sizing: border-box;
-        }
-
-        .system-title {
-            color: var(--neon-blue);
-            text-shadow: 0 0 15px var(--neon-blue);
-            margin-top: 0;
-            text-align: center;
-            font-size: 2rem;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #a29bfe;
-            font-weight: bold;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 12px 16px;
-            background: #02000a;
-            border: 1px solid rgba(10, 132, 255, 0.4);
-            border-radius: 12px;
-            color: #fff;
-            font-size: 1rem;
-            box-sizing: border-box;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--neon-purple);
-            box-shadow: 0 0 12px var(--neon-purple);
-        }
-
-        .btn-save {
-            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
-            color: #fff;
-            border: none;
-            width: 100%;
-            padding: 15px;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(10, 132, 255, 0.3);
-            transition: 0.3s;
-        }
-
-        .btn-save:hover {
-            box-shadow: 0 0 25px var(--neon-purple);
-            transform: translateY(-2px);
-        }
-    </style>
-</head>
-<body>
-
-    <header class="space-header">
-        <div class="triple-lions">
-            <div class="lion-item"><i class="fa-solid fa-shield-cat"></i></div>
-            <div class="lion-item" onclick="activateSecretSystem()"><i class="fa-solid fa-shield-cat"></i></div>
-            <div class="lion-item"><i class="fa-solid fa-shield-cat"></i></div>
-        </div>
-        <h1 class="store-title">LEON SHOP</h1>
-        <p style="color: #a29bfe; font-size: 1.2rem;">اضغط على شعار الأسد الأوسط 3 مرات لفتح لوحة تحكم النظام</p>
-    </header>
-
-    <main class="main-content">
-        <div class="grid-container">
-            <div class="product-card">
-                <div class="badge-discount" id="p1-discount">خصم 20%</div>
-                <div class="card-icon"><i class="fa-solid fa-trophy"></i></div>
-                <h3 id="p1-title" style="font-size: 1.6rem; margin: 10px 0;">حساب فورتنايت أسطوري</h3>
-                <p style="color: #b2bec3; font-size: 0.95rem;">يحتوي على سكنات نادرة ورقصات قديمة من السيزون الأول.</p>
-                <div class="price-tag" id="p1-price">119 SAR</div>
-            </div>
-
-            <div class="product-card">
-                <div class="badge-discount" id="p2-discount">خصم 10%</div>
-                <div class="card-icon" style="color: var(--neon-purple); text-shadow: 0 0 15px var(--neon-purple);"><i class="fa-solid fa-car-burst"></i></div>
-                <h3 id="p2-title" style="font-size: 1.6rem; margin: 10px 0;">حساب روكيت ليك فخم</h3>
-                <p style="color: #b2bec3; font-size: 0.95rem;">سيارات وعناصر نادرة مع مستويات تنافسية عالية جداً.</p>
-                <div class="price-tag" id="p2-price">44 SAR</div>
-            </div>
-        </div>
-    </main>
-
-    <div class="system-overlay" id="secretSystem">
-        <div class="system-panel">
-            <h2 class="system-title"><i class="fa-solid fa-terminal"></i> لوحة تحكم نظام LEON</h2>
-            <p style="text-align: center; color: #b2bec3; font-size: 0.9rem; margin-bottom: 30px;">تعديل حركي فوري لبيانات المتجر الفضائي</p>
-            
-            <div class="form-group">
-                <label>اسم منتج فورتنايت:</label>
-                <input type="text" id="input-p1-title" class="form-input" value="حساب فورتنايت أسطوري">
-            </div>
-            <div class="form-group" style="display: flex; gap: 15px;">
-                <div style="flex: 1;">
-                    <label>السعر الحالي (فورتنايت):</label>
-                    <input type="text" id="input-p1-price" class="form-input" value="119 SAR">
-                </div>
-                <div style="flex: 1;">
-                    <label>نسبة الخصم:</label>
-                    <input type="text" id="input-p1-discount" class="form-input" value="خصم 20%">
-                </div>
-            </div>
-
-            <hr style="border: 0; height: 1px; background: rgba(10, 132, 255, 0.2); margin: 30px 0;">
-
-            <div class="form-group">
-                <label>اسم منتج روكيت ليك:</label>
-                <input type="text" id="input-p2-title" class="form-input" value="حساب روكيت ليك فخم">
-            </div>
-            <div class="form-group" style="display: flex; gap: 15px;">
-                <div style="flex: 1;">
-                    <label>السعر الحالي (روكيت):</label>
-                    <input type="text" id="input-p2-price" class="form-input" value="44 SAR">
-                </div>
-                <div style="flex: 1;">
-                    <label>نسبة الخصم:</label>
-                    <input type="text" id="input-p2-discount" class="form-input" value="خصم 10%">
-                </div>
-            </div>
-
-            <button class="btn-save" onclick="saveSystemChanges()">حفظ وتحديث البيانات فوراً 🚀</button>
-            <p style="text-align: center; margin-top: 15px;"><a href="#" onclick="closeSystem()" style="color: #ff4757; text-decoration: none; font-size: 0.9rem;">إغلاق اللوحة</a></p>
-        </div>
-    </div>
-
-    <script>
-        let clickCounter = 0;
-        let clickTimer;
-
-        // دالة احتساب الضغطات الـ 3 على الشعار الأوسط
-        function activateSecretSystem() {
-            clickCounter++;
-            
-            clearTimeout(clickTimer);
-            
-            if (clickCounter === 3) {
-                document.getElementById('secretSystem').style.display = 'flex';
-                clickCounter = 0; // تصفير العداد بعد الفتح
-            }
-
-            // تصفير العداد تلقائياً إذا تأخر المستخدم في الضغط (خلال ثانية ونصف)
-            clickTimer = setTimeout(() => {
-                clickCounter = 0;
-            }, 1500);
-        }
-
-        function closeSystem() {
-            document.getElementById('secretSystem').style.display = 'none';
-        }
-
-        // دالة حفظ التعديلات وتحديث واجهة الموقع فوراً
-        function saveSystemChanges() {
-            // تحديث المنتج الأول
-            document.getElementById('p1-title').innerText = document.getElementById('input-p1-title').value;
-            document.getElementById('p1-price').innerText = document.getElementById('input-p1-price').value;
-            document.getElementById('p1-discount').innerText = document.getElementById('input-p1-discount').value;
-
-            // تحديث المنتج الثاني
-            document.getElementById('p2-title').innerText = document.getElementById('input-p2-title').value;
-            document.getElementById('p2-price').innerText = document.getElementById('input-p2-price').value;
-            document.getElementById('p2-discount').innerText = document.getElementById('input-p2-discount').value;
-
-            alert("⚙️ تم تحديث النظام بنجاح وتطبيق التعديلات على المتجر الفضائي!");
-            closeSystem();
-        }
-    </script>
-</body>
-</html><!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leon Shop | نظام المنتجات الذكي</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --bg-dark: #02000a;
-            --neon-purple: #bf5af2;
-            --neon-blue: #0a84ff;
-            --text-main: #ffffff;
-            --card-purple: rgba(19, 9, 41, 0.85);
-            --border-glow: 0 0 25px rgba(191, 90, 242, 0.5);
-            --blue-glow: 0 0 25px rgba(10, 132, 255, 0.5);
-        }
-
-        body {
-            background-color: var(--bg-dark);
-            background-image: 
-                radial-gradient(circle at 15% 20%, rgba(191, 90, 242, 0.15) 0%, transparent 45%),
-                radial-gradient(circle at 85% 75%, rgba(10, 132, 255, 0.15) 0%, transparent 45%);
-            color: var(--text-main);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-        }
-
-        @keyframes floatSpace {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-12px); }
-            100% { transform: translateY(0px); }
-        }
-
-        .space-header {
-            text-align: center;
-            padding: 60px 20px 20px 20px;
-        }
-
-        .triple-lions {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            margin-bottom: 25px;
-        }
-
-        .lion-item {
-            font-size: 3.5rem;
-            color: var(--neon-purple);
-            text-shadow: 0 0 25px var(--neon-purple);
-            animation: floatSpace 4s ease-in-out infinite;
-            cursor: pointer;
-        }
-
-        .lion-item:nth-child(2) {
-            color: var(--neon-blue);
-            text-shadow: 0 0 25px var(--neon-blue);
-            animation-delay: 1s;
-        }
-        .lion-item:nth-child(3) { animation-delay: 2s; }
-
-        .main-content {
-            max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
         }
 
-        /* 🗂️ كروت الأقسام الرئيسية الثقيلة */
-        .category-selection {
+        /* الحاوية الأساسية للمنتجات */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 28px;
+            margin-bottom: 30px;
+            border-right: 4px solid var(--gold);
+            padding-right: 15px;
+            color: var(--text-main);
+        }
+
+        /* شبكة المنتجات */
+        .products-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-bottom: 50px;
-        }
-
-        .cat-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            padding: 40px;
-            text-align: center;
-            cursor: pointer;
-            transition: 0.4s;
-        }
-
-        .cat-card i {
-            font-size: 4.5rem;
-            margin-bottom: 20px;
-            transition: 0.4s;
-        }
-
-        /* تأثير التوهج المخصص لكل قسم عند الاختيار أو المرور */
-        .cat-card.fortnite-btn:hover, .cat-card.fortnite-btn.active {
-            border-color: var(--neon-purple);
-            box-shadow: var(--border-glow);
-            background: var(--card-purple);
-        }
-        .cat-card.fortnite-btn i { color: var(--neon-purple); text-shadow: 0 0 15px var(--neon-purple); }
-
-        .cat-card.rocket-btn:hover, .cat-card.rocket-btn.active {
-            border-color: var(--neon-blue);
-            box-shadow: var(--blue-glow);
-            background: rgba(10, 132, 255, 0.1);
-        }
-        .cat-card.rocket-btn i { color: var(--neon-blue); text-shadow: 0 0 15px var(--neon-blue); }
-
-        /* 📦 حاوية المنتجات المخفية تلقائياً */
-        .products-container {
-            display: none; /* تظهر عبر الجافاسكربت */
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            animation: fadeIn 0.5s ease-in-out;
+            gap: 25px;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
+        /* كرت المنتج الفخم بتأثير زجاجي مضيء */
         .product-card {
-            background: var(--card-purple);
-            border: 2px solid rgba(191, 90, 242, 0.2);
-            border-radius: 24px;
-            padding: 30px 20px;
-            text-align: center;
+            background-color: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
             position: relative;
-            transition: 0.3s;
         }
 
         .product-card:hover {
-            transform: scale(1.05);
-            box-shadow: var(--border-glow);
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.15);
         }
 
-        .rocket-product {
-            border-color: rgba(10, 132, 255, 0.2);
-        }
-        .rocket-product:hover {
-            box-shadow: var(--blue-glow);
-            border-color: var(--neon-blue);
-        }
-
-        .badge-discount {
+        /* شارة التوثيق أو الضمان للمنتجات الرقمية */
+        .badge {
             position: absolute;
             top: 15px;
             right: 15px;
-            background: linear-gradient(45deg, #ff4757, #ff6b81);
-            padding: 5px 12px;
-            border-radius: 50px;
-            font-size: 0.85rem;
+            background-color: rgba(0, 0, 0, 0.75);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 5px 10px;
+            font-size: 12px;
+            border-radius: 20px;
             font-weight: bold;
+            z-index: 1;
         }
 
-        .price-tag {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #2ed573;
-            margin-top: 15px;
+        .product-img-wrapper {
+            width: 100%;
+            height: 200px;
+            background: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            color: rgba(255,255,255,0.1);
+            position: relative;
+            overflow: hidden;
         }
 
-        /* ⚙️ لوحة تحكم النظام */
-        .system-overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(2, 0, 10, 0.95); backdrop-filter: blur(20px); z-index: 9999;
-            justify-content: center; align-items: center; padding: 20px;
-        }
+        /* خلفيات افتراضية فخمة للألعاب */
+        .bg-fortnite { background: linear-gradient(135deg, #150030, #310062); }
+        .bg-rocket { background: linear-gradient(135deg, #001f4d, #004080); }
 
-        .system-panel {
-            background: #0f0724; border: 2px solid var(--neon-blue); border-radius: 24px;
-            width: 100%; max-width: 600px; padding: 40px; box-sizing: border-box;
-        }
-
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; margin-bottom: 5px; color: #a29bfe; }
-        .form-input { width: 100%; padding: 10px; background: #02000a; border: 1px solid var(--neon-blue); border-radius: 8px; color: #fff; }
-        .btn-save { background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple)); color: #fff; border: none; width: 100%; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; }
-    </style>
-</head>
-<body>
-
-    <header class="space-header">
-        <div class="triple-lions">
-            <div class="lion-item"><i class="fa-solid fa-shield-cat"></i></div>
-            <div class="lion-item" onclick="activateSecretSystem()"><i class="fa-solid fa-shield-cat"></i></div>
-            <div class="lion-item"><i class="fa-solid fa-shield-cat"></i></div>
-        </div>
-        <h1 style="font-size: 3.5rem; margin: 0; text-shadow: 0 0 30px var(--neon-purple);">LEON SHOP</h1>
-        <p style="color: #a29bfe;">اختر القسم لعرض المنتجات النارية 🚀</p>
-    </header>
-
-    <main class="main-content">
-        <div class="category-selection">
-            <div class="cat-card fortnite-btn" id="btn-fortnite" onclick="showCategory('fortnite')">
-                <i class="fa-solid fa-mask"></i>
-                <h2 style="margin: 0;">قسم فورتنايت</h2>
-                <p style="color: #b2bec3; margin: 5px 0 0 0;">حسابات عشوائية وأسطورية</p>
-            </div>
-            <div class="cat-card rocket-btn" id="btn-rocket" onclick="showCategory('rocket')">
-                <i class="fa-solid fa-car"></i>
-                <h2 style="margin: 0;">قسم روكيت ليق</h2>
-                <p style="color: #b2bec3; margin: 5px 0 0 0;">سيارات نادرة ومستويات عالية</p>
-            </div>
-        </div>
-
-        <div class="products-container" id="fortnite-container">
-            <div class="product-card">
-                <div class="badge-discount" id="f1-discount">خصم 20%</div>
-                <i class="fa-solid fa-bolt" style="font-size: 3rem; color: var(--neon-purple);"></i>
-                <h3 id="f1-title">حساب فورتنايت شيطاني</h3>
-                <p>يحتوي على سكنات نادرة من السيزونات القديمة.</p>
-                <div class="price-tag" id="f1-price">119 SAR</div>
-            </div>
-            <div class="product-card">
-                <div class="badge-discount" id="f2-discount">خصم 15%</div>
-                <i class="fa-solid fa-skull" style="font-size: 3rem; color: var(--neon-purple);"></i>
-                <h3 id="f2-title">حساب الهيكل العظمي</h3>
-                <p>حساب أساسي جاهز ومؤمن بالكامل.</p>
-                <div class="price-tag" id="f2-price">84 SAR</div>
-            </div>
-        </div>
-
-        <div class="products-container" id="rocket-container">
-            <div class="product-card rocket-product">
-                <div class="badge-discount" id="r1-discount">خصم 10%</div>
-                <i class="fa-solid fa-gauge-high" style="font-size: 3rem; color: var(--neon-blue);"></i>
-                <h3 id="r1-title">حساب روكيت ليق أسطوري</h3>
-                <p>سيارات تميز وسكنات سيارات نادرة جداً.</p>
-                <div class="price-tag" id="r1-price">44 SAR</div>
-            </div>
-        </div>
-    </main>
-
-    <div class="system-overlay" id="secretSystem">
-        <div class="system-panel">
-            <h2 style="color: var(--neon-blue); text-align: center;"><i class="fa-solid fa-terminal"></i> لوحة تعديل السيستم</h2>
-            <div class="form-group">
-                <label>اسم منتج فورتنايت الرئيسي:</label>
-                <input type="text" id="input-f1-title" class="form-input" value="حساب فورتنايت شيطاني">
-            </div>
-            <div class="form-group">
-                <label>سعر فورتنايت الرئيسي:</label>
-                <input type="text" id="input-f1-price" class="form-input" value="119 SAR">
-            </div>
-            <div class="form-group">
-                <label>اسم منتج روكيت الرئيسي:</label>
-                <input type="text" id="input-r1-title" class="form-input" value="حساب روكيت ليق أسطوري">
-            </div>
-            <div class="form-group">
-                <label>سعر روكيت الرئيسي:</label>
-                <input type="text" id="input-r1-price" class="form-input" value="44 SAR">
-            </div>
-            <button class="btn-save" onclick="saveSystemChanges()">تحديث النظام فوراً 🚀</button>
-            <p style="text-align: center; margin-top: 10px;"><a href="#" onclick="closeSystem()" style="color: #ff4757; text-decoration: none;">إغلاق</a></p>
-        </div>
-    </div>
-
-    <script>
-        // دالة تبديل الأقسام وإظهار المنتجات التابعة لها
-        function showCategory(category) {
-            // إخفاء كل الحاويات أولاً
-            document.getElementById('fortnite-container').style.display = 'none';
-            document.getElementById('rocket-container').style.display = 'none';
-            document.getElementById('btn-fortnite').classList.remove('active');
-            document.getElementById('btn-rocket').classList.remove('active');
-
-            // إظهار الحاوية المطلوبة وتفعيل الكرت الخاص بها
-            if (category === 'fortnite') {
-                document.getElementById('fortnite-container').style.display = 'grid';
-                document.getElementById('btn-fortnite').classList.add('active');
-            } else if (category === 'rocket') {
-                document.getElementById('rocket-container').style.display = 'grid';
-                document.getElementById('btn-rocket').classList.add('active');
-            }
-        }
-
-        // دالة الشفرة السرية لفتح السيستم (3 ضغطات على الشعار الأوسط)
-        let clickCounter = 0;
-        let clickTimer;
-        function activateSecretSystem() {
-            clickCounter++;
-            clearTimeout(clickTimer);
-            if (clickCounter === 3) {
-                document.getElementById('secretSystem').style.display = 'flex';
-                clickCounter = 0;
-            }
-            clickTimer = setTimeout(() => { clickCounter = 0; }, 1500);
-        }
-
-        function closeSystem() { document.getElementById('secretSystem').style.display = 'none'; }
-
-        function saveSystemChanges() {
-            document.getElementById('f1-title').innerText = document.getElementById('input-f1-title').value;
-            document.getElementById('f1-price').innerText = document.getElementById('input-f1-price').value;
-            document.getElementById('r1-title').innerText = document.getElementById('input-r1-title').value;
-            document.getElementById('r1-price').innerText = document.getElementById('input-r1-price').value;
-            alert("⚙️ تم تحديث بيانات المنتجات داخل السيستم بنجاح!");
-            closeSystem();
-        }
-    </script>
-</body>
-</html>
-
-
-
+        .product-img-wrapper i {
+            color: rgba(255, 255, 255, 0.2);
+            font
