@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة ليون الرقمية المتكاملة والفاخرة</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Cairo:wght@400;600;700;900&family=Almarai:wght@400;700;800&display=swap" rel="stylesheet">
+    <title>منصة ليون الرقمية المتكاملة والفاخرة - الإصدار العملاق</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -21,6 +21,11 @@
             --gold-admin-color: #eab308;
             --success-green-color: #10b981;
             --danger-red-color: #ef4444;
+            
+            /* قياسات القصائم الافتراضية - يتم التحكم بها من الإدارة */
+            --coupon-width: 280px;
+            --coupon-height: 130px;
+            --coupon-radius: 14px;
         }
 
         body {
@@ -70,19 +75,8 @@
             text-shadow: 0 0 25px rgba(56, 189, 248, 0.7);
         }
 
-        #store-name:hover {
-            transform: scale(1.06);
-            color: var(--gold-admin-color);
-        }
-
-        .store-description {
-            color: #94a3b8;
-            margin-top: 12px;
-            font-size: 16px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+        #store-name:hover { transform: scale(1.06); color: var(--gold-admin-color); }
+        .store-description { color: #94a3b8; margin-top: 12px; font-size: 16px; max-width: 600px; margin-left: auto; margin-right: auto; }
 
         .cart-trigger-btn {
             position: absolute;
@@ -96,11 +90,10 @@
             border: 2px solid #334155;
             box-shadow: 0 4px 12px rgba(0,0,0,0.4);
         }
-
         .cart-trigger-btn:hover { border-color: var(--accent-neon-color); transform: scale(1.1); }
         .cart-counter-badge { position: absolute; top: -5px; right: -5px; background: var(--danger-red-color); color: white; border-radius: 50%; padding: 3px 8px; font-size: 11px; font-weight: bold; }
 
-        /* نظام القسائم والمربعات الإعلانية المتحركة (الثقيلة جداً) */
+        /* نظام القسائم والمربعات الإعلانية المتحركة (الثقيلة والمطورة هندسياً) */
         .coupon-slider-wrapper {
             width: 100%;
             overflow: hidden;
@@ -110,37 +103,47 @@
             border-bottom: 1px solid #1e293b;
             position: relative;
         }
-
         .coupon-track { display: flex; gap: 25px; width: max-content; }
         
-        /* اتجاهات حركات القسائم الإعلانية */
+        /* اتجاهات حركات القسائم الإعلانية (يمين يمين أو يسار يسار) */
         .anim-right { animation: scrollAnimRight 25s linear infinite; }
         .anim-left { animation: scrollAnimLeft 25s linear infinite; }
-
         @keyframes scrollAnimRight { 0% { transform: translateX(0); } 100% { transform: translateX(50%); } }
         @keyframes scrollAnimLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
+        /* أنماط وأشكال القصائم المتعددة المتاحة للتبديل من الإدارة */
         .coupon-card-item {
-            width: 280px;
-            background: var(--card-bg-color);
-            border-radius: 14px;
+            width: var(--coupon-width);
+            border-radius: var(--coupon-radius);
             overflow: hidden;
-            border: 2px solid #1e293b;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
             flex-shrink: 0;
             text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
         }
 
-        .coupon-card-item:hover { border-color: var(--accent-neon-color); transform: scale(1.02); }
-        .coupon-card-item img { width: 100%; height: 120px; object-fit: cover; background: #1e293b; }
-        .coupon-card-item h4 { font-size: 15px; padding: 12px; color: #f59e0b; font-weight: 700; }
+        /* 1. الشكل الكلاسيكي */
+        .style-classic { background: var(--card-bg-color); border: 2px solid #1e293b; }
+        .style-classic img { width: 100%; height: var(--coupon-height); object-fit: cover; }
+        .style-classic h4 { font-size: 14px; padding: 12px; color: #f59e0b; font-weight: 700; }
+
+        /* 2. شكل كرت نيون مضيء */
+        .style-neon { background: #070a12; border: 2px solid var(--accent-neon-color); box-shadow: 0 0 15px rgba(56,189,248,0.4); }
+        .style-neon img { width: 100%; height: var(--coupon-height); object-fit: cover; filter: brightness(0.9); }
+        .style-neon h4 { font-size: 14px; padding: 12px; color: #ffffff; font-weight: bold; text-shadow: 0 0 5px var(--accent-neon-color); }
+
+        /* 3. شكل سينمائي خلفية كاملة */
+        .style-cinema { position: relative; height: calc(var(--coupon-height) + 45px); background: #000; border: 2px solid #334155; }
+        .style-cinema img { width: 100%; height: 100%; object-fit: cover; opacity: 0.45; }
+        .style-cinema h4 { position: absolute; bottom: 0; left: 0; width: 100%; padding: 15px; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); color: #eab308; font-size: 14px; font-weight: 800; }
 
         /* التقسيمات الأساسية والصفحات */
         .page-segment { display: none; padding: 50px 20px; max-width: 1300px; margin: 0 auto; animation: segmentFadeIn 0.4s ease-out; }
         .page-segment.active { display: block; }
         @keyframes segmentFadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* مربعات الأقسام (القصائم والطلبات الكبرى) */
+        /* مربعات الأقسام الرئيسية */
         .categories-layout-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 20px; }
         .category-box-interactive {
             background: linear-gradient(135deg, var(--card-bg-color), #1e293b);
@@ -150,65 +153,64 @@
             text-align: center;
             cursor: pointer;
             box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-            position: relative;
         }
         .category-box-interactive:hover { transform: translateY(-8px); border-color: var(--accent-neon-color); box-shadow: 0 12px 30px rgba(56, 189, 248, 0.25); }
         .category-box-interactive h3 { font-size: 24px; margin-bottom: 12px; color: #ffffff; font-weight: 800; }
         .category-box-interactive p { color: #64748b; font-size: 15px; line-height: 1.5; }
 
-        /* عرض المنتجات الفخم بالصور والتعليقات والوصف والأسعار */
+        /* عرض المنتجات والتعليقات والأسعار */
         .products-showcase-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 30px; }
         .product-card-premium { background: var(--card-bg-color); border-radius: 20px; border: 2px solid #1e293b; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
-        .product-card-premium:hover { border-color: var(--accent-neon-color); }
         .product-showcase-img { width: 100%; height: 210px; object-fit: cover; background: #1e293b; border-bottom: 1px solid #1e293b; }
         
         .product-content-area { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
         .product-main-title { font-size: 20px; font-weight: 800; color: #ffffff; margin-bottom: 8px; }
-        .product-extended-desc { font-size: 14px; color: #94a3b8; line-height: 1.6; margin-bottom: 15px; text-align: justify; }
+        .product-extended-desc { font-size: 14px; color: #94a3b8; line-height: 1.6; margin-bottom: 15px; }
         .product-price-tag { font-size: 24px; font-weight: 900; color: var(--success-green-color); margin-bottom: 15px; }
         
-        .add-to-cart-btn { background: linear-gradient(135deg, #059669, #10b981); color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold; font-size: 16px; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2); }
+        .add-to-cart-btn { background: linear-gradient(135deg, #059669, #10b981); color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold; font-size: 16px; }
         .add-to-cart-btn:hover { background: #059669; transform: translateY(-2px); }
 
-        /* قسم الآراء الفخم المدمج أسفل المنتجات */
         .product-feedback-container { background: #0b0f19; padding: 15px; border-top: 1px solid #1e293b; font-size: 13px; max-height: 150px; overflow-y: auto; }
         .feedback-title { font-weight: bold; margin-bottom: 8px; color: var(--gold-admin-color); display: flex; justify-content: space-between; }
         .feedback-row { padding: 6px 0; border-bottom: 1px dashed #1e293b; color: #cbd5e1; }
 
-        /* صفحة السلة الاحترافية والفواتير والتدبيل التلقائي للاسعار */
+        /* صفحة السلة الاحترافية وتدبيل الاسعار التلقائي وبوابات الدفع المثبتة بالأسفل */
         .cart-data-table { width: 100%; border-collapse: collapse; margin-top: 25px; background: var(--card-bg-color); border-radius: 12px; overflow: hidden; }
         .cart-data-table th, .cart-data-table td { padding: 16px; border-bottom: 1px solid #1e293b; text-align: right; }
         .cart-data-table th { background: #1e293b; color: #94a3b8; font-weight: 700; }
         
         .checkout-billing-summary { background: var(--card-bg-color); padding: 35px; border-radius: 20px; border: 2px solid var(--success-green-color); margin-top: 40px; text-align: center; }
         
-        /* استعراض بوابات الدفع الكاملة الفخمة (Apple Pay, Visa, Mastercard, Mada, Knet) */
-        .payment-gateways-showcase { display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap; margin: 30px 0; }
+        /* بوابات الدفع الكاملة الفخمة والأسطر التوضيحية المثبتة تحت مدى وفيزا */
+        .payment-gateways-showcase { display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap; margin: 25px 0 15px 0; }
         .gateway-logo-item { background: #ffffff; color: #000000; font-weight: 900; padding: 8px 16px; border-radius: 6px; font-size: 14px; box-shadow: 0 4px 10px rgba(255,255,255,0.05); }
-        .gateway-icon { font-size: 32px; color: #f8fafc; }
+        .gateway-icon { font-size: 34px; color: #f8fafc; vertical-align: middle; }
+
+        .payment-security-notice { color: #94a3b8; font-size: 13px; max-width: 700px; margin: 0 auto 25px auto; line-height: 1.6; border-top: 1px dashed #334155; padding-top: 15px; text-align: center; }
 
         .complete-order-btn { background: linear-gradient(135deg, #d97706, #f59e0b); color: #080c14; font-weight: 800; font-size: 19px; padding: 14px 45px; border-radius: 10px; border: none; cursor: pointer; box-shadow: 0 5px 15px rgba(245, 158, 11, 0.3); }
         .complete-order-btn:hover { background: #d97706; transform: translateY(-3px); }
 
-        /* لوحة التحكم والادارة العملاقة والثقيلة جداً (تغنيك عن الكود) */
+        /* لوحة التحكم والادارة الثقيلة والشاملة لتعديل القياسات والأشكال وزيادة القصائم */
         .admin-super-panel { background: #0b0f19; border: 3px solid var(--gold-admin-color); border-radius: 24px; padding: 40px; box-shadow: 0 0 50px rgba(234,179,8,0.2); }
         .admin-flex-columns { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 35px; margin-top: 30px; }
         .admin-card-section { background: var(--card-bg-color); padding: 30px; border-radius: 16px; border: 1px solid #1e293b; }
         .admin-card-section h3 { font-size: 20px; color: var(--gold-admin-color); margin-bottom: 20px; border-bottom: 2px dashed #1e293b; padding-bottom: 10px; font-weight: 800; }
         
-        label { display: block; margin: 12px 0 6px; font-size: 14px; color: #cbd5e1; font-weight: 600; }
+        label { display: block; margin: 12px 0 4px; font-size: 13px; color: #cbd5e1; font-weight: 600; }
         input, select, textarea { width: 100%; padding: 12px; background: #080c14; border: 1px solid #475569; border-radius: 8px; color: white; margin-bottom: 12px; font-size: 14px; }
         input:focus, select:focus, textarea:focus { border-color: var(--gold-admin-color); outline: none; }
         
-        .action-execute-btn { background: var(--gold-admin-color); color: #080c14; font-weight: bold; border: none; padding: 14px; border-radius: 8px; cursor: pointer; width: 100%; font-size: 16px; }
+        .action-execute-btn { background: var(--gold-admin-color); color: #080c14; font-weight: bold; border: none; padding: 13px; border-radius: 8px; cursor: pointer; width: 100%; font-size: 15px; margin-top: 5px; }
         .action-execute-btn:hover { background: #ca8a04; }
 
-        .admin-items-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        .admin-items-table th, .admin-items-table td { padding: 12px; border-bottom: 1px solid #1e293b; text-align: right; font-size: 13px; }
-        .edit-row-btn { background: #06b6d4; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; margin-left: 4px; }
-        .delete-row-btn { background: var(--danger-red-color); color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; }
+        .admin-items-table { width: 100%; border-collapse: collapse; margin-top: 15px; margin-bottom: 15px; }
+        .admin-items-table th, .admin-items-table td { padding: 10px; border-bottom: 1px solid #1e293b; text-align: right; font-size: 13px; }
+        .edit-row-btn { background: #06b6d4; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; margin-left: 3px; }
+        .delete-row-btn { background: var(--danger-red-color); color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; }
 
-        /* أيقونة الواتساب الدائرية الثابتة العائمة (كويتية احترافية نابضة) */
+        /* زر الواتساب الكويتي الدائم الدائري النابض والمطور */
         .whatsapp-floating-ball {
             position: fixed;
             bottom: 40px;
@@ -227,7 +229,6 @@
             text-decoration: none;
             animation: pulseBallAnimation 2s infinite;
         }
-
         @keyframes pulseBallAnimation {
             0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); transform: scale(1); }
             70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); transform: scale(1.05); }
@@ -235,7 +236,6 @@
         }
 
         .general-back-btn { background: #334155; color: white; border: none; padding: 10px 22px; border-radius: 8px; cursor: pointer; font-weight: bold; margin-bottom: 25px; }
-        .general-back-btn:hover { background: #475569; }
     </style>
 </head>
 <body>
@@ -246,7 +246,7 @@
 
     <header id="store-header-hero">
         <div id="store-name" onclick="handleThreeClicksConfig()">مـتـجـر لـيـون 👑</div>
-        <div class="store-description" id="store-slogan-label">المنصة الكبرى لشراء الحسابات النادرة (فورتنايت، روكيت ليج) والبطاقات الرقمية المضمونة.</div>
+        <div class="store-description">المنصة الكبرى لشراء الحسابات النادرة (فورتنايت، روكيت ليج) والبطاقات الرقمية المضمونة بـكـفـاءة عـالـيـة.</div>
         
         <div class="cart-trigger-btn" onclick="navigateToSection('cart_page')">
             <i class="fas fa-shopping-cart" style="color: white; font-size: 22px;"></i>
@@ -265,16 +265,16 @@
         
         <div class="categories-layout-grid">
             <div class="category-box-interactive" onclick="viewCategorySection('fortnite')">
-                <h3 id="lbl-cat-fn-title">حسابات فورتنايت نادرة</h3>
-                <p id="lbl-cat-fn-desc">حسابات قديمة وشيطون مربوطة بالكامل مع Epic Games وجاهزة للنقل.</p>
+                <h3>حسابات فورتنايت نادرة</h3>
+                <p>حسابات قديمة وشيطون مربوطة بالكامل مع Epic Games وجاهزة للنقل الفوري لحسابك.</p>
             </div>
             <div class="category-box-interactive" onclick="viewCategorySection('rocket')">
-                <h3 id="lbl-cat-rk-title">حسابات Rocket League</h3>
-                <p id="lbl-cat-rk-desc">حسابات عريقة تحتوي على سيارات الفندك وأغراض حصرية ومضمونة.</p>
+                <h3>حسابات Rocket League</h3>
+                <p>حسابات عريقة تحتوي على سيارات الفندك وأغراض وسكنات حصرية ومضمونة 100%.</p>
             </div>
             <div class="category-box-interactive" onclick="viewCategorySection('other')">
-                <h3 id="lbl-cat-ot-title">أخرى (روبوكس وبطاقات)</h3>
-                <p id="lbl-cat-ot-desc">شحن روبوكس بكميات ضخمة وبطاقات شحن رقمية لجميع المنصات.</p>
+                <h3>أخرى (روبوكس وبطاقات)</h3>
+                <p>شحن روبوكس بكميات ضخمة وبطاقات شحن رقمية وبطاقات هدايا متجددة بشكل يومي.</p>
             </div>
         </div>
     </div>
@@ -284,8 +284,7 @@
         <h2 id="current-selected-cat-title" style="color: var(--accent-neon-color); font-size: 30px; margin-bottom: 5px;">اسم القسم</h2>
         <p id="current-selected-cat-desc" style="color: #64748b; margin-bottom: 30px;">وصف وتفاصيل القسم المختار</p>
         
-        <div class="products-showcase-grid" id="products-render-container">
-            </div>
+        <div class="products-showcase-grid" id="products-render-container"></div>
     </div>
 
     <div id="segment-cart_page" class="page-segment">
@@ -303,13 +302,12 @@
                     <th>إجراء</th>
                 </tr>
             </thead>
-            <tbody id="cart-table-rows">
-                </tbody>
+            <tbody id="cart-table-rows"></tbody>
         </table>
 
         <div class="checkout-billing-summary">
             <h3 style="font-size: 26px;">الإجمالي الكلي المستحق: <span id="cart-grand-total-label" style="color: var(--success-green-color); font-weight: 900;">0</span> ر.س</h3>
-            <p style="color: #94a3b8; margin-top: 8px; font-size: 14px;">* عند طلب غرضين أو أكثر من نفس الحساب يتضاعف السعر بدقة عالية وبشكل تلقائي.</p>
+            <p style="color: #94a3b8; margin-top: 8px; font-size: 14px;">* عند طلب غرضين أو أكثر من نفس الحساب يتضاعف السعر بدقة عالية وبشكل تلقائي بداخل الفاتورة.</p>
             
             <div class="payment-gateways-showcase">
                 <div class="gateway-logo-item" style="background: #000; color: #fff;"><i class="fab fa-apple-pay" style="font-size: 24px; vertical-align: middle;"></i> Apple Pay</div>
@@ -320,6 +318,11 @@
                 <div class="gateway-logo-item" style="background: #ff4500; color: #fff;">STC Pay</div>
             </div>
 
+            <div class="payment-security-notice">
+                🔒 <b>نظام حماية المشتري الموحد (بوابات الدفع الآمنة):</b><br>
+                جميع المعاملات المالية مشفرة عبر بروتوكول أمان عالي المستوى SSL. عند الضغط على إتمام الطلب، سيتم توجيهك إلى خادم البنك المباشر (سواءً بنوك الكويت عبر K-Net أو فيزا ومدى والـ Apple Pay) حيث سيصلك **رمز تحقق وتأكيد OTP (كلمة مرور لمرة واحدة)** على هاتفك المرتبط بالبطاقة لضمان وتأكيد الخصم المباشر بنجاح وحماية حسابك من أي عمليات غير مصرحة.
+            </div>
+
             <button class="complete-order-btn" onclick="executeCheckoutRedirection()">💳 إتمام الطلب والتوجه لبوابة الدفع الآمنة</button>
         </div>
     </div>
@@ -327,12 +330,12 @@
     <div id="segment-admin_super_page" class="page-segment">
         <div class="admin-super-panel">
             <button class="general-back-btn" onclick="navigateToSection('home_page')" style="float: left; background: var(--container-bg-color);">خروج من الإدارة</button>
-            <h2>⚙️ لوحة ليون الإدارية الثقيلة (إدارة شاملة بدون كود)</h2>
-            <p style="color: #a1a1aa;">يمكنك تعديل المربعات المتحركة، مواضعها، اتجاهاتها، ألوان الخطوط، والمنتجات وحذفها وتحديثها.</p>
+            <h2>⚙️ لوحة ليون الإدارية المتقدمة (تعديل القياسات والأشكال والقصائم والمنتجات)</h2>
+            <p style="color: #a1a1aa;">تحكم كامل ومطلق في شكل وقياسات المتجر والمربعات الإعلانية دون تعديل كود برمجي واحد.</p>
             
             <div class="admin-flex-columns">
                 <div class="admin-card-section">
-                    <h3>✍️ تعديل مظهر وقصائم العرض المتحركة</h3>
+                    <h3>✍️ القياسات وتصميم المربعات الإعلانية</h3>
                     
                     <label>اسم المتجر (أعلى الوسط):</label>
                     <input type="text" id="adm-store-name">
@@ -345,40 +348,72 @@
 
                     <hr style="border-color: #334155; margin: 15px 0;">
                     
-                    <h4 style="color: var(--accent-neon-color); margin-bottom: 10px;">⚙️ إعدادات القصائم الإعلانية المتحركة (المربعات):</h4>
-                    <label>موضع شريط القصائم المتحركة بالمتجر:</label>
+                    <h4 style="color: var(--accent-neon-color); margin-bottom: 10px;">📐 هندسة وقياسات المربعات المتحركة (القصائم):</h4>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div>
+                            <label>عرض المربع (بكسل):</label>
+                            <input type="number" id="adm-coupon-width" placeholder="280">
+                        </div>
+                        <div>
+                            <label>ارتفاع الصورة (بكسل):</label>
+                            <input type="number" id="adm-coupon-height" placeholder="130">
+                        </div>
+                    </div>
+                    
+                    <label>حجم انحناء الحواف للمربع Border Radius:</label>
+                    <input type="number" id="adm-coupon-radius" placeholder="14">
+
+                    <label>شكل وتصميم المربعات الإعلانية (ستايلات متعددة):</label>
+                    <select id="adm-coupon-style">
+                        <option value="style-classic">الشكل الكلاسيكي الفخم (خلفية غامقة ونص برتقالي)</option>
+                        <option value="style-neon">شكل كرت نيون مضيء (إضاءة زرقاء مشعة ومميزة)</option>
+                        <option value="style-cinema">شكل سينمائي خلفية كاملة (صورة معتمة والنص فوقها)</option>
+                    </select>
+
+                    <label>موضع شريط القصائم بداخل المتجر:</label>
                     <select id="adm-coupon-position" onchange="adjustCouponBarPositionUI()">
                         <option value="top_header">فوق الهيدر (أعلى شيء)</option>
                         <option value="under_header">تحت الهيدر مباشرة</option>
                         <option value="above_cats">فوق مربعات الأقسام (الافتراضي)</option>
                     </select>
 
-                    <label>اتجاه حركة المربعات المتحركة:</label>
+                    <label>اتجاه حركة المربعات الإعلانية:</label>
                     <select id="adm-coupon-direction">
-                        <option value="anim-right">تتحرك لليمين (يمين يمين)</option>
-                        <option value="anim-left">تتحرك لليسار (يسار يسار)</option>
+                        <option value="anim-right">تتحرك لليمين (يمين يمين يمين)</option>
+                        <option value="anim-left">تتحرك لليسار (يسار يسار يسار)</option>
                     </select>
 
-                    <label>عنوان وصورة مربع القسيمة الإعلانية الأولى:</label>
-                    <input type="text" id="adm-c1-title" placeholder="نص المربع 1">
-                    <input type="text" id="adm-c1-img" placeholder="رابط صورة المربع 1">
+                    <button class="action-execute-btn" onclick="saveGlobalVisualConfigs()">حفظ وتحديث كامل المظهر والقياسات 💾</button>
+                    
+                    <hr style="border-color: #334155; margin: 25px 0;">
+                    
+                    <h3 style="color: #f59e0b; font-size:18px;">➕ إضافة / تعديل قسيمة (مربع متحرك) منفصل</h3>
+                    <input type="hidden" id="adm-editing-coupon-id" value="">
+                    
+                    <label>النص المكتوب على المربع الإعلاني:</label>
+                    <input type="text" id="adm-cp-title" placeholder="مثال: خصم خاص 40% على حسابات فورتنايت">
+                    
+                    <label>رابط صورة المربع الإعلاني:</label>
+                    <input type="text" id="adm-cp-img" placeholder="رابط صورة المربع المتحرك">
 
-                    <label>عنوان وصورة مربع القسيمة الإعلانية الثانية:</label>
-                    <input type="text" id="adm-c2-title" placeholder="نص المربع 2">
-                    <input type="text" id="adm-c2-img" placeholder="رابط صورة المربع 2">
-
-                    <button class="action-execute-btn" onclick="saveGlobalVisualConfigs()">حفظ وتحديث كامل المظهر والقصائم 💾</button>
+                    <button class="action-execute-btn" style="background:#3b82f6; color:white;" onclick="saveCouponFromAdmin()">حفظ / زيادة القسيمة بجدول الحركة 🚀</button>
+                    
+                    <h4 style="margin-top:15px; font-size:13px; color:var(--danger-red-color);">📋 المربعات الإعلانية الحالية المضافة:</h4>
+                    <table class="admin-items-table">
+                        <tbody id="adm-coupons-rows-list"></tbody>
+                    </table>
                 </div>
 
                 <div class="admin-card-section">
-                    <h3>📦 إضافة وتعديل حسابات المتجر</h3>
+                    <h3>📦 إضافة وتعديل حسابات ومنتجات المتجر</h3>
                     <input type="hidden" id="adm-editing-product-id" value="">
                     
                     <label>اسم الحساب / المنتج:</label>
-                    <input type="text" id="adm-p-name" placeholder="مثال: حساب شيطون ومربوط إيبك جيمز">
+                    <input type="text" id="adm-p-name" placeholder="مثال: حساب بنت الطيارة نادير">
                     
-                    <label>وصف الحساب وتفاصيل الربط الكاملة:</label>
-                    <textarea id="adm-p-desc" rows="3" placeholder="اكتب تفاصيل السكنات، السيزونات، ونوع الربط بدقة..."></textarea>
+                    <label>وصف الحساب وتفاصيل الربط الكاملة للزبون:</label>
+                    <textarea id="adm-p-desc" rows="3" placeholder="اكتب تفاصيل السكنات، نوع الربط، وسيزون الحساب بدقة..."></textarea>
 
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
                         <div>
@@ -395,11 +430,11 @@
                         </div>
                     </div>
 
-                    <label>رابط صورة الحساب الفاخرة المخصصة:</label>
+                    <label>رابط صورة الحساب الفاخرة المخصصة المعروضة:</label>
                     <input type="text" id="adm-p-img" placeholder="ضع رابط الصورة للمنتج هنا">
 
-                    <label>رابط الدفع المخصص لإتمام الطلب (فيزا/مدى/أبل باي):</label>
-                    <input type="text" id="adm-p-link" placeholder="رابط صفحة الدفع لهذا المنتج">
+                    <label>رابط الدفع المخصص لإتمام الطلب (رابط بوابة ماي فاتورة/تاب):</label>
+                    <input type="text" id="adm-p-link" placeholder="رابط الدفع الخارجي المؤمن لهذا الحساب">
 
                     <button class="action-execute-btn" style="background: var(--success-green-color); color: white;" onclick="saveProductFromAdmin()">حفظ وتثبيت المنتج في المتجر ➕</button>
 
@@ -408,15 +443,14 @@
                         <thead>
                             <tr><th>اسم الحساب</th><th>السعر</th><th>إجراءات التحكم</th></tr>
                         </thead>
-                        <tbody id="adm-products-rows-list">
-                            </tbody>
+                        <tbody id="adm-products-rows-list"></tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
 
-    <a href="https://wa.me/96551674410?text=%D8%A3%D9%87%D9%84%D8%A7%D9%8B%20%D9%88%D3%81%D9%87%D9%84%D8%A7%D9%8B%20%D9%85%D8%AA%D8%AC%D8%B1%20%D9%84%D9%8A%D9%88%D9%86%D8%8C%20%D8%A3%D9%86%D8%A7%20%D8%B5%D9%84%D9%85%D8%AA%20%D9%88%D8%A3%D8%A8%D9%8A%20%D8%A3%D8%B4%D8%AA%D8%B1%D9%8A%20%D8%AD%D8%B3%D8%A7%D8%A8%D8%A7%D8%AA%20%D9%85%D9%86%20%D9%85%D8%AA%D8%AC%D8%B1%D9%83%D9%85%20%D8%A7%D9%84%D9%81%D8%AE%D9%85" class="whatsapp-floating-ball" target="_blank">
+    <a href="https://wa.me/96551674410?text=%D8%A3%D9%87%D9%84%D9%84%D8%A7%D9%8B%20%D9%88%D3%81%D9%87%D9%84%D8%A7%D9%8B%20%D9%85%D8%AA%D8%AC%D8%B1%20%D9%84%D9%8A%D9%88%D9%86%D8%8C%20%D8%A3%D9%86%D8%A7%20%D8%B5%D9%84%D9%85%D8%AA%20%D9%88%D8%A3%D8%A8%D9%82%D9%8A%20%D8%A3%D8%B4%D8%AA%D8%B1%D9%82%20%D9%85%D9%86%20%D9%85%D8%AA%D8%AC%D8%B1%D9%83%D9%85%20%D8%A7%D9%84%D9%81%D8%AE%D9%85" class="whatsapp-floating-ball" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
@@ -428,21 +462,26 @@
             headerBg: "https://images.unsplash.com/photo-1612287230202-1bf1d85d1bdf?q=80&w=1400",
             couponPosition: "above_cats",
             couponDirection: "anim-right",
-            c1Title: "🔥 خصم 30% على حساب بنت الطيارة لفترة محدودة!",
-            c1Img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=300",
-            c2Title: "⚡ عروض شحن الروبوكس الفورية والآمنة 100%",
-            c2Img: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=300"
+            couponStyle: "style-classic",
+            couponWidth: "280",
+            couponHeight: "130",
+            couponRadius: "14"
         };
+
+        const defaultPlatformCoupons = [
+            { id: 1, title: "🔥 خصم 30% على حساب بنت الطيارة لفترة محدودة!", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=300" },
+            { id: 2, title: "⚡ عروض شحن الروبوكس الفورية والآمنة 100%", img: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=300" }
+        ];
 
         const defaultPlatformProducts = [
             { id: 101, name: "حساب فورتنايت بنت الطيارة أساسي", desc: "يحتوي على سكن بنت الطيارة مع المظلة النادرة، السيزون الثاني كامل ومربوط بشكل كامل ونظامي مع إيبك جيمز Epic Games ويمكن نقله للايميل الشخصي فوراً.", cat: "fortnite", price: 450, img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=500", link: "https://pay.lionstore.com/item1", reviews: ["ثقة وسريع جداً بالتسليم ما قصرتوا", "الحساب شغال ومربوط كامل بيض الله وجهكم"] },
-            { id: 102, name: "حساب روكيت ليج سيارة فندك الحصرية", desc: "حساب أسطوري يحتوي على سيارة فندك بكامل الألوان النادرة والملحقات الحصرية، مربوط بالكامل وجاهز للعب الفوري.", cat: "rocket", price: 220, img: "https://images.unsplash.com/photo-1614624532983-4ce03382d63d?q=80&w=500", reviews: ["أفضل متجر روكيت ليج بالكويت ثقة"] },
-            { id: 103, name: "حزمة شحن 20,000 روبوكس فوري", desc: "شحن مباشر ونظامي لحسابك في لعبة روبلوكس عبر الأيدي الرقمي، آمن تماماً وبدون أي مخاطر بنظام رسمي.", cat: "other", price: 380, img: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=500", reviews: ["تم الشحن في أقل من 5 دقائق شكراً ليون"] }
+            { id: 102, name: "حساب روكيت ليج سيارة فندك الحصرية", desc: "حساب أسطوري يحتوي على سيارة فندك بكامل الألوان النادرة والملحقات الحصرية، مربوط بالكامل وجاهز للعب الفوري.", cat: "rocket", price: 220, img: "https://images.unsplash.com/photo-1614624532983-4ce03382d63d?q=80&w=500", link: "", reviews: ["أفضل متجر روكيت ليج تعاملت معه وثقة عريقة كويتية."] }
         ];
 
         // تحميل وتثبيت الذاكرة المستمرة المحفوظة بالكامل
-        let currentConfigs = JSON.parse(localStorage.getItem('lion_heavy_configs')) || defaultPlatformConfigs;
-        let currentProducts = JSON.parse(localStorage.getItem('lion_heavy_products')) || defaultPlatformProducts;
+        let currentConfigs = JSON.parse(localStorage.getItem('lion_v3_configs')) || defaultPlatformConfigs;
+        let currentCoupons = JSON.parse(localStorage.getItem('lion_v3_coupons')) || defaultPlatformCoupons;
+        let currentProducts = JSON.parse(localStorage.getItem('lion_v3_products')) || defaultPlatformProducts;
         let shoppingCart = [];
 
         let secretClickCounter = 0;
@@ -454,14 +493,13 @@
             updateShoppingCartMetrics();
         };
 
-        // دالة التنقل الهيكلي بين صفحات المتجر
         function navigateToSection(sectionId) {
             document.querySelectorAll('.page-segment').forEach(seg => seg.classList.remove('active'));
             document.getElementById('segment-' + sectionId).classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // رصد النقر الثلاثي لفتح الإدارة السرية
+        // رصد النقر الثلاثي لفتح الإدارة السرية (lion2007)
         function handleThreeClicksConfig() {
             let rightNow = new Date().getTime();
             if(rightNow - lastSecretClickTime < 450) secretClickCounter++; else secretClickCounter = 1;
@@ -469,10 +507,11 @@
 
             if(secretClickCounter === 3) {
                 secretClickCounter = 0;
-                let userAuthCode = prompt("🔒 أدخل الكود التعريفي لـ ليون لفتح اللوحة الإدارية الثقيلة:");
+                let userAuthCode = prompt("🔒 أدخل الكود التعريفي لـ ليون لفتح اللوحة الإدارية المتقدمة:");
                 if(userAuthCode === "lion2007") {
-                    alert("🔓 أهلاً بك يا ليون في مركز القيادة الكامل. تم تفعيل الصلاحيات الشاملة.");
+                    alert("🔓 أهلاً بك يا ليون في مركز التحكم الهندسي والمظهري الشامل.");
                     fillAdminSuperFormFields();
+                    renderAdminCouponsManagementTable();
                     renderAdminProductsManagementTable();
                     navigateToSection('admin_super_page');
                 } else if(userAuthCode !== null) {
@@ -481,15 +520,21 @@
             }
         }
 
-        // تطبيق تكوينات الإدارة في الواجهة
+        // تطبيق تكوينات القياسات والمظهر والواجهات هندسياً
         function applyLoadedConfigsToUI() {
             document.getElementById('store-name').innerText = currentConfigs.storeName;
             document.getElementById('global-marquee-text').innerText = currentConfigs.tickerText;
             document.getElementById('store-header-hero').style.backgroundImage = `linear-gradient(to bottom, rgba(8, 12, 20, 0.4), rgba(8, 12, 20, 0.95)), url('${currentConfigs.headerBg}')`;
+            
+            // حقن وتحديث قياسات المربعات والقصائم هندسياً في الـ CSS المتغير
+            let root = document.documentElement;
+            root.style.setProperty('--coupon-width', currentConfigs.couponWidth + 'px');
+            root.style.setProperty('--coupon-height', currentConfigs.couponHeight + 'px');
+            root.style.setProperty('--coupon-radius', currentConfigs.couponRadius + 'px');
+            
             adjustCouponBarPositionUI();
         }
 
-        // تعديل موضع شريط القصائم الإعلانية المتحركة حسب رغبة ليون
         function adjustCouponBarPositionUI() {
             let bar = document.getElementById('coupon-outer-block');
             let header = document.getElementById('store-header-hero');
@@ -504,63 +549,125 @@
             }
         }
 
-        // بناء وتوليد المربعات الإعلانية المتحركة وتكرارها لمنع الانقطاع أثناء الحركة يمين يمين
+        // بناء وتوليد المربعات الإعلانية المتحركة حسب الشكل المختار (كلاسيك، نيون، سينما) وزيادتها لانهائياً
         function renderCouponSliderTrack() {
             let track = document.getElementById('coupon-slider-track');
             track.className = "coupon-track " + currentConfigs.couponDirection;
 
-            let cardLayoutHtml = `
-                <div class="coupon-card-item"><img src="${currentConfigs.c1Img}"><h4>${currentConfigs.c1Title}</h4></div>
-                <div class="coupon-card-item"><img src="${currentConfigs.c2Img}"><h4>${currentConfigs.c2Title}</h4></div>
-            `;
-            // تكرار مضاعف لضمان الحركة اللانهائية المريحة للعين
-            track.innerHTML = cardLayoutHtml + cardLayoutHtml + cardLayoutHtml + cardLayoutHtml + cardLayoutHtml;
+            if(currentCoupons.length === 0) {
+                track.innerHTML = "<p style='color:#64748b; padding:10px;'>لا توجد قصائم إعلانية متحركة حالياً.</p>";
+                return;
+            }
+
+            let styleClass = currentConfigs.couponStyle || 'style-classic';
+            let cardLayoutHtml = "";
+            
+            currentCoupons.forEach(cp => {
+                cardLayoutHtml += `
+                    <div class="coupon-card-item ${styleClass}">
+                        <img src="${cp.img}" alt="Coupon Image">
+                        <h4>${cp.title}</h4>
+                    </div>
+                `;
+            });
+            
+            // تكرار الأسطر والمربعات لضمان حركة مستمرة بلا انقطاع يمين أو يسار
+            track.innerHTML = cardLayoutHtml + cardLayoutHtml + cardLayoutHtml + cardLayoutHtml;
         }
 
-        // تعبئة المدخلات في لوحة التحكم
+        // تعبئة حقول لوحة القيادة بالكامل
         function fillAdminSuperFormFields() {
             document.getElementById('adm-store-name').value = currentConfigs.storeName;
             document.getElementById('adm-ticker-text').value = currentConfigs.tickerText;
             document.getElementById('adm-header-bg').value = currentConfigs.headerBg;
             document.getElementById('adm-coupon-position').value = currentConfigs.couponPosition;
             document.getElementById('adm-coupon-direction').value = currentConfigs.couponDirection;
-            document.getElementById('adm-c1-title').value = currentConfigs.c1Title;
-            document.getElementById('adm-c1-img').value = currentConfigs.c1Img;
-            document.getElementById('adm-c2-title').value = currentConfigs.c2Title;
-            document.getElementById('adm-c2-img').value = currentConfigs.c2Img;
+            document.getElementById('adm-coupon-style').value = currentConfigs.couponStyle;
+            document.getElementById('adm-coupon-width').value = currentConfigs.couponWidth;
+            document.getElementById('adm-coupon-height').value = currentConfigs.couponHeight;
+            document.getElementById('adm-coupon-radius').value = currentConfigs.couponRadius;
         }
 
-        // حفظ وتحديث المظهر بالكامل
+        // حفظ وتحديث المظهر والقياسات بالكامل بداخل الذاكرة
         function saveGlobalVisualConfigs() {
             currentConfigs.storeName = document.getElementById('adm-store-name').value;
             currentConfigs.tickerText = document.getElementById('adm-ticker-text').value;
             currentConfigs.headerBg = document.getElementById('adm-header-bg').value;
             currentConfigs.couponPosition = document.getElementById('adm-coupon-position').value;
             currentConfigs.couponDirection = document.getElementById('adm-coupon-direction').value;
-            currentConfigs.c1Title = document.getElementById('adm-c1-title').value;
-            currentConfigs.c1Img = document.getElementById('adm-c1-img').value;
-            currentConfigs.c2Title = document.getElementById('adm-c2-title').value;
-            currentConfigs.c2Img = document.getElementById('adm-c2-img').value;
+            currentConfigs.couponStyle = document.getElementById('adm-coupon-style').value;
+            currentConfigs.couponWidth = document.getElementById('adm-coupon-width').value;
+            currentConfigs.couponHeight = document.getElementById('adm-coupon-height').value;
+            currentConfigs.couponRadius = document.getElementById('adm-coupon-radius').value;
 
-            localStorage.setItem('lion_heavy_configs', JSON.stringify(currentConfigs));
+            localStorage.setItem('lion_v3_configs', JSON.stringify(currentConfigs));
             applyLoadedConfigsToUI();
             renderCouponSliderTrack();
-            alert("✨ تم حفظ كل التعديلات وتثبيتها بنجاح في ذاكرة المتصفح العميقة!");
+            alert("✨ تم حفظ الأشكال الهندسية، الأبعاد، والقياسات وتثبيتها بنجاح للمتجر بالكامل!");
         }
 
-        // عرض منتجات تصنيف معين
-        function viewCategorySection(categoryCode) {
-            let displayTitle = "", displayDesc = "";
-            if(categoryCode === 'fortnite') {
-                displayTitle = "حسابات فورتنايت (Epic Games)"; displayDesc = "تشكيلة نادرة وموثوقة من الحسابات القديمة المرتبطة بالكامل.";
-            } else if(categoryCode === 'rocket') {
-                displayTitle = "حسابات روكيت ليج المضمونة"; displayDesc = "تصفح الحسابات التي تحتوي على أغراض نادرة وسيارات فندك مميزة.";
+        // --- نظام إدارة المربعات الإعلانية (القصائم) المنفصل وزيادتها لانهائياً ---
+        function renderAdminCouponsManagementTable() {
+            let container = document.getElementById('adm-coupons-rows-list');
+            container.innerHTML = "";
+            currentCoupons.forEach(cp => {
+                container.innerHTML += `
+                    <tr>
+                        <td><b>${cp.title.substring(0, 35)}...</b></td>
+                        <td>
+                            <button class="edit-row-btn" onclick="loadCouponToAdminEditor(${cp.id})">تعديل ✍️</button>
+                            <button class="delete-row-btn" onclick="deleteCouponFromAdminPanel(${cp.id})">حذف 🗑️</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function loadCouponToAdminEditor(id) {
+            let target = currentCoupons.find(c => c.id === id);
+            document.getElementById('adm-editing-coupon-id').value = target.id;
+            document.getElementById('adm-cp-title').value = target.title;
+            document.getElementById('adm-cp-img').value = target.img;
+        }
+
+        function saveCouponFromAdmin() {
+            let editId = document.getElementById('adm-editing-coupon-id').value;
+            let title = document.getElementById('adm-cp-title').value;
+            let img = document.getElementById('adm-cp-img').value;
+
+            if(!title || !img) { alert("يرجى ملء نص القسيمة ورابط الصورة الخاص بها أولاً!"); return; }
+
+            if(editId) {
+                let obj = currentCoupons.find(c => c.id == editId);
+                obj.title = title; obj.img = img;
+                alert("تم تحديث بيانات المربع الإعلاني بنجاح!");
             } else {
-                displayTitle = "خدمات الشحن والبطاقات الرقمية"; displayDesc = "شحن آمن وفوري لجميع الألعاب والبطاقات المتاحة.";
+                currentCoupons.push({ id: Date.now(), title: title, img: img });
+                alert("تم زيادة وإضافة المربع الإعلاني الجديد إلى شريط الحركة بنجاح!");
             }
 
+            localStorage.setItem('lion_v3_coupons', JSON.stringify(currentCoupons));
+            document.getElementById('adm-editing-coupon-id').value = "";
+            document.getElementById('adm-cp-title').value = "";
+            document.getElementById('adm-cp-img').value = "";
+            renderAdminCouponsManagementTable();
+            renderCouponSliderTrack();
+        }
+
+        function deleteCouponFromAdminPanel(id) {
+            if(confirm("هل تريد حذف هذا المربع الإعلاني تماماً من شريط القسائم المتحرك؟")) {
+                currentCoupons = currentCoupons.filter(c => c.id !== id);
+                localStorage.setItem('lion_v3_coupons', JSON.stringify(currentCoupons));
+                renderAdminCouponsManagementTable();
+                renderCouponSliderTrack();
+                alert("تم حذف القسيمة المحددة.");
+            }
+        }
+
+        // --- نظام إدارة الحسابات والمنتجات وعرضها ---
+        function viewCategorySection(categoryCode) {
+            let displayTitle = categoryCode === 'fortnite' ? 'حسابات فورتنايت (Epic Games)' : categoryCode === 'rocket' ? 'حسابات Rocket League المضمونة' : 'خدمات الشحن والبطاقات الرقمية';
             document.getElementById('current-selected-cat-title').innerText = displayTitle;
-            document.getElementById('current-selected-cat-desc').innerText = displayDesc;
 
             let renderContainer = document.getElementById('products-render-container');
             renderContainer.innerHTML = "";
@@ -585,7 +692,7 @@
                                 <button class="add-to-cart-btn" onclick="appendItemToCart(${p.id})">🛒 إضافة لحقيبة المشتريات</button>
                             </div>
                             <div class="product-feedback-container">
-                                <div class="feedback-title"><span>💬 تقييمات المشترين:</span><span>5/5 ⭐</span></div>
+                                <div class="feedback-title"><span>💬 تقييمات وآراء المشترين:</span><span>5/5 ⭐</span></div>
                                 ${feedBacksHtml || '<div style="color:#475569;">لا توجد تعليقات بعد لهذا الحساب.</div>'}
                             </div>
                         </div>
@@ -595,13 +702,12 @@
             navigateToSection('products_view_page');
         }
 
-        // إضافة غرض إلى السلة وإدارة التدبيل التلقائي للاسعار
         function appendItemToCart(id) {
             let targetProduct = currentProducts.find(p => p.id === id);
             let alreadyInCart = shoppingCart.find(item => item.product.id === id);
 
             if(alreadyInCart) {
-                alreadyInCart.quantity++; // زيادة الكمية والتدبيل تلقائي
+                alreadyInCart.quantity++;
             } else {
                 shoppingCart.push({ product: targetProduct, quantity: 1 });
             }
@@ -609,14 +715,12 @@
             alert(`✅ تم إضافة المنتج [ ${targetProduct.name} ] إلى سلتك بنجاح!`);
         }
 
-        // تحديث أرقام وعدادات السلة
         function updateShoppingCartMetrics() {
             let totalItemsCount = shoppingCart.reduce((total, current) => total + current.quantity, 0);
             document.getElementById('cart-badge-count').innerText = totalItemsCount;
             renderShoppingCartTableData();
         }
 
-        // توليد جدول السلة التفصيلي وحساب المضاعفات
         function renderShoppingCartTableData() {
             let tbody = document.getElementById('cart-table-rows');
             tbody.innerHTML = "";
@@ -650,28 +754,25 @@
             updateShoppingCartMetrics();
         }
 
-        // تنفيذ عملية التوجيه والدفع المباشر (رابط مخصص لكل منتج أو افتراضي)
         function executeCheckoutRedirection() {
             if(shoppingCart.length === 0) {
-                alert("حقيبة التسوق فارغة! أضف الحسابات التي تريدها أولاً لتتمكن من الدفع.");
+                alert("حقيبة التسوق فارغة! أضف المنتجات أولاً لتتمكن من الدفع.");
                 return;
             }
             let checkoutPrice = document.getElementById('cart-grand-total-label').innerText;
             let targetRedirectionUrl = shoppingCart[0].product.link || "https://wa.me/96551674410";
 
-            alert(`🚀 جاري تحويلك بأمان تام لبوابة الدفع الإلكترونية الموحدة لمعالجة مبلغ: ${checkoutPrice} ر.س عبر (Apple Pay / مدى / K-Net / Visa)`);
+            alert(`🚀 جاري فتح بوابة الدفع الآمنة لتأكيد عملية الخصم وإرسال كود الـ OTP لجوالك بقيمة كليّة: ${checkoutPrice} ر.س`);
             window.open(targetRedirectionUrl, '_blank');
         }
 
-        // توليد جدول المنتجات في الادارة للتحكم الشامل (منتج منتج)
         function renderAdminProductsManagementTable() {
             let container = document.getElementById('adm-products-rows-list');
             container.innerHTML = "";
-
             currentProducts.forEach(p => {
                 container.innerHTML += `
                     <tr>
-                        <td><b>${p.name}</b></td>
+                        <td><b>${p.name.substring(0, 30)}</b></td>
                         <td><b style="color:var(--success-green-color);">${p.price} ر.س</b></td>
                         <td>
                             <button class="edit-row-btn" onclick="loadProductToAdminEditor(${p.id})">تعديل ✍️</button>
@@ -682,7 +783,6 @@
             });
         }
 
-        // رفع بيانات المنتج للمدخلات لتعديلها
         function loadProductToAdminEditor(id) {
             let target = currentProducts.find(p => p.id === id);
             document.getElementById('adm-editing-product-id').value = target.id;
@@ -694,7 +794,6 @@
             document.getElementById('adm-p-link').value = target.link ? target.link : "";
         }
 
-        // حفظ أو تعديل الحسابات والمنتجات من الادارة
         function saveProductFromAdmin() {
             let editId = document.getElementById('adm-editing-product-id').value;
             let name = document.getElementById('adm-p-name').value;
@@ -704,42 +803,36 @@
             let img = document.getElementById('adm-p-img').value;
             let link = document.getElementById('adm-p-link').value;
 
-            if(!name || !price) { alert("يرجى ملء اسم المنتج والسعر بدقة لإتمام العملية!"); return; }
+            if(!name || !price) { alert("يرجى ملء اسم الحساب والسعر بدقة!"); return; }
 
             if(editId) {
-                // وضع التحديث لمنتج موجود مسبقاً
                 let obj = currentProducts.find(p => p.id == editId);
                 obj.name = name; obj.desc = desc; obj.cat = cat; obj.price = parseFloat(price); obj.img = img; obj.link = link;
-                alert("✅ تم تعديل وتحديث بيانات الحساب بنجاح في المتجر!");
+                alert("✅ تم تعديل وحفظ بيانات الحساب بنجاح!");
             } else {
-                // وضع الإضافة لمنتج جديد كلياً
                 currentProducts.push({
-                    id: Date.now(), name: name, desc: desc, cat: cat, price: parseFloat(price), img: img, link: link, reviews: ["منتج ممتاز تسليم فوري تبارك الرحمن", "تعامل راقي جداً"]
+                    id: Date.now(), name: name, desc: desc, cat: cat, price: parseFloat(price), img: img, link: link, reviews: ["منتج ممتاز وتوصيل فوري ثقة", "أنصح بالتعامل معه 100%"]
                 });
-                alert("✅ تم إضافة الحساب الجديد بنجاح للقسم المخصص له!");
+                alert("✅ تم إضافة الحساب بنجاح للقسم!");
             }
 
-            localStorage.setItem('lion_heavy_products', JSON.stringify(currentProducts));
-            clearAdminProductInputs();
-            renderAdminProductsManagementTable();
-        }
-
-        function deleteProductFromAdminPanel(id) {
-            if(confirm("هل أنت متأكد تماماً من رغبتك في حذف هذا المنتج نهائياً من المتجر؟")) {
-                currentProducts = currentProducts.filter(p => p.id !== id);
-                localStorage.setItem('lion_heavy_products', JSON.stringify(currentProducts));
-                renderAdminProductsManagementTable();
-                alert("تم حذف الحساب المحدد من المتجر بنجاح.");
-            }
-        }
-
-        function clearAdminProductInputs() {
+            localStorage.setItem('lion_v3_products', JSON.stringify(currentProducts));
             document.getElementById('adm-editing-product-id').value = "";
             document.getElementById('adm-p-name').value = "";
             document.getElementById('adm-p-desc').value = "";
             document.getElementById('adm-p-price').value = "";
             document.getElementById('adm-p-img').value = "";
             document.getElementById('adm-p-link').value = "";
+            renderAdminProductsManagementTable();
+        }
+
+        function deleteProductFromAdminPanel(id) {
+            if(confirm("هل تريد حذف هذا الحساب نهائياً من المتجر؟")) {
+                currentProducts = currentProducts.filter(p => p.id !== id);
+                localStorage.setItem('lion_v3_products', JSON.stringify(currentProducts));
+                renderAdminProductsManagementTable();
+                alert("تم حذف الحساب.");
+            }
         }
     </script>
 </body>
