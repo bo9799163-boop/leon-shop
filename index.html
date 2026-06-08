@@ -1,383 +1,545 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Leon Shop</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ليون شوب | LION SHOP</title>
+    <style>
+        :root {
+            --bg-main: #06020b;
+            --bg-card: #0e071a;
+            --bg-card-hover: #160b28;
+            --neon-purple: #9d4edd;
+            --neon-glow: #e0aaff;
+            --gold: #dfb74c;
+            --text-main: #ffffff;
+            --text-muted: #a5a1b8;
+            --border-purple: rgba(157, 78, 221, 0.2);
+        }
 
-<style>
-:root{
-    --bg:#0a0a0a;
-    --card:#111111;
-    --gold:#dfb74c;
-    --gold2:#f7d77a;
-    --text:#ffffff;
-    --green:#25D366;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Tahoma,sans-serif;
-}
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            padding: 15px;
+            overflow-x: hidden;
+            background-image: linear-gradient(to bottom, #06020b, #0b0414);
+        }
 
-body{
-    background:var(--bg);
-    color:var(--text);
-    min-height:100vh;
-}
+        /* شريط التعديل العلوي للمدير */
+        .admin-banner {
+            background: linear-gradient(90deg, var(--neon-purple), var(--gold));
+            color: #000;
+            text-align: center;
+            padding: 8px;
+            font-weight: bold;
+            font-size: 12px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 15px rgba(157, 78, 221, 0.5);
+        }
 
-header{
-    padding:25px;
-    border-bottom:1px solid rgba(223,183,76,.2);
-    background:#080808;
-    position:sticky;
-    top:0;
-    z-index:100;
-}
+        /* الهيدر والبطل */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+        }
 
-.logo{
-    display:flex;
-    align-items:center;
-    gap:15px;
-    justify-content:center;
-}
+        .main-logo {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 15px var(--neon-purple));
+        }
 
-.logo-icon{
-    width:60px;
-    height:60px;
-    border-radius:50%;
-    background:linear-gradient(135deg,var(--gold),#8d6a12);
-    box-shadow:0 0 25px rgba(223,183,76,.4);
-}
+        .store-name {
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            text-shadow: 0 0 10px var(--neon-purple);
+        }
 
-.logo h1{
-    color:var(--gold);
-    font-size:2rem;
-}
+        .store-tagline {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
 
-main{
-    width:95%;
-    max-width:1400px;
-    margin:auto;
-    padding:30px 0;
-}
+        .store-desc {
+            color: var(--neon-glow);
+            font-size: 15px;
+            font-weight: bold;
+        }
 
-.section-title{
-    text-align:center;
-    color:var(--gold);
-    font-size:2rem;
-    margin-bottom:30px;
-}
+        /* عنوان العروض */
+        .offers-title {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin: 30px 0 20px 0;
+            position: relative;
+            color: var(--text-main);
+        }
+        .offers-title::before, .offers-title::after {
+            content: " ♦ ";
+            color: var(--neon-purple);
+        }
 
-.product-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:20px;
-}
+        /* شبكة المنتجات (4 كروت بالصف العلوي) */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
 
-.product-card{
-    background:var(--card);
-    border:1px solid rgba(223,183,76,.15);
-    border-radius:20px;
-    padding:20px;
-    cursor:pointer;
-    transition:.3s;
-    position:relative;
-    overflow:hidden;
-}
+        .product-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-purple);
+            border-radius: 16px;
+            padding: 15px;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            overflow: hidden;
+        }
 
-.product-card:hover{
-    transform:translateY(-5px);
-    border-color:var(--gold);
-    box-shadow:0 0 25px rgba(223,183,76,.15);
-}
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon-purple);
+            background: var(--bg-card-hover);
+            box-shadow: 0 0 20px rgba(157, 78, 221, 0.3);
+        }
 
-.badge{
-    background:var(--gold);
-    color:black;
-    display:inline-block;
-    padding:6px 12px;
-    border-radius:50px;
-    font-size:.8rem;
-    font-weight:bold;
-    margin-bottom:12px;
-}
+        .discount-badge {
+            position: absolute;
+            top: 12px; right: 12px;
+            background: rgba(157, 78, 221, 0.2);
+            color: var(--neon-glow);
+            border: 1px solid var(--neon-purple);
+            padding: 3px 8px;
+            font-size: 11px;
+            font-weight: bold;
+            border-radius: 6px;
+            z-index: 2;
+        }
 
-.product-name{
-    font-size:1.3rem;
-    color:var(--gold2);
-    margin-bottom:10px;
-}
+        .card-img-wrapper {
+            width: 100%;
+            height: 160px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            background: #120922;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-.product-desc{
-    opacity:.8;
-    margin-bottom:15px;
-    line-height:1.6;
-}
+        .card-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-.price{
-    font-size:1.4rem;
-    color:var(--gold);
-    font-weight:bold;
-}
+        .card-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
 
-.add-product{
-    display:block;
-    margin:35px auto;
-    background:linear-gradient(135deg,var(--gold),#8d6a12);
-    color:black;
-    border:none;
-    padding:15px 30px;
-    border-radius:50px;
-    font-size:1rem;
-    font-weight:bold;
-    cursor:pointer;
-}
+        .feature-list {
+            list-style: none;
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
 
-.add-product:hover{
-    transform:scale(1.05);
-}
+        .feature-list li {
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .feature-list li::before {
+            content: "✧";
+            color: var(--neon-purple);
+        }
 
-.modal{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.85);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    opacity:0;
-    visibility:hidden;
-    transition:.3s;
-    z-index:999;
-}
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 12px;
+        }
 
-.modal.active{
-    opacity:1;
-    visibility:visible;
-}
+        .price-container {
+            display: flex;
+            flex-direction: column;
+        }
 
-.modal-content{
-    width:90%;
-    max-width:500px;
-    background:#111;
-    border:2px solid var(--gold);
-    border-radius:25px;
-    padding:30px;
-    position:relative;
-    transform:scale(0);
-    border-radius:50%;
-    aspect-ratio:1/1;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-}
+        .old-price {
+            font-size: 11px;
+            color: #555;
+            text-decoration: line-through;
+        }
 
-.modal.active .modal-content{
-    animation:circleOpen .5s ease forwards;
-}
+        .new-price {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--text-main);
+        }
 
-@keyframes circleOpen{
-    from{
-        transform:scale(0);
-        border-radius:50%;
-    }
-    to{
-        transform:scale(1);
-        border-radius:30px;
-    }
-}
+        .cart-btn {
+            background: var(--neon-purple);
+            color: #fff;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
 
-.close{
-    position:absolute;
-    top:15px;
-    left:15px;
-    font-size:30px;
-    cursor:pointer;
-    color:white;
-}
+        /* الصناديق والمكعبات العريضة السفلى */
+        .wide-boxes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+            margin-bottom: 40px;
+        }
 
-.buy-btn{
-    margin-top:20px;
-    background:var(--green);
-    color:white;
-    text-decoration:none;
-    padding:15px 30px;
-    border-radius:50px;
-    font-weight:bold;
-}
+        .wide-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-purple);
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
 
-.buy-btn:hover{
-    transform:scale(1.05);
-}
+        .wide-box-content {
+            flex: 1;
+            z-index: 2;
+        }
 
-[contenteditable="true"]{
-    outline:none;
-}
+        .wide-box-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--neon-glow);
+        }
 
-[contenteditable="true"]:focus{
-    box-shadow:0 0 0 2px var(--gold);
-    border-radius:6px;
-}
+        .wide-box-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
 
-@media(max-width:600px){
-    .logo h1{
-        font-size:1.5rem;
-    }
+        .wide-box-btn {
+            background: rgba(157, 78, 221, 0.1);
+            color: #fff;
+            border: 1px solid var(--neon-purple);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            text-decoration: none;
+            display: inline-block;
+        }
 
-    .section-title{
-        font-size:1.6rem;
-    }
-}
-</style>
+        .wide-box-img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            opacity: 0.8;
+            z-index: 1;
+        }
+
+        /* شريط الضمان والمميزات السفلي */
+        .info-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            background: #090412;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.02);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .info-item {
+            font-size: 13px;
+            font-weight: bold;
+        }
+        .info-item span {
+            display: block;
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: normal;
+            margin-top: 3px;
+        }
+
+        /* الفوتر السفلي */
+        footer {
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .footer-row {
+            margin-bottom: 10px;
+        }
+
+        /* نافذة المودال المطور بأنيميشن دائري */
+        .circle-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .circle-modal-content {
+            background: #110822;
+            border: 1px solid var(--neon-purple);
+            border-radius: 24px;
+            padding: 30px;
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            position: relative;
+            animation: circularExpand 0.4s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+        }
+
+        @keyframes circularExpand {
+            0% { transform: scale(0); border-radius: 50%; opacity: 0; }
+            100% { transform: scale(1); border-radius: 24px; opacity: 1; }
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px; left: 20px;
+            font-size: 24px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .checkout-btn {
+            background: linear-gradient(90deg, #9d4edd, #7b2cbf);
+            color: #fff;
+            padding: 12px;
+            border-radius: 10px;
+            display: block;
+            font-weight: bold;
+            text-decoration: none;
+            margin-top: 20px;
+            box-shadow: 0 0 15px rgba(157, 78, 221, 0.4);
+        }
+
+        /* التعديل المباشر */
+        [contenteditable="true"] { outline: none; }
+        [contenteditable="true"]:focus { background: rgba(255,255,255,0.05); border-radius: 4px; }
+    </style>
 </head>
 <body>
 
-<header>
-    <div class="logo">
-        <div class="logo-icon" contenteditable="true"></div>
-        <h1 contenteditable="true">Leon Shop</h1>
+    <div class="admin-banner">🛠️ وضع تعديل الإدارة مفعل: اضغط على أي نص أو سعر في الصفحة لتغييره حياً!</div>
+
+    <header>
+        <img class="main-logo" src="https://i.ibb.co/60X99p4/lion-logo.png" alt="Lion Logo" onerror="this.src='https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569_1280.jpg'; this.style.borderRadius='50%'">
+        <div class="store-name" contenteditable="true">ليون شوب</div>
+        <div class="store-tagline" contenteditable="true">LION SHOP</div>
+        <div class="store-desc" contenteditable="true">متجر متخصص في بيع حسابات فورتنايت و روكيت ليق</div>
+    </header>
+
+    <div class="offers-title" contenteditable="true">العروض</div>
+
+    <div class="products-grid">
+        
+        <div class="product-card" onclick="openProduct('حساب فورتنايت أسطوري', 'عدد سكنات كبير • رقصات نادرة • أدوات نادرة • غير مرتبط')">
+            <div class="discount-badge" contenteditable="true">خصم 20%</div>
+            <div class="card-img-wrapper">
+                <img src="https://i.ibb.co/N6T9N1t/fn-icon1.png" alt="Fortnite OG" onerror="this.src='https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=400'">
+            </div>
+            <div class="card-title" contenteditable="true">حساب فورتنايت أسطوري</div>
+            <ul class="feature-list" contenteditable="true">
+                <li>عدد سكنات كبير</li>
+                <li>رقصات نادرة</li>
+                <li>أدوات نادرة</li>
+                <li>غير مرتبط</li>
+            </ul>
+            <div class="card-footer">
+                <div class="price-container">
+                    <span class="old-price" contenteditable="true">149 SAR</span>
+                    <span class="new-price" contenteditable="true">119 SAR</span>
+                </div>
+                <div class="cart-btn">🛒</div>
+            </div>
+        </div>
+
+        <div class="product-card" onclick="openProduct('حساب فورتنايت نادر', 'سكنات نادرة • رقصات نادرة • أدوات نادرة • غير مرتبط')">
+            <div class="discount-badge" contenteditable="true">خصم 15%</div>
+            <div class="card-img-wrapper">
+                <img src="https://i.ibb.co/SnfGk6V/fn-icon2.png" alt="Fortnite Rare" onerror="this.src='https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=400'">
+            </div>
+            <div class="card-title" contenteditable="true">حساب فورتنايت نادر</div>
+            <ul class="feature-list" contenteditable="true">
+                <li>سكنات نادرة</li>
+                <li>رقصات نادرة</li>
+                <li>أدوات نادرة</li>
+                <li>غير مرتبط</li>
+            </ul>
+            <div class="card-footer">
+                <div class="price-container">
+                    <span class="old-price" contenteditable="true">99 SAR</span>
+                    <span class="new-price" contenteditable="true">84 SAR</span>
+                </div>
+                <div class="cart-btn">🛒</div>
+            </div>
+        </div>
+
+        <div class="product-card" onclick="openProduct('حساب فورتنايت أساسي', 'سكنات أساسية • رقصات أساسية • أدوات أساسية • غير مرتبط')">
+            <div class="discount-badge" contenteditable="true">خصم 10%</div>
+            <div class="card-img-wrapper">
+                <img src="https://i.ibb.co/VvM0g3T/fn-icon3.png" alt="Fortnite Basic" onerror="this.src='https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=400'">
+            </div>
+            <div class="card-title" contenteditable="true">حساب فورتنايت أساسي</div>
+            <ul class="feature-list" contenteditable="true">
+                <li>سكنات أساسية</li>
+                <li>رقصات أساسية</li>
+                <li>أدوات أساسية</li>
+                <li>غير مرتبط</li>
+            </ul>
+            <div class="card-footer">
+                <div class="price-container">
+                    <span class="old-price" contenteditable="true">59 SAR</span>
+                    <span class="new-price" contenteditable="true">53 SAR</span>
+                </div>
+                <div class="cart-btn">🛒</div>
+            </div>
+        </div>
+
+        <div class="product-card" onclick="openProduct('حساب روكيت ليك', 'مستويات عالية • عناصر نادرة • سيارات مميزة • غير مرتبط')">
+            <div class="discount-badge" contenteditable="true">خصم 10%</div>
+            <div class="card-img-wrapper">
+                <img src="https://i.ibb.co/YyYf4Z7/rl-icon.png" alt="Rocket League" onerror="this.src='https://images.unsplash.com/photo-1553481187-be93c21490a9?q=80&w=400'">
+            </div>
+            <div class="card-title" contenteditable="true">حساب روكيت ليك</div>
+            <ul class="feature-list" contenteditable="true">
+                <li>مستويات عالية</li>
+                <li>عناصر نادرة</li>
+                <li>سيارات مميزة</li>
+                <li>غير مرتبط</li>
+            </ul>
+            <div class="card-footer">
+                <div class="price-container">
+                    <span class="old-price" contenteditable="true">49 SAR</span>
+                    <span class="new-price" contenteditable="true">44 SAR</span>
+                </div>
+                <div class="cart-btn">🛒</div>
+            </div>
+        </div>
+
     </div>
-</header>
 
-<main>
-
-    <h2 class="section-title" contenteditable="true">
-        الحسابات النادرة
-    </h2>
-
-    <div class="product-grid" id="productGrid">
-
-        <div class="product-card">
-            <div class="badge" contenteditable="true">نادر</div>
-
-            <div class="product-name" contenteditable="true">
-                حساب فورتنايت OG
+    <div class="wide-boxes-grid">
+        
+        <div class="wide-box">
+            <div class="wide-box-content">
+                <div class="wide-box-title" contenteditable="true">حسابات أساسية</div>
+                <div class="wide-box-desc" contenteditable="true">حسابات فورتنايت أساسية غير مرتبطة - جاهزة للاستخدام</div>
+                <a href="#" class="wide-box-btn" contenteditable="true">تصفح الحسابات ‹</a>
             </div>
-
-            <div class="product-desc" contenteditable="true">
-                يحتوي على سكنات نادرة ومستوى مرتفع.
-            </div>
-
-            <div class="price" contenteditable="true">
-                25 د.ك
-            </div>
+            <img class="wide-box-img" src="https://i.ibb.co/VvM0g3T/fn-icon3.png" alt="icon" onerror="this.style.display='none'">
         </div>
 
-        <div class="product-card">
-            <div class="badge" contenteditable="true">حصري</div>
-
-            <div class="product-name" contenteditable="true">
-                حساب فالورانت
+        <div class="wide-box">
+            <div class="wide-box-content">
+                <div class="wide-box-title" contenteditable="true">حسابات روكيت ليك</div>
+                <div class="wide-box-desc" contenteditable="true">حسابات روكيت ليك بمستويات وعناصر مميزة</div>
+                <a href="#" class="wide-box-btn" contenteditable="true">تصفح الحسابات ‹</a>
             </div>
+            <img class="wide-box-img" src="https://i.ibb.co/YyYf4Z7/rl-icon.png" alt="icon" onerror="this.style.display='none'">
+        </div>
 
-            <div class="product-desc" contenteditable="true">
-                رانك عالي وسكنات مميزة.
+        <div class="wide-box">
+            <div class="wide-box-content">
+                <div class="wide-box-title" contenteditable="true">حسابات مرتبطة</div>
+                <div class="wide-box-desc" contenteditable="true">حسابات مرتبطة بـ VikGames ليست أساسية - ضمان وأمان</div>
+                <a href="#" class="wide-box-btn" contenteditable="true">تصفح الحسابات ‹</a>
             </div>
+            <div style="font-size: 40px; opacity: 0.3;">🔗</div>
+        </div>
 
-            <div class="price" contenteditable="true">
-                18 د.ك
+        <div class="wide-box">
+            <div class="wide-box-content">
+                <div class="wide-box-title" contenteditable="true">الأخرى V-Box وأكثر</div>
+                <div class="wide-box-desc" contenteditable="true">V-Box - هدايا - سكنات عروض وخدمات إضافية</div>
+                <a href="#" class="wide-box-btn" contenteditable="true">تصفح العروض ‹</a>
             </div>
+            <div style="font-size: 40px; opacity: 0.3;">📦</div>
         </div>
 
     </div>
 
-    <button class="add-product" id="addProduct">
-        + إضافة حساب جديد
-    </button>
-
-</main>
-
-<div class="modal" id="modal">
-    <div class="modal-content">
-
-        <span class="close" id="closeModal">×</span>
-
-        <h2 id="modalName"></h2>
-        <p id="modalDesc"></p>
-        <h3 id="modalPrice"></h3>
-
-        <a
-        href="https://wa.me/96500000000"
-        target="_blank"
-        class="buy-btn">
-        شراء عبر واتساب
-        </a>
-
+    <div class="info-bar">
+        <div class="info-item" contenteditable="true">🛡️ ضمان كامل <span>على جميع الحسابات</span></div>
+        <div class="info-item" contenteditable="true">⚡ تسليم فوري <span>بعد إتمام الطلب</span></div>
+        <div class="info-item" contenteditable="true">🎧 دعم 24/6 <span>خدمة عملاء متاحة دائماً</span></div>
+        <div class="info-item" contenteditable="true">🏷️ أسعار تنافسية <span>أفضل الأسعار في السوق</span></div>
     </div>
-</div>
 
-<script>
+    <footer>
+        <div class="footer-row" contenteditable="true">ثقة آلاف العملاء • سهولة وأمان • خدمة العملاء متاحة 24/7 عبر الواتساب: +966 50 123 4567</div>
+        <div class="footer-row" contenteditable="true">💳 طرق الدفع: mada | VISA | MasterCard | Apple Pay | stc pay</div>
+        <div>© 2026 LION SHOP. جميع الحقوق محفوظة.</div>
+    </footer>
 
-const modal = document.getElementById("modal");
-const modalName = document.getElementById("modalName");
-const modalDesc = document.getElementById("modalDesc");
-const modalPrice = document.getElementById("modalPrice");
-
-function bindCards(){
-
-    document.querySelectorAll(".product-card").forEach(card=>{
-
-        card.onclick = ()=>{
-
-            modalName.innerText =
-            card.querySelector(".product-name").innerText;
-
-            modalDesc.innerText =
-            card.querySelector(".product-desc").innerText;
-
-            modalPrice.innerText =
-            card.querySelector(".price").innerText;
-
-            modal.classList.add("active");
-        };
-
-    });
-
-}
-
-bindCards();
-
-document.getElementById("closeModal").onclick=()=>{
-    modal.classList.remove("active");
-};
-
-modal.onclick=(e)=>{
-    if(e.target===modal){
-        modal.classList.remove("active");
-    }
-};
-
-document.getElementById("addProduct").onclick=()=>{
-
-    const card=document.createElement("div");
-    card.className="product-card";
-
-    card.innerHTML=`
-        <div class="badge" contenteditable="true">جديد</div>
-
-        <div class="product-name" contenteditable="true">
-            اسم الحساب
+    <div class="circle-modal" id="purchaseModal">
+        <div class="circle-modal-content">
+            <span class="close-btn" onclick="closeProduct()">&times;</span>
+            <h2 id="modalTitle" style="color: var(--neon-glow); margin-bottom: 15px;">اسم المنتج</h2>
+            <p id="modalDesc" style="color: var(--text-muted); font-size: 14px; line-height: 1.6; margin-bottom: 25px;">التفاصيل...</p>
+            
+            <a href="#" id="payLinkButton" class="checkout-btn" target="_blank">الانتقال لإتمام الدفع الآمن 💳</a>
         </div>
+    </div>
 
-        <div class="product-desc" contenteditable="true">
-            وصف الحساب
-        </div>
+    <script>
+        // دالة فتح صندوق تفاصيل المنتج وتوجيه الدفع
+        function openProduct(name, desc) {
+            document.getElementById('modalTitle').innerText = name;
+            document.getElementById('modalDesc').innerText = desc;
+            
+            // هنا يمكنك مستقبلاً وضع روابط PayLinks المباشرة لكل حساب بدلاً من '#'
+            document.getElementById('payLinkButton').href = "https://xsifany.com"; 
 
-        <div class="price" contenteditable="true">
-            0 د.ك
-        </div>
-    `;
+            document.getElementById('purchaseModal').style.display = 'flex';
+        }
 
-    document.getElementById("productGrid").appendChild(card);
-
-    bindCards();
-};
-
-</script>
-
+        function closeProduct() {
+            document.getElementById('purchaseModal').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
