@@ -45,7 +45,6 @@
             box-shadow: 0 0 15px rgba(157, 78, 221, 0.5);
         }
 
-        /* الهيدر والبطل */
         header {
             text-align: center;
             padding: 40px 20px;
@@ -79,7 +78,6 @@
             font-weight: bold;
         }
 
-        /* عنوان العروض */
         .offers-title {
             text-align: center;
             font-size: 20px;
@@ -93,7 +91,7 @@
             color: var(--neon-purple);
         }
 
-        /* شبكة المنتجات (4 كروت بالصف العلوي) */
+        /* شبكة المنتجات */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -211,7 +209,7 @@
             font-size: 16px;
         }
 
-        /* الصناديق والمكعبات العريضة السفلى */
+        /* الصناديق السفلى */
         .wide-boxes-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -269,7 +267,6 @@
             z-index: 1;
         }
 
-        /* شريط الضمان والمميزات السفلي */
         .info-bar {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -294,7 +291,6 @@
             margin-top: 3px;
         }
 
-        /* الفوتر السفلي */
         footer {
             text-align: center;
             padding: 20px;
@@ -307,7 +303,7 @@
             margin-bottom: 10px;
         }
 
-        /* نافذة المودال المطور بأنيميشن دائري */
+        /* المودال المطور */
         .circle-modal {
             display: none;
             position: fixed;
@@ -352,18 +348,32 @@
             display: block;
             font-weight: bold;
             text-decoration: none;
-            margin-top: 20px;
+            margin-top: 15px;
             box-shadow: 0 0 15px rgba(157, 78, 221, 0.4);
         }
 
-        /* التعديل المباشر */
+        /* زر المدير السري لتعديل الروابط */
+        .admin-link-changer {
+            background: #22123a;
+            color: var(--gold);
+            border: 1px dashed var(--gold);
+            padding: 8px;
+            font-size: 11px;
+            border-radius: 8px;
+            margin-top: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            display: block;
+            width: 100%;
+        }
+
         [contenteditable="true"] { outline: none; }
         [contenteditable="true"]:focus { background: rgba(255,255,255,0.05); border-radius: 4px; }
     </style>
 </head>
 <body>
 
-    <div class="admin-banner">🛠️ وضع تعديل الإدارة مفعل: اضغط على أي نص أو سعر في الصفحة لتغييره حياً!</div>
+    <div class="admin-banner">🛠️ وضع تعديل الإدارة مفعل: يمكنك تعديل النصوص، الأسعار، وروابط الدفع حياً من الشاشة!</div>
 
     <header>
         <img class="main-logo" src="https://i.ibb.co/60X99p4/lion-logo.png" alt="Lion Logo" onerror="this.src='https://cdn.pixabay.com/photo/2017/08/30/01/05/milky-way-2695569_1280.jpg'; this.style.borderRadius='50%'">
@@ -376,17 +386,14 @@
 
     <div class="products-grid">
         
-        <div class="product-card" onclick="openProduct('حساب فورتنايت أسطوري', 'عدد سكنات كبير • رقصات نادرة • أدوات نادرة • غير مرتبط')">
+        <div class="product-card" data-link="https://paytabs.com/default-link-1" onclick="openProduct(this, 'حساب فورتنايت أسطوري', 'عدد سكنات كبير • رقصات نادرة • أدوات نادرة • غير مرتبط')">
             <div class="discount-badge" contenteditable="true">خصم 20%</div>
-            <div class="card-img-wrapper">
-                <img src="https://i.ibb.co/N6T9N1t/fn-icon1.png" alt="Fortnite OG" onerror="this.src='https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=400'">
-            </div>
+            <div class="card-img-wrapper"><img src="https://i.ibb.co/N6T9N1t/fn-icon1.png" alt="FN"></div>
             <div class="card-title" contenteditable="true">حساب فورتنايت أسطوري</div>
             <ul class="feature-list" contenteditable="true">
                 <li>عدد سكنات كبير</li>
                 <li>رقصات نادرة</li>
-                <li>أدوات نادرة</li>
-                <li>غير مرتبط</li>
+                <li>يربط سوني وبي سي</li>
             </ul>
             <div class="card-footer">
                 <div class="price-container">
@@ -397,17 +404,14 @@
             </div>
         </div>
 
-        <div class="product-card" onclick="openProduct('حساب فورتنايت نادر', 'سكنات نادرة • رقصات نادرة • أدوات نادرة • غير مرتبط')">
+        <div class="product-card" data-link="https://paytabs.com/default-link-2" onclick="openProduct(this, 'حساب فورتنايت نادر', 'سكنات نادرة • رقصات نادرة • أدوات نادرة • غير مرتبط')">
             <div class="discount-badge" contenteditable="true">خصم 15%</div>
-            <div class="card-img-wrapper">
-                <img src="https://i.ibb.co/SnfGk6V/fn-icon2.png" alt="Fortnite Rare" onerror="this.src='https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=400'">
-            </div>
+            <div class="card-img-wrapper"><img src="https://i.ibb.co/SnfGk6V/fn-icon2.png" alt="FN"></div>
             <div class="card-title" contenteditable="true">حساب فورتنايت نادر</div>
             <ul class="feature-list" contenteditable="true">
                 <li>سكنات نادرة</li>
                 <li>رقصات نادرة</li>
                 <li>أدوات نادرة</li>
-                <li>غير مرتبط</li>
             </ul>
             <div class="card-footer">
                 <div class="price-container">
@@ -418,17 +422,14 @@
             </div>
         </div>
 
-        <div class="product-card" onclick="openProduct('حساب فورتنايت أساسي', 'سكنات أساسية • رقصات أساسية • أدوات أساسية • غير مرتبط')">
+        <div class="product-card" data-link="https://paytabs.com/default-link-3" onclick="openProduct(this, 'حساب فورتنايت أساسي', 'سكنات أساسية • رقصات أساسية • أدوات أساسية • غير مرتبط')">
             <div class="discount-badge" contenteditable="true">خصم 10%</div>
-            <div class="card-img-wrapper">
-                <img src="https://i.ibb.co/VvM0g3T/fn-icon3.png" alt="Fortnite Basic" onerror="this.src='https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=400'">
-            </div>
+            <div class="card-img-wrapper"><img src="https://i.ibb.co/VvM0g3T/fn-icon3.png" alt="FN"></div>
             <div class="card-title" contenteditable="true">حساب فورتنايت أساسي</div>
             <ul class="feature-list" contenteditable="true">
                 <li>سكنات أساسية</li>
                 <li>رقصات أساسية</li>
-                <li>أدوات أساسية</li>
-                <li>غير مرتبط</li>
+                <li>تسليم فوري</li>
             </ul>
             <div class="card-footer">
                 <div class="price-container">
@@ -439,17 +440,14 @@
             </div>
         </div>
 
-        <div class="product-card" onclick="openProduct('حساب روكيت ليك', 'مستويات عالية • عناصر نادرة • سيارات مميزة • غير مرتبط')">
+        <div class="product-card" data-link="https://paytabs.com/default-link-4" onclick="openProduct(this, 'حساب روكيت ليك', 'مستويات عالية • عناصر نادرة • سيارات مميزة • غير مرتبط')">
             <div class="discount-badge" contenteditable="true">خصم 10%</div>
-            <div class="card-img-wrapper">
-                <img src="https://i.ibb.co/YyYf4Z7/rl-icon.png" alt="Rocket League" onerror="this.src='https://images.unsplash.com/photo-1553481187-be93c21490a9?q=80&w=400'">
-            </div>
+            <div class="card-img-wrapper"><img src="https://i.ibb.co/YyYf4Z7/rl-icon.png" alt="RL"></div>
             <div class="card-title" contenteditable="true">حساب روكيت ليك</div>
             <ul class="feature-list" contenteditable="true">
                 <li>مستويات عالية</li>
                 <li>عناصر نادرة</li>
                 <li>سيارات مميزة</li>
-                <li>غير مرتبط</li>
             </ul>
             <div class="card-footer">
                 <div class="price-container">
@@ -463,55 +461,34 @@
     </div>
 
     <div class="wide-boxes-grid">
-        
         <div class="wide-box">
             <div class="wide-box-content">
                 <div class="wide-box-title" contenteditable="true">حسابات أساسية</div>
                 <div class="wide-box-desc" contenteditable="true">حسابات فورتنايت أساسية غير مرتبطة - جاهزة للاستخدام</div>
                 <a href="#" class="wide-box-btn" contenteditable="true">تصفح الحسابات ‹</a>
             </div>
-            <img class="wide-box-img" src="https://i.ibb.co/VvM0g3T/fn-icon3.png" alt="icon" onerror="this.style.display='none'">
+            <img class="wide-box-img" src="https://i.ibb.co/VvM0g3T/fn-icon3.png" alt="icon">
         </div>
-
         <div class="wide-box">
             <div class="wide-box-content">
                 <div class="wide-box-title" contenteditable="true">حسابات روكيت ليك</div>
                 <div class="wide-box-desc" contenteditable="true">حسابات روكيت ليك بمستويات وعناصر مميزة</div>
                 <a href="#" class="wide-box-btn" contenteditable="true">تصفح الحسابات ‹</a>
             </div>
-            <img class="wide-box-img" src="https://i.ibb.co/YyYf4Z7/rl-icon.png" alt="icon" onerror="this.style.display='none'">
+            <img class="wide-box-img" src="https://i.ibb.co/YyYf4Z7/rl-icon.png" alt="icon">
         </div>
-
-        <div class="wide-box">
-            <div class="wide-box-content">
-                <div class="wide-box-title" contenteditable="true">حسابات مرتبطة</div>
-                <div class="wide-box-desc" contenteditable="true">حسابات مرتبطة بـ VikGames ليست أساسية - ضمان وأمان</div>
-                <a href="#" class="wide-box-btn" contenteditable="true">تصفح الحسابات ‹</a>
-            </div>
-            <div style="font-size: 40px; opacity: 0.3;">🔗</div>
-        </div>
-
-        <div class="wide-box">
-            <div class="wide-box-content">
-                <div class="wide-box-title" contenteditable="true">الأخرى V-Box وأكثر</div>
-                <div class="wide-box-desc" contenteditable="true">V-Box - هدايا - سكنات عروض وخدمات إضافية</div>
-                <a href="#" class="wide-box-btn" contenteditable="true">تصفح العروض ‹</a>
-            </div>
-            <div style="font-size: 40px; opacity: 0.3;">📦</div>
-        </div>
-
     </div>
 
     <div class="info-bar">
         <div class="info-item" contenteditable="true">🛡️ ضمان كامل <span>على جميع الحسابات</span></div>
         <div class="info-item" contenteditable="true">⚡ تسليم فوري <span>بعد إتمام الطلب</span></div>
-        <div class="info-item" contenteditable="true">🎧 دعم 24/6 <span>خدمة عملاء متاحة دائماً</span></div>
+        <div class="info-item" contenteditable="true">🎧 دعم 24/7 <span>خدمة عملاء متاحة دائماً</span></div>
         <div class="info-item" contenteditable="true">🏷️ أسعار تنافسية <span>أفضل الأسعار في السوق</span></div>
     </div>
 
     <footer>
-        <div class="footer-row" contenteditable="true">ثقة آلاف العملاء • سهولة وأمان • خدمة العملاء متاحة 24/7 عبر الواتساب: +966 50 123 4567</div>
-        <div class="footer-row" contenteditable="true">💳 طرق الدفع: mada | VISA | MasterCard | Apple Pay | stc pay</div>
+        <div class="footer-row" contenteditable="true">ثقة آلاف العملاء • سهولة وأمان • خدمة العملاء متاحة عبر الواتساب</div>
+        <div class="footer-row" contenteditable="true">💳 طرق الدفع المباشرة: mada | VISA | Apple Pay</div>
         <div>© 2026 LION SHOP. جميع الحقوق محفوظة.</div>
     </footer>
 
@@ -522,23 +499,43 @@
             <p id="modalDesc" style="color: var(--text-muted); font-size: 14px; line-height: 1.6; margin-bottom: 25px;">التفاصيل...</p>
             
             <a href="#" id="payLinkButton" class="checkout-btn" target="_blank">الانتقال لإتمام الدفع الآمن 💳</a>
+            
+            <button class="admin-link-changer" onclick="changeCurrentProductLink()">⚙️ تعديل رابط الدفع لهذا المنتج</button>
         </div>
     </div>
 
     <script>
-        // دالة فتح صندوق تفاصيل المنتج وتوجيه الدفع
-        function openProduct(name, desc) {
+        let currentActiveCard = null;
+
+        function openProduct(cardElement, name, desc) {
+            currentActiveCard = cardElement;
+            
+            // قراءة الرابط المخزن داخل الكرت
+            let productPayLink = cardElement.getAttribute('data-link');
+            
             document.getElementById('modalTitle').innerText = name;
             document.getElementById('modalDesc').innerText = desc;
-            
-            // هنا يمكنك مستقبلاً وضع روابط PayLinks المباشرة لكل حساب بدلاً من '#'
-            document.getElementById('payLinkButton').href = "https://xsifany.com"; 
+            document.getElementById('payLinkButton').href = productPayLink;
 
             document.getElementById('purchaseModal').style.display = 'flex';
         }
 
         function closeProduct() {
             document.getElementById('purchaseModal').style.display = 'none';
+        }
+
+        // دالة الإدارة السحرية لتغيير الرابط من المتصفح مباشرة
+        function changeCurrentProductLink() {
+            if(!currentActiveCard) return;
+            
+            let oldLink = currentActiveCard.getAttribute('data-link');
+            let newLink = prompt("قم بلصق رابط الدفع الجديد (PayLink) من تطبيق بيتابس هنا:", oldLink);
+            
+            if(newLink !== null && newLink.trim() !== "") {
+                currentActiveCard.setAttribute('data-link', newLink.trim());
+                document.getElementById('payLinkButton').href = newLink.trim();
+                alert("تم تحديث رابط الدفع لهذا المنتج بنجاح! 🎉 (تذكر حفظ الملف في GitHub لتثبيت التعديل)");
+            }
         }
     </script>
 </body>
