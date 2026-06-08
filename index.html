@@ -3,278 +3,502 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر ليون</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <title>متجر ليون الرقمي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
+        /* العناية بالتفاصيل والحركات المتناسقة */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
             font-family: 'Tajawal', sans-serif;
+            transition: all 0.3s ease;
         }
 
         body {
-            background-color: #0f172a;
-            color: #f8fafc;
-            padding: 20px;
+            background-color: #0b0f19;
+            color: #f1f5f9;
+            overflow-x: hidden;
         }
 
-        /* تنسيق الهيدر واسم المتجر */
+        /* الهيدر: الاسم فوق على اليمين */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px;
-            background: #1e293b;
-            border-radius: 12px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding: 20px 40px;
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #1e293b;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         #store-name {
-            font-size: 24px;
-            font-weight: bold;
-            color: #f59e0b; /* لون ذهبي مميز */
+            font-size: 26px;
+            font-weight: 700;
+            color: #38bdf8; /* لون أزرق فضائي مميز */
             cursor: pointer;
-            user-select: none; /* لمنع تحديد النص عند الضغط السريع */
-            transition: transform 0.2s;
+            user-select: none;
+            text-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
         }
 
-        #store-name:active {
-            transform: scale(0.95);
-        }
-
-        /* واجهة المنتجات الرئيسية */
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .product-card {
-            background: #1e293b;
-            border: 1px solid #334155;
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            position: relative;
-            transition: translateY 0.2s;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .product-card h3 {
-            margin-bottom: 10px;
-            color: #e2e8f0;
-        }
-
-        .product-card p {
-            color: #94a3b8;
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
-
-        .price {
-            font-weight: bold;
-            color: #10b981;
-            font-size: 18px;
-        }
-
-        /* زر حذف المنتج في لوحة التحكم */
-        .delete-btn {
-            background: #ef4444;
-            color: white;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 6px;
-            cursor: pointer;
-            margin-top: 10px;
-            display: none; /* مخفي في الواجهة العامة */
-        }
-
-        /* تنسيق اللوحة السرية (الإحصائيات) */
-        #admin-panel {
-            display: none; /* مخفية افتراضياً */
-            background: #1e293b;
-            border: 2px dashed #f59e0b;
-            border-radius: 12px;
-            padding: 25px;
-            margin-bottom: 30px;
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
-        .stats-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .stat-box {
-            background: #0f172a;
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            border: 1px solid #334155;
-        }
-
-        .stat-box h4 {
-            color: #94a3b8;
-            font-size: 14px;
-            margin-bottom: 5px;
-        }
-
-        .stat-box p {
-            font-size: 22px;
-            font-weight: bold;
+        #store-name:hover {
+            transform: scale(1.03);
             color: #f59e0b;
         }
 
-        .close-admin-btn {
-            background: #475569;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            float: left;
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
+        .nav-links li a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .nav-links li a:hover {
+            color: #fff;
+        }
+
+        /* نظام الصفحات الافتراضية - إخفاء الصفحات غير النشطة */
+        .page {
+            display: none;
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* تصميم المربعات (الأقسام الرئيسية) */
+        .grid-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .category-card {
+            background: linear-gradient(145deg, #111827, #1e293b);
+            border: 1px solid #334155;
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        /* حركة متناسقة وناعمة عند التمرير فوق المربع */
+        .category-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: #38bdf8;
+            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.15);
+        }
+
+        .category-card h3 {
+            font-size: 20px;
+            color: #f8fafc;
+            margin-bottom: 10px;
+        }
+
+        .category-card p {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* تصميم صفحة المنتجات الداخلية */
+        .products-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .product-item {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #334155;
+            text-align: center;
+        }
+
+        .product-item h4 { margin-bottom: 8px; color: #e2e8f0; }
+        .product-item .tag { 
+            display: inline-block; 
+            background: #0369a1; 
+            padding: 2px 8px; 
+            border-radius: 4px; 
+            font-size: 11px; 
+            margin-bottom: 10px;
+        }
+        .product-item .price { color: #10b981; font-weight: bold; margin-bottom: 15px;}
+
+        .back-btn {
+            background: #334155;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .back-btn:hover { background: #475569; }
+
+        /* تصميم الصفحة الإدارية السرية بالكامل */
+        .admin-box {
+            background: #111827;
+            border: 1px solid #eab308;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 0 30px rgba(234, 179, 8, 0.1);
+        }
+
+        .admin-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .admin-section {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #334155;
+        }
+
+        .admin-section h3 { margin-bottom: 15px; color: #eab308; font-size: 16px;}
+
+        label { display: block; margin-bottom: 6px; font-size: 13px; color: #94a3b8; }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            background: #0b0f19;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        input:focus { border-color: #eab308; outline: none; }
+
+        .save-btn {
+            background: #eab308;
+            color: #0f172a;
+            font-weight: bold;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .save-btn:hover { background: #ca8a04; }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .admin-table th, .admin-table td {
+            padding: 12px;
+            text-align: right;
+            border-bottom: 1px solid #334155;
+        }
+
+        .admin-table th { color: #94a3b8; font-size: 13px; }
+
+        .del-prod-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .del-prod-btn:hover { background: #dc2626; }
     </style>
 </head>
 <body>
 
     <header>
         <div id="store-name" onclick="handleNameClick()">مـتـجـر لـيـون 👑</div>
-        <div>الرئيسية | الأقسام</div>
+        <ul class="nav-links">
+            <li><a href="#" onclick="showPage('home')">الرئيسية</a></li>
+            <li><a href="#">الدعم الفني</a></li>
+        </ul>
     </header>
 
-    <section id="admin-panel">
-        <button class="close-admin-btn" onclick="closeAdmin()">إغلاق اللوحة</button>
-        <h2 style="color: #f59e0b; margin-bottom: 15px;">📊 لوحة تحكم ليون السرية (الإحصائيات)</h2>
-        <hr style="border-color: #334155; margin-bottom: 15px;">
+    <div id="page-home" class="page active">
+        <h2 style="font-size: 28px; margin-bottom: 10px;">أهلاً بك في منصتنا الرقمية</h2>
+        <p style="color: #64748b;">اختر القسم الذي ترغب في تصفح حساباته ومنتجاته النادرة:</p>
+
+        <div class="grid-categories">
+            <div class="category-card" onclick="openCategoryPage('fortnite')">
+                <h3 id="title-cat-fortnite">حسابات فورتنايت نادرة</h3>
+                <p id="desc-cat-fortnite">حسابات قديمة ومربوطة بالكامل إيبك جيمز</p>
+            </div>
+            <div class="category-card" onclick="openCategoryPage('rocket')">
+                <h3 id="title-cat-rocket">حسابات Rocket League</h3>
+                <p id="desc-cat-rocket">حسابات مع سيارات وأغراض نادرة بكامل الصلاحيات</p>
+            </div>
+            <div class="category-card" onclick="openCategoryPage('other')">
+                <h3 id="title-cat-other">أخرى (روبوكس وبطاقات)</h3>
+                <p id="desc-cat-other">شحن روبوكس، بطاقات رقمية، واشتراكات منوعة</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="page-category-view" class="page">
+        <button class="back-btn" onclick="showPage('home')">← العودة للرئيسية</button>
+        <h2 id="current-category-title" style="color: #38bdf8; margin-bottom: 10px;">اسم القسم</h2>
+        <p id="current-category-desc" style="color: #64748b; margin-bottom: 20px;">وصف القسم</p>
         
-        <div class="stats-container">
-            <div class="stat-box">
-                <h4>إجمالي المبيعات</h4>
-                <p>12,450 ر.س</p>
+        <div class="products-list" id="products-container">
             </div>
-            <div class="stat-box">
-                <h4>الطلبات الجديدة</h4>
-                <p>28 طلب</p>
+    </div>
+
+    <div id="page-admin" class="page">
+        <div class="admin-box">
+            <button class="back-btn" onclick="showPage('home')" style="float: left; background:#1e293b;">خروج من الإدارة</button>
+            <h2>⚙️ لوحة التحكم والإدارة السرية لـ ليون</h2>
+            <p style="color: #a1a1aa; margin-bottom: 20px;">من هنا يمكنك تعديل أسماء المربعات والتحكم بالمنتجات وحذفها.</p>
+            <hr style="border-color: #334155;">
+
+            <div class="admin-grid">
+                <div class="admin-section">
+                    <h3>✍️ تعديل بيانات الواجهة والمربعات</h3>
+                    
+                    <label>اسم المتجر الرئيسي:</label>
+                    <input type="text" id="input-store-name" value="مـتـجـر لـيـون 👑">
+                    
+                    <hr style="border-color: #334155; margin: 15px 0;">
+                    
+                    <label>عنوان مربع فورتنايت:</label>
+                    <input type="text" id="input-fortnite-title" value="حسابات فورتنايت نادرة">
+                    <label>وصف مربع فورتنايت:</label>
+                    <input type="text" id="input-fortnite-desc" value="حسابات قديمة ومربوطة بالكامل إيبك جيمز">
+
+                    <hr style="border-color: #334155; margin: 15px 0;">
+
+                    <label>عنوان مربع روكيت ليج:</label>
+                    <input type="text" id="input-rocket-title" value="حسابات Rocket League">
+                    
+                    <label>عنوان مربع أخرى (روبوكس):</label>
+                    <input type="text" id="input-other-title" value="أخرى (روبوكس وبطاقات)">
+
+                    <button class="save-btn" onclick="saveInterfaceSettings()">حفظ وتحديث الواجهة ✨</button>
+                </div>
+
+                <div class="admin-section">
+                    <h3>📦 إضافة منتج جديد في صفحة منفصلة</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div>
+                            <label>اسم المنتج:</label>
+                            <input type="text" id="new-prod-name" placeholder="مثال: حساب شيطون">
+                        </div>
+                        <div>
+                            <label>القسم المستهدف:</label>
+                            <select id="new-prod-cat">
+                                <option value="fortnite">فورتنايت (Epic Games)</option>
+                                <option value="rocket">روكيت ليج</option>
+                                <option value="other">أخرى / روبوكس</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div>
+                            <label>السعر (ر.س):</label>
+                            <input type="number" id="new-prod-price" placeholder="150">
+                        </div>
+                        <div>
+                            <label>تفاصيل الربط/النوع:</label>
+                            <input type="text" id="new-prod-tag" placeholder="مثال: مربوط Epic Games">
+                        </div>
+                    </div>
+                    <button class="save-btn" style="background:#10b981; color:white;" onclick="addNewProduct()">إضافة المنتج فوراً ➕</button>
+
+                    <h3 style="margin-top: 30px; color: #ef4444;">🗑️ التحكم بالمنتجات الحالية (حذف منتج منتج)</h3>
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>المنتج</th>
+                                <th>القسم</th>
+                                <th>السعر</th>
+                                <th>إجراء</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-table-body">
+                            </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="stat-box">
-                <h4>عدد المنتجات المتاحة</h4>
-                <p id="products-count">3 منتجات</p>
-            </div>
         </div>
-        <p style="margin-top: 15px; font-size: 13px; color: #64748b;">* يمكنك الآن حذف أي منتج مباشرة من الواجهة في الأسفل.</p>
-    </section>
-
-    <main class="products-grid" id="products-wrapper">
-        <div class="product-card" id="prod-1">
-            <h3>حساب فورتنايت نادر</h3>
-            <p>يحتوي على سكنات نادرة من السيزون الثاني أساسي.</p>
-            <div class="price">150 ر.س</div>
-            <button class="delete-btn" onclick="deleteProduct('prod-1')">حذف المنتج 🗑️</button>
-        </div>
-
-        <div class="product-card" id="prod-2">
-            <h3>اشتراك بلس 12 شهر</h3>
-            <p>تفعيل رسمي مضمون على حسابك الشخصي.</p>
-            <div class="price">90 ر.س</div>
-            <button class="delete-btn" onclick="deleteProduct('prod-2')">حذف المنتج 🗑️</button>
-        </div>
-
-        <div class="product-card" id="prod-3">
-            <h3>حزمة فيبوكس 13,500</h3>
-            <p>شحن آمن ونظامي 100% عبر الأيدي.</p>
-            <div class="price">220 ر.س</div>
-            <button class="delete-btn" onclick="deleteProduct('prod-3')">حذف المنتج 🗑️</button>
-        </div>
-    </main>
+    </div>
 
     <script>
+        // قاعدة البيانات الافتراضية للمتجر لقابلية التعديل والحذف الكامل
+        let products = [
+            { id: 1, name: 'حساب بنت الطيارة أساسي', cat: 'fortnite', tag: 'مربوط Epic Games', price: 350 },
+            { id: 2, name: 'حساب شيطون كامل السيزونات', cat: 'fortnite', tag: 'مربوط Epic Games', price: 500 },
+            { id: 3, name: 'حساب روكيت ليج سيارة فندك نادرة', cat: 'rocket', tag: 'كامل الصلاحيات', price: 180 },
+            { id: 4, name: 'شحن 10,000 روبوكس نظامي', cat: 'other', tag: 'تسليم سريع روبلوكس', price: 210 }
+        ];
+
         let clickCount = 0;
         let lastClickTime = 0;
-        let isAdminActive = false;
 
+        // دالة التنقل الذكي بين الصفحات المنفصلة
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById('page-' + pageId).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // رصد الـ 3 ضغطات السريعة والمتتالية على الاسم فوق على اليمين لطلب الرمز التعريفي لفتح الإدارة
         function handleNameClick() {
             const currentTime = new Date().getTime();
-            
-            // التحقق من أن الضغطات متتالية وسريعة (أقل من 400 ملي ثانية بين الضغطة والأخرى)
-            if (currentTime - lastClickTime < 400) {
+            if (currentTime - lastClickTime < 450) {
                 clickCount++;
             } else {
-                clickCount = 1; // إعادة التعيين إذا كانت الضغطة بطيئة
+                clickCount = 1;
             }
-            
             lastClickTime = currentTime;
 
-            // عند الوصول لـ 3 ضغطات
             if (clickCount === 3) {
-                clickCount = 0; // تصفير العداد
-                triggerSecretAuth();
-            }
-        }
-
-        // طلب الكود والتحقق منه
-        function triggerSecretAuth() {
-            const secretCode = prompt("أدخل الكود التعريفي لفتح الإحصائيات:");
-            
-            if (secretCode === "lion2007") {
-                alert("تم التحقق بنجاح! تم فتح لوحة الإحصائيات وخيار الحذف.");
-                openAdminPanel();
-            } else if (secretCode !== null) {
-                alert("الكود خاطئ! لا تملك صلاحية الدخول.");
-            }
-        }
-
-        // فتح لوحة التحكم وإظهار أزرار الحذف
-        function openAdminPanel() {
-            document.getElementById('admin-panel').style.display = 'block';
-            
-            // إظهار أزرار الحذف في كل المنتجات
-            const deleteButtons = document.querySelectorAll('.delete-btn');
-            deleteButtons.forEach(btn => btn.style.display = 'inline-block');
-            
-            // التمرير تلقائياً للوحة التحكم
-            document.getElementById('admin-panel').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // إغلاق لوحة التحكم
-        function closeAdmin() {
-            document.getElementById('admin-panel').style.display = 'none';
-            const deleteButtons = document.querySelectorAll('.delete-btn');
-            deleteButtons.forEach(btn => btn.style.display = 'none');
-        }
-
-        // وظيفة حذف المنتج وتحديث العداد
-        function deleteProduct(productId) {
-            const confirmDelete = confirm("هل أنت متأكد من حذف هذا المنتج نهائياً؟");
-            if (confirmDelete) {
-                const productElement = document.getElementById(productId);
-                if (productElement) {
-                    productElement.remove(); // حذف المنتج من الواجهة تماماً
-                    updateProductsCount();  // تحديث الإحصائيات مباشرة
+                clickCount = 0;
+                let authCode = prompt("🔒 يرجى إدخال الرمز التعريفي لفتح الصفحة الإدارية:");
+                if (authCode === "lion2007") {
+                    alert("🔓 تم التحقق بنجاح. جاري نقلك إلى الصفحة الإدارية الجديدة.");
+                    renderAdminTable();
+                    showPage('admin');
+                } else if (authCode !== null) {
+                    alert("❌ الرمز التعريفي خاطئ! لا يمكنك الدخول.");
                 }
             }
         }
 
-        // تحديث عدد المنتجات في الإحصائيات
-        function updateProductsCount() {
-            const currentProducts = document.querySelectorAll('.product-card').length;
-            document.getElementById('products-count').innerText = currentProducts + " منتجات";
-            
-            if(currentProducts === 0) {
-                document.getElementById('products-wrapper').innerHTML = '<p style="text-align:center; width:100%; color:#64748b; padding:40px;">خلصت المنتجات! المتجر فارغ الآن.</p>';
+        // فتح صفحة المنتجات المنفصلة عند الضغط على أحد المربعات في الواجهة
+        function openCategoryPage(categoryCode) {
+            let catTitle = "", catDesc = "";
+            if(categoryCode === 'fortnite') {
+                catTitle = document.getElementById('title-cat-fortnite').innerText;
+                catDesc = document.getElementById('desc-cat-fortnite').innerText;
+            } else if(categoryCode === 'rocket') {
+                catTitle = document.getElementById('title-cat-rocket').innerText;
+                catDesc = document.getElementById('desc-cat-rocket').innerText;
+            } else {
+                catTitle = document.getElementById('title-cat-other').innerText;
+                catDesc = document.getElementById('desc-cat-other').innerText;
             }
+
+            document.getElementById('current-category-title').innerText = catTitle;
+            document.getElementById('current-category-desc').innerText = catDesc;
+
+            // فلترة وتوليد المنتجات الخاصة بهذا القسم فقط
+            let container = document.getElementById('products-container');
+            container.innerHTML = "";
+            
+            let filtered = products.filter(p => p.cat === categoryCode);
+            if(filtered.length === 0) {
+                container.innerHTML = "<p style='color:#64748b; grid-column: 1/-1; text-align:center;'>لا توجد منتجات متوفرة حالياً في هذا القسم.</p>";
+            } else {
+                filtered.forEach(p => {
+                    container.innerHTML += `
+                        <div class="product-item">
+                            <h4>${p.name}</h4>
+                            <span class="tag">${p.tag}</span>
+                            <div class="price">${p.price} ر.س</div>
+                        </div>
+                    `;
+                });
+            }
+            showPage('category-view');
+        }
+
+        // حفظ الإعدادات وتغيير أسامي المربعات والاسم فوق على اليمين من داخل صفحة الإدارة
+        function saveInterfaceSettings() {
+            let newName = document.getElementById('input-store-name').value;
+            document.getElementById('store-name').innerText = newName;
+
+            document.getElementById('title-cat-fortnite').innerText = document.getElementById('input-fortnite-title').value;
+            document.getElementById('desc-cat-fortnite').innerText = document.getElementById('input-fortnite-desc').value;
+            document.getElementById('title-cat-rocket').innerText = document.getElementById('input-rocket-title').value;
+            document.getElementById('title-cat-other').innerText = document.getElementById('input-other-title').value;
+
+            alert("✨ تم تحديث أسماء المربعات وبيانات الواجهة بالكامل بنجاح!");
+        }
+
+        // بناء جدول المنتجات داخل الصفحة الإدارية للتمكين من الحذف "منتج منتج"
+        function renderAdminTable() {
+            let tbody = document.getElementById('admin-table-body');
+            tbody.innerHTML = "";
+            products.forEach(p => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td><b>${p.name}</b></td>
+                        <td>${p.cat === 'fortnite' ? 'فورتنايت' : p.cat === 'rocket' ? 'روكيت ليج' : 'أخرى'}</td>
+                        <td>${p.price} ر.س</td>
+                        <td><button class="del-prod-btn" onclick="deleteProductById(${p.id})">حذف 🗑️</button></td>
+                    </tr>
+                `;
+            });
+        }
+
+        // حذف منتج تلو الآخر بشكل نهائي وتحديث النظام فوراً
+        function deleteProductById(id) {
+            if(confirm("هل أنت متأكد من رغبتك في حذف هذا المنتج نهائياً؟")) {
+                products = products.filter(p => p.id !== id);
+                renderAdminTable();
+                alert("تم حذف المنتج المحدد بنجاح!");
+            }
+        }
+
+        // إضافة منتج جديد عبر الإدارة
+        function addNewProduct() {
+            let name = document.getElementById('new-prod-name').value;
+            let cat = document.getElementById('new-prod-cat').value;
+            let price = document.getElementById('new-prod-price').value;
+            let tag = document.getElementById('new-prod-tag').value;
+
+            if(!name || !price) {
+                alert("الرجاء ملء اسم المنتج والسعر أولاً!");
+                return;
+            }
+
+            let newProd = {
+                id: Date.now(),
+                name: name,
+                cat: cat,
+                tag: tag ? tag : "منتج رقمي نظامي",
+                price: parseFloat(price)
+            };
+
+            products.push(newProd);
+            renderAdminTable();
+            
+            // تصفير الحقول بعد الإضافة
+            document.getElementById('new-prod-name').value = "";
+            document.getElementById('new-prod-price').value = "";
+            document.getElementById('new-prod-tag').value = "";
+            
+            alert("✅ تم إضافة المنتج بنجاح، وسيظهر فوراً في صفحته المخصصة عند تصفحها.");
         }
     </script>
 </body>
