@@ -1,356 +1,383 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leon Shop | لوحة التحكم الكاملة</title>
-    <style>
-        :root {
-            --bg-dark: #0a0a0a;
-            --bg-card: #121212;
-            --gold: #dfb74c;
-            --gold-gradient: linear-gradient(45deg, #b38728, #fbf5b7, #daa520, #aa771c);
-            --text-main: #ffffff;
-            --text-muted: #8a8a8a;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leon Shop</title>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+<style>
+:root{
+    --bg:#0a0a0a;
+    --card:#111111;
+    --gold:#dfb74c;
+    --gold2:#f7d77a;
+    --text:#ffffff;
+    --green:#25D366;
+}
 
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            overflow-x: hidden;
-            padding-bottom: 60px;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Tahoma,sans-serif;
+}
 
-        /* شريط التنبيه العلوي */
-        .admin-badge {
-            background: #ff3b30;
-            color: white;
-            text-align: center;
-            padding: 8px;
-            font-weight: bold;
-            font-size: 14px;
-        }
+body{
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+}
 
-        header {
-            background-color: #121212;
-            border-bottom: 2px solid #1a1a1a;
-            padding: 15px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+header{
+    padding:25px;
+    border-bottom:1px solid rgba(223,183,76,.2);
+    background:#080808;
+    position:sticky;
+    top:0;
+    z-index:100;
+}
 
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
+.logo{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    justify-content:center;
+}
 
-        .lion-icon {
-            width: 50px;
-            height: 50px;
-            fill: var(--gold);
-            cursor: pointer;
-        }
+.logo-icon{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    background:linear-gradient(135deg,var(--gold),#8d6a12);
+    box-shadow:0 0 25px rgba(223,183,76,.4);
+}
 
-        .logo-text {
-            font-size: 26px;
-            font-weight: 900;
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+.logo h1{
+    color:var(--gold);
+    font-size:2rem;
+}
 
-        .hero-section {
-            text-align: center;
-            padding: 60px 20px;
-            background: radial-gradient(circle at center, #1c1507 0%, #0a0a0a 80%);
-        }
+main{
+    width:95%;
+    max-width:1400px;
+    margin:auto;
+    padding:30px 0;
+}
 
-        .hero-section h1 span {
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+.section-title{
+    text-align:center;
+    color:var(--gold);
+    font-size:2rem;
+    margin-bottom:30px;
+}
 
-        .container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
+.product-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+}
 
-        .section-title {
-            font-size: 24px;
-            margin-bottom: 30px;
-            border-right: 4px solid var(--gold);
-            padding-right: 15px;
-            font-weight: 700;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+.product-card{
+    background:var(--card);
+    border:1px solid rgba(223,183,76,.15);
+    border-radius:20px;
+    padding:20px;
+    cursor:pointer;
+    transition:.3s;
+    position:relative;
+    overflow:hidden;
+}
 
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
+.product-card:hover{
+    transform:translateY(-5px);
+    border-color:var(--gold);
+    box-shadow:0 0 25px rgba(223,183,76,.15);
+}
 
-        .product-card {
-            background-color: var(--bg-card);
-            border: 1px solid #1f1f1f;
-            border-radius: 16px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            position: relative;
-            cursor: pointer;
-        }
+.badge{
+    background:var(--gold);
+    color:black;
+    display:inline-block;
+    padding:6px 12px;
+    border-radius:50px;
+    font-size:.8rem;
+    font-weight:bold;
+    margin-bottom:12px;
+}
 
-        .product-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--gold);
-        }
+.product-name{
+    font-size:1.3rem;
+    color:var(--gold2);
+    margin-bottom:10px;
+}
 
-        .badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(0, 0, 0, 0.8);
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            padding: 6px 14px;
-            font-size: 12px;
-            border-radius: 50px;
-            z-index: 2;
-        }
+.product-desc{
+    opacity:.8;
+    margin-bottom:15px;
+    line-height:1.6;
+}
 
-        .product-img-wrapper {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, #141414, #1f1a10);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-bottom: 1px solid #1f1f1f;
-        }
+.price{
+    font-size:1.4rem;
+    color:var(--gold);
+    font-weight:bold;
+}
 
-        .product-img-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+.add-product{
+    display:block;
+    margin:35px auto;
+    background:linear-gradient(135deg,var(--gold),#8d6a12);
+    color:black;
+    border:none;
+    padding:15px 30px;
+    border-radius:50px;
+    font-size:1rem;
+    font-weight:bold;
+    cursor:pointer;
+}
 
-        .product-info {
-            padding: 22px;
-        }
+.add-product:hover{
+    transform:scale(1.05);
+}
 
-        .product-title {
-            font-size: 19px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.85);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    opacity:0;
+    visibility:hidden;
+    transition:.3s;
+    z-index:999;
+}
 
-        .product-desc {
-            font-size: 14px;
-            color: var(--text-muted);
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
+.modal.active{
+    opacity:1;
+    visibility:visible;
+}
 
-        .product-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+.modal-content{
+    width:90%;
+    max-width:500px;
+    background:#111;
+    border:2px solid var(--gold);
+    border-radius:25px;
+    padding:30px;
+    position:relative;
+    transform:scale(0);
+    border-radius:50%;
+    aspect-ratio:1/1;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
 
-        .price {
-            font-size: 22px;
-            font-weight: 800;
-            color: var(--gold);
-        }
+.modal.active .modal-content{
+    animation:circleOpen .5s ease forwards;
+}
 
-        .buy-btn {
-            background: linear-gradient(135deg, #25D366, #128C7E);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
-        }
+@keyframes circleOpen{
+    from{
+        transform:scale(0);
+        border-radius:50%;
+    }
+    to{
+        transform:scale(1);
+        border-radius:30px;
+    }
+}
 
-        /* أزرار التحكم والإضافة */
-        .add-btn {
-            background: linear-gradient(45deg, #111, #222);
-            color: var(--gold);
-            border: 1px dashed var(--gold);
-            padding: 15px;
-            border-radius: 12px;
-            cursor: pointer;
-            font-weight: bold;
-            text-align: center;
-            transition: 0.3s;
-            width: 100%;
-            font-size: 16px;
-        }
+.close{
+    position:absolute;
+    top:15px;
+    left:15px;
+    font-size:30px;
+    cursor:pointer;
+    color:white;
+}
 
-        .add-btn:hover {
-            background: var(--gold);
-            color: black;
-        }
+.buy-btn{
+    margin-top:20px;
+    background:var(--green);
+    color:white;
+    text-decoration:none;
+    padding:15px 30px;
+    border-radius:50px;
+    font-weight:bold;
+}
 
-        /* نافذة التفاصيل المنبثقة (Modal) */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.9);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
+.buy-btn:hover{
+    transform:scale(1.05);
+}
 
-        .modal-content {
-            background: #121212;
-            border: 1px solid var(--gold);
-            border-radius: 20px;
-            max-width: 500px;
-            width: 100%;
-            padding: 30px;
-            position: relative;
-            text-align: center;
-        }
+[contenteditable="true"]{
+    outline:none;
+}
 
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-        }
+[contenteditable="true"]:focus{
+    box-shadow:0 0 0 2px var(--gold);
+    border-radius:6px;
+}
 
-        /* تحديد العناصر القابلة للتعديل تلقائياً */
-        [contenteditable="true"] {
-            border: 1px dashed rgba(223, 183, 76, 0.3);
-            padding: 2px;
-            border-radius: 4px;
-            outline: none;
-        }
-        [contenteditable="true"]:focus {
-            border-color: var(--gold);
-            background: #1c1507;
-        }
-    </style>
+@media(max-width:600px){
+    .logo h1{
+        font-size:1.5rem;
+    }
+
+    .section-title{
+        font-size:1.6rem;
+    }
+}
+</style>
 </head>
 <body>
 
-    <div class="admin-badge">🛠️ وضع التعديل المباشر مفعّل: اضغط على أي اسم أو سعر في الصفحة لتغييره فوراً!</div>
+<header>
+    <div class="logo">
+        <div class="logo-icon" contenteditable="true"></div>
+        <h1 contenteditable="true">Leon Shop</h1>
+    </div>
+</header>
 
-    <header>
-        <div class="logo-container">
-            <svg class="lion-icon" viewBox="0 0 24 24" onclick="changeLogoUrl()">
-                <path d="M12,2C6.48,2 2,6.48 2,12C2,17.52 6.48,22 12,22C17.52,22 22,17.52 22,12C22,6.48 17.52,2 12,2M12,4A3,3 0 0,1 15,7A3,3 0 0,1 12,10A3,3 0 0,1 9,7A3,3 0 0,1 12,4M12,14C10.06,14 6.5,14 6.5,16.5C6.5,17.88 7.62,19 9,19C10.14,19 11.1,18.23 11.4,17.2C11.6,16.2 12.4,16.2 12.6,17.2C12.9,18.23 13.86,19 15,19C16.38,19 17.5,17.88 17.5,16.5C17.5,14 13.94,14 12,14Z"/>
-            </svg>
-            <div class="logo-text" contenteditable="true">LEON SHOP</div>
-        </div>
-    </header>
+<main>
 
-    <section class="hero-section">
-        <h1 contenteditable="true">متجر <span>LEON SHOP</span> للألعاب</h1>
-        <p contenteditable="true">وجهتك الأولى والأضمن للحصول على حسابات فورت نايت النادرة وسيارات روكت ليق الأسطورية بأقوى الأسعار.</p>
-    </section>
+    <h2 class="section-title" contenteditable="true">
+        الحسابات النادرة
+    </h2>
 
-    <div class="container">
-        
-        <div class="section-title">
-            <span contenteditable="true">🔥 مربع الحسابات النادرة</span>
-        </div>
-        
-        <div class="products-grid" id="rare-grid">
-            
-            <div class="product-card" onclick="openDetails('حساب شيطون فخم أساسي', 'الحساب يحتوي على سكن الشيطون ومظلة الفصل الأول كاملة مع 50 سكن إضافي يربط سوني وبي سي.')">
-                <div class="badge" contenteditable="true">يربط سوني</div>
-                <div class="product-img-wrapper">
-                    <span style="color:#333;">[ اضغط لتغيير الصورة ]</span>
-                </div>
-                <div class="product-info">
-                    <div class="product-title" contenteditable="true">حساب فورت نايت | شيطون ومظلات قديمة</div>
-                    <div class="product-desc" contenteditable="true">اضغط هنا لكتابة وصف قصير يظهر في الواجهة للزبائن...</div>
-                    <div class="product-footer">
-                        <div class="price" contenteditable="true">150 ر.س</div>
-                        <a href="https://wa.me/966000000000" class="buy-btn" onclick="event.stopPropagation();">شراء</a>
-                    </div>
-                </div>
+    <div class="product-grid" id="productGrid">
+
+        <div class="product-card">
+            <div class="badge" contenteditable="true">نادر</div>
+
+            <div class="product-name" contenteditable="true">
+                حساب فورتنايت OG
             </div>
 
+            <div class="product-desc" contenteditable="true">
+                يحتوي على سكنات نادرة ومستوى مرتفع.
+            </div>
+
+            <div class="price" contenteditable="true">
+                25 د.ك
+            </div>
         </div>
 
-        <button class="add-btn" onclick="addNewProduct()">➕ إضافة حساب جديد في النوادر</button>
+        <div class="product-card">
+            <div class="badge" contenteditable="true">حصري</div>
+
+            <div class="product-name" contenteditable="true">
+                حساب فالورانت
+            </div>
+
+            <div class="product-desc" contenteditable="true">
+                رانك عالي وسكنات مميزة.
+            </div>
+
+            <div class="price" contenteditable="true">
+                18 د.ك
+            </div>
+        </div>
 
     </div>
 
-    <div class="modal" id="detailsModal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h2 id="modalTitle" style="color: var(--gold); margin-bottom: 15px;">اسم الحساب</h2>
-            <p id="modalDesc" style="color: white; line-height: 1.6; margin-bottom: 20px;">تفاصيل ومميزات الحساب المطور...</p>
-            <a id="modalBuyBtn" href="https://wa.me/966000000000" class="buy-btn" style="display: inline-block;">تأكيد الشراء عبر الواتساب</a>
-        </div>
+    <button class="add-product" id="addProduct">
+        + إضافة حساب جديد
+    </button>
+
+</main>
+
+<div class="modal" id="modal">
+    <div class="modal-content">
+
+        <span class="close" id="closeModal">×</span>
+
+        <h2 id="modalName"></h2>
+        <p id="modalDesc"></p>
+        <h3 id="modalPrice"></h3>
+
+        <a
+        href="https://wa.me/96500000000"
+        target="_blank"
+        class="buy-btn">
+        شراء عبر واتساب
+        </a>
+
     </div>
+</div>
 
-    <script>
-        // دالة لفتح تفاصيل المنتج
-        function openDetails(title, desc) {
-            document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modalDesc').innerText = desc;
-            document.getElementById('detailsModal').style.display = 'flex';
-        }
+<script>
 
-        // دالة لإغلاق النافذة
-        function closeModal() {
-            document.getElementById('detailsModal').style.display = 'none';
-        }
+const modal = document.getElementById("modal");
+const modalName = document.getElementById("modalName");
+const modalDesc = document.getElementById("modalDesc");
+const modalPrice = document.getElementById("modalPrice");
 
-        // دالة إضافة حساب جديد تلقائياً في مربع النوادر
-        function addNewProduct() {
-            const grid = document.getElementById('rare-grid');
-            
-            const newCard = document.createElement('div');
-            newCard.className = 'product-card';
-            newCard.onclick = function() {
-                openDetails('حساب نادر جديد', 'تفاصيل الحساب الجديد المضاف يدوياً.');
-            };
+function bindCards(){
 
-            newCard.innerHTML = `
-                <div class="badge" contenteditable="true">جديد 🔥</div>
-                <div class="product-img-wrapper">
-                    <span style="color:#333;">[ بدون صورة ]</span>
-                </div>
-                <div class="product-info">
-                    <div class="product-title" contenteditable="true">اسم الحساب الجديد اضغط للتعديل</div>
-                    <div class="product-desc" contenteditable="true">اكتب هنا وصف الحساب الجديد ومميزاته للبيع...</div>
-                    <div class="product-footer">
-                        <div class="price" contenteditable="true">99 ر.س</div>
-                        <a href="https://wa.me/966000000000" class="buy-btn" onclick="event.stopPropagation();">شراء</a>
-                    </div>
-                </div>
-            `;
-            
-            grid.appendChild(newCard);
-        }
-    </script>
+    document.querySelectorAll(".product-card").forEach(card=>{
+
+        card.onclick = ()=>{
+
+            modalName.innerText =
+            card.querySelector(".product-name").innerText;
+
+            modalDesc.innerText =
+            card.querySelector(".product-desc").innerText;
+
+            modalPrice.innerText =
+            card.querySelector(".price").innerText;
+
+            modal.classList.add("active");
+        };
+
+    });
+
+}
+
+bindCards();
+
+document.getElementById("closeModal").onclick=()=>{
+    modal.classList.remove("active");
+};
+
+modal.onclick=(e)=>{
+    if(e.target===modal){
+        modal.classList.remove("active");
+    }
+};
+
+document.getElementById("addProduct").onclick=()=>{
+
+    const card=document.createElement("div");
+    card.className="product-card";
+
+    card.innerHTML=`
+        <div class="badge" contenteditable="true">جديد</div>
+
+        <div class="product-name" contenteditable="true">
+            اسم الحساب
+        </div>
+
+        <div class="product-desc" contenteditable="true">
+            وصف الحساب
+        </div>
+
+        <div class="price" contenteditable="true">
+            0 د.ك
+        </div>
+    `;
+
+    document.getElementById("productGrid").appendChild(card);
+
+    bindCards();
+};
+
+</script>
+
 </body>
 </html>
