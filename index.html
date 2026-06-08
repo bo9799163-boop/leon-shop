@@ -3,17 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Leon Shop | ليون ستور</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Leon Shop | لوحة التحكم الكاملة</title>
     <style>
-        /* إعدادات الألوان والفخامة المستوحاة من الشعار */
         :root {
-            --bg-dark: #0b0b0b;
-            --bg-card: #141414;
-            --gold: #d4af37;
-            --gold-glow: #f3e5ab;
+            --bg-dark: #0a0a0a;
+            --bg-card: #121212;
+            --gold: #dfb74c;
+            --gold-gradient: linear-gradient(45deg, #b38728, #fbf5b7, #daa520, #aa771c);
             --text-main: #ffffff;
-            --text-muted: #aaaaaa;
+            --text-muted: #8a8a8a;
         }
 
         * {
@@ -27,96 +25,61 @@
             background-color: var(--bg-dark);
             color: var(--text-main);
             overflow-x: hidden;
+            padding-bottom: 60px;
         }
 
-        /* الهيدر العلوي */
+        /* شريط التنبيه العلوي */
+        .admin-badge {
+            background: #ff3b30;
+            color: white;
+            text-align: center;
+            padding: 8px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
         header {
-            background-color: rgba(20, 20, 20, 0.95);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            background-color: #121212;
+            border-bottom: 2px solid #1a1a1a;
             padding: 15px 5%;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            backdrop-filter: blur(10px);
         }
 
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
         }
 
-        /* تصميم الشعار المطور بشكل دائري فخم */
-        .logo-img {
+        .lion-icon {
             width: 50px;
             height: 50px;
-            border-radius: 50%;
-            border: 2px solid var(--gold);
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
-            background-color: #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            color: var(--gold);
+            fill: var(--gold);
+            cursor: pointer;
         }
 
         .logo-text {
-            font-size: 24px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            background: linear-gradient(45deg, var(--gold), var(--gold-glow));
+            font-size: 26px;
+            font-weight: 900;
+            background: var(--gold-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 20px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-main);
-            text-decoration: none;
-            font-size: 16px;
-            transition: 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--gold);
-        }
-
-        /* البنر الترحيبي العريض */
         .hero-section {
             text-align: center;
             padding: 60px 20px;
-            background: radial-gradient(circle, rgba(40,30,10,1) 0%, rgba(11,11,11,1) 70%);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
-        }
-
-        .hero-section h1 {
-            font-size: 40px;
-            margin-bottom: 15px;
-            color: #fff;
+            background: radial-gradient(circle at center, #1c1507 0%, #0a0a0a 80%);
         }
 
         .hero-section h1 span {
-            color: var(--gold);
-            text-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .hero-section p {
-            color: var(--text-muted);
-            font-size: 18px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* الحاوية الأساسية للمنتجات */
         .container {
             max-width: 1200px;
             margin: 40px auto;
@@ -124,68 +87,270 @@
         }
 
         .section-title {
-            font-size: 28px;
+            font-size: 24px;
             margin-bottom: 30px;
             border-right: 4px solid var(--gold);
             padding-right: 15px;
-            color: var(--text-main);
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        /* شبكة المنتجات */
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
         }
 
-        /* كرت المنتج الفخم بتأثير زجاجي مضيء */
         .product-card {
             background-color: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
+            border: 1px solid #1f1f1f;
+            border-radius: 16px;
             overflow: hidden;
-            transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+            transition: all 0.3s ease;
             position: relative;
+            cursor: pointer;
         }
 
         .product-card:hover {
             transform: translateY(-5px);
             border-color: var(--gold);
-            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.15);
         }
 
-        /* شارة التوثيق أو الضمان للمنتجات الرقمية */
         .badge {
             position: absolute;
             top: 15px;
             right: 15px;
-            background-color: rgba(0, 0, 0, 0.75);
+            background: rgba(0, 0, 0, 0.8);
             border: 1px solid var(--gold);
             color: var(--gold);
-            padding: 5px 10px;
+            padding: 6px 14px;
             font-size: 12px;
-            border-radius: 20px;
-            font-weight: bold;
-            z-index: 1;
+            border-radius: 50px;
+            z-index: 2;
         }
 
         .product-img-wrapper {
             width: 100%;
             height: 200px;
-            background: #222;
+            background: linear-gradient(135deg, #141414, #1f1a10);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 50px;
-            color: rgba(255,255,255,0.1);
-            position: relative;
-            overflow: hidden;
+            border-bottom: 1px solid #1f1f1f;
         }
 
-        /* خلفيات افتراضية فخمة للألعاب */
-        .bg-fortnite { background: linear-gradient(135deg, #150030, #310062); }
-        .bg-rocket { background: linear-gradient(135deg, #001f4d, #004080); }
+        .product-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-        .product-img-wrapper i {
-            color: rgba(255, 255, 255, 0.2);
-            font
+        .product-info {
+            padding: 22px;
+        }
+
+        .product-title {
+            font-size: 19px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .product-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--gold);
+        }
+
+        .buy-btn {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        /* أزرار التحكم والإضافة */
+        .add-btn {
+            background: linear-gradient(45deg, #111, #222);
+            color: var(--gold);
+            border: 1px dashed var(--gold);
+            padding: 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            text-align: center;
+            transition: 0.3s;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        .add-btn:hover {
+            background: var(--gold);
+            color: black;
+        }
+
+        /* نافذة التفاصيل المنبثقة (Modal) */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: #121212;
+            border: 1px solid var(--gold);
+            border-radius: 20px;
+            max-width: 500px;
+            width: 100%;
+            padding: 30px;
+            position: relative;
+            text-align: center;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* تحديد العناصر القابلة للتعديل تلقائياً */
+        [contenteditable="true"] {
+            border: 1px dashed rgba(223, 183, 76, 0.3);
+            padding: 2px;
+            border-radius: 4px;
+            outline: none;
+        }
+        [contenteditable="true"]:focus {
+            border-color: var(--gold);
+            background: #1c1507;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="admin-badge">🛠️ وضع التعديل المباشر مفعّل: اضغط على أي اسم أو سعر في الصفحة لتغييره فوراً!</div>
+
+    <header>
+        <div class="logo-container">
+            <svg class="lion-icon" viewBox="0 0 24 24" onclick="changeLogoUrl()">
+                <path d="M12,2C6.48,2 2,6.48 2,12C2,17.52 6.48,22 12,22C17.52,22 22,17.52 22,12C22,6.48 17.52,2 12,2M12,4A3,3 0 0,1 15,7A3,3 0 0,1 12,10A3,3 0 0,1 9,7A3,3 0 0,1 12,4M12,14C10.06,14 6.5,14 6.5,16.5C6.5,17.88 7.62,19 9,19C10.14,19 11.1,18.23 11.4,17.2C11.6,16.2 12.4,16.2 12.6,17.2C12.9,18.23 13.86,19 15,19C16.38,19 17.5,17.88 17.5,16.5C17.5,14 13.94,14 12,14Z"/>
+            </svg>
+            <div class="logo-text" contenteditable="true">LEON SHOP</div>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <h1 contenteditable="true">متجر <span>LEON SHOP</span> للألعاب</h1>
+        <p contenteditable="true">وجهتك الأولى والأضمن للحصول على حسابات فورت نايت النادرة وسيارات روكت ليق الأسطورية بأقوى الأسعار.</p>
+    </section>
+
+    <div class="container">
+        
+        <div class="section-title">
+            <span contenteditable="true">🔥 مربع الحسابات النادرة</span>
+        </div>
+        
+        <div class="products-grid" id="rare-grid">
+            
+            <div class="product-card" onclick="openDetails('حساب شيطون فخم أساسي', 'الحساب يحتوي على سكن الشيطون ومظلة الفصل الأول كاملة مع 50 سكن إضافي يربط سوني وبي سي.')">
+                <div class="badge" contenteditable="true">يربط سوني</div>
+                <div class="product-img-wrapper">
+                    <span style="color:#333;">[ اضغط لتغيير الصورة ]</span>
+                </div>
+                <div class="product-info">
+                    <div class="product-title" contenteditable="true">حساب فورت نايت | شيطون ومظلات قديمة</div>
+                    <div class="product-desc" contenteditable="true">اضغط هنا لكتابة وصف قصير يظهر في الواجهة للزبائن...</div>
+                    <div class="product-footer">
+                        <div class="price" contenteditable="true">150 ر.س</div>
+                        <a href="https://wa.me/966000000000" class="buy-btn" onclick="event.stopPropagation();">شراء</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <button class="add-btn" onclick="addNewProduct()">➕ إضافة حساب جديد في النوادر</button>
+
+    </div>
+
+    <div class="modal" id="detailsModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle" style="color: var(--gold); margin-bottom: 15px;">اسم الحساب</h2>
+            <p id="modalDesc" style="color: white; line-height: 1.6; margin-bottom: 20px;">تفاصيل ومميزات الحساب المطور...</p>
+            <a id="modalBuyBtn" href="https://wa.me/966000000000" class="buy-btn" style="display: inline-block;">تأكيد الشراء عبر الواتساب</a>
+        </div>
+    </div>
+
+    <script>
+        // دالة لفتح تفاصيل المنتج
+        function openDetails(title, desc) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalDesc').innerText = desc;
+            document.getElementById('detailsModal').style.display = 'flex';
+        }
+
+        // دالة لإغلاق النافذة
+        function closeModal() {
+            document.getElementById('detailsModal').style.display = 'none';
+        }
+
+        // دالة إضافة حساب جديد تلقائياً في مربع النوادر
+        function addNewProduct() {
+            const grid = document.getElementById('rare-grid');
+            
+            const newCard = document.createElement('div');
+            newCard.className = 'product-card';
+            newCard.onclick = function() {
+                openDetails('حساب نادر جديد', 'تفاصيل الحساب الجديد المضاف يدوياً.');
+            };
+
+            newCard.innerHTML = `
+                <div class="badge" contenteditable="true">جديد 🔥</div>
+                <div class="product-img-wrapper">
+                    <span style="color:#333;">[ بدون صورة ]</span>
+                </div>
+                <div class="product-info">
+                    <div class="product-title" contenteditable="true">اسم الحساب الجديد اضغط للتعديل</div>
+                    <div class="product-desc" contenteditable="true">اكتب هنا وصف الحساب الجديد ومميزاته للبيع...</div>
+                    <div class="product-footer">
+                        <div class="price" contenteditable="true">99 ر.س</div>
+                        <a href="https://wa.me/966000000000" class="buy-btn" onclick="event.stopPropagation();">شراء</a>
+                    </div>
+                </div>
+            `;
+            
+            grid.appendChild(newCard);
+        }
+    </script>
+</body>
+</html>
