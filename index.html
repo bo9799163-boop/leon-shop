@@ -3,167 +3,387 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر ليون المتكامل</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <title>منصة ليون الرقمية المتكاملة والفاخرة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Cairo:wght@400;600;700;900&family=Almarai:wght@400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; transition: all 0.3s ease; }
-        :root { --main-font: 'Tajawal', sans-serif; --bg-color: #0b0f19; --card-bg: #111827; --text-color: #f1f5f9; --accent-color: #38bdf8; }
-        body { background-color: var(--bg-color); color: var(--text-color); font-family: var(--main-font); overflow-x: hidden; padding-bottom: 60px; }
-
-        /* 1. الشريط البرتقالي العلوي */
-        .ticker-wrap { width: 100%; background: linear-gradient(90deg, #b45309, #d97706); color: #fff; padding: 10px 0; font-size: 14px; font-weight: bold; overflow: hidden; white-space: nowrap; }
-        .ticker { display: inline-block; padding-right: 100%; animation: tickerAnim 25s linear infinite; }
-        @keyframes tickerAnim { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(100%, 0, 0); } }
-
-        /* 2. الهيدر والاسم في المنتصف */
-        header { background: linear-gradient(to bottom, rgba(17,24,39,0.5), var(--bg-color)), url('https://images.unsplash.com/photo-1612287230202-1bf1d85d1bdf?q=80&w=1200') center/cover; padding: 50px 20px; text-align: center; border-bottom: 1px solid #1e293b; position: relative; }
-        #store-name { font-size: 36px; font-weight: 700; color: var(--accent-color); cursor: pointer; text-shadow: 0 0 15px rgba(56,189,248,0.5); }
-        .cart-icon-top { position: absolute; left: 30px; top: 30px; background: #1e293b; padding: 12px; border-radius: 50%; cursor: pointer; border: 1px solid #334155; }
-        .cart-count { position: absolute; top: -5px; right: -5px; background: #ef4444; color: white; border-radius: 50%; padding: 2px 7px; font-size: 12px; }
-
-        /* 3. المربعات الإعلانية المتحركة فوق الأقسام (يمين يمين) */
-        .adv-slider-container { width: 100%; overflow: hidden; padding: 20px 0; background: #0f172a; border-bottom: 1px solid #1e293b; }
-        .adv-track { display: flex; gap: 20px; width: max-content; animation: scrollRight 20s linear infinite; }
-        .adv-card { width: 220px; background: #1e293b; border-radius: 12px; overflow: hidden; border: 1px solid #334155; text-align: center; flex-shrink: 0; }
-        .adv-card img { width: 100%; height: 100px; object-fit: cover; }
-        .adv-card h4 { font-size: 14px; padding: 8px; color: #f59e0b; }
-        @keyframes scrollRight { 0% { transform: translateX(0); } 100% { transform: translateX(50%); } }
-
-        /* 4. نظام الصفحات والمربعات */
-        .page { display: none; padding: 30px 20px; max-width: 1200px; margin: 0 auto; }
-        .page.active { display: block; }
-        .grid-categories { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 25px; }
-        .category-card { background: var(--card-bg); border: 1px solid #334155; border-radius: 16px; padding: 30px; text-align: center; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-        .category-card:hover { transform: translateY(-5px); border-color: var(--accent-color); }
-
-        /* 5. المنتجات مع الصور والوصف والتعليقات */
-        .products-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
-        .product-item { background: var(--card-bg); border-radius: 16px; border: 1px solid #334155; overflow: hidden; display: flex; flex-direction: column; }
-        .product-img { width: 100%; height: 170px; object-fit: cover; }
-        .product-details { padding: 15px; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-        .product-desc { font-size: 13px; color: #94a3b8; margin: 8px 0; }
-        .buy-btn { background: #10b981; color: white; border: none; padding: 8px; border-radius: 6px; cursor: pointer; width: 100%; font-weight: bold; margin-top: 10px; }
+        /* نظام التنسيق والمظهر الفاخر للمنصة الثقيلة */
+        * { box-sizing: border-box; margin: 0; padding: 0; transition: background 0.3s, border-color 0.3s, transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
         
-        /* قسم المراجعات والآراء أسفل المنتج */
-        .reviews-section { background: #0f172a; padding: 10px; border-top: 1px solid #334155; font-size: 12px; }
-        .review-item { border-bottom: 1px dashed #223047; padding: 5px 0; color: #cbd5e1; }
+        :root {
+            --font-family-global: 'Tajawal', sans-serif;
+            --main-bg-color: #080c14;
+            --card-bg-color: #0f172a;
+            --container-bg-color: #1e293b;
+            --text-primary-color: #f8fafc;
+            --accent-neon-color: #38bdf8;
+            --gold-admin-color: #eab308;
+            --success-green-color: #10b981;
+            --danger-red-color: #ef4444;
+        }
 
-        /* 6. السلة وإتمام الطلب وبوابات الدفع */
-        .cart-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        .cart-table th, .cart-table td { padding: 12px; border-bottom: 1px solid #334155; text-align: right; }
-        .checkout-box { background: #111827; padding: 25px; border-radius: 16px; border: 1px solid #10b981; margin-top: 30px; text-align: center; }
-        .payment-methods { display: flex; justify-content: center; gap: 20px; margin: 20px 0; font-size: 30px; }
-        .pay-btn { background: #f59e0b; color: #0b0f19; font-weight: bold; font-size: 18px; padding: 12px 35px; border-radius: 8px; border: none; cursor: pointer; }
+        body {
+            background-color: var(--main-bg-color);
+            color: var(--text-primary-color);
+            font-family: var(--font-family-global);
+            overflow-x: hidden;
+            padding-bottom: 80px;
+        }
 
-        /* 7. لوحة التحكم الإدارية الجبارة */
-        .admin-box { background: #0f172a; border: 2px solid #eab308; border-radius: 20px; padding: 25px; }
-        .admin-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px; }
-        .admin-section { background: #1e293b; padding: 20px; border-radius: 12px; }
-        label { display: block; margin: 8px 0 4px; font-size: 13px; color: #cbd5e1; }
-        input, select, textarea { width: 100%; padding: 10px; background: #0b0f19; border: 1px solid #475569; border-radius: 6px; color: white; margin-bottom: 10px; }
-        .save-btn { background: #eab308; color: #0f172a; font-weight: bold; border: none; padding: 10px; border-radius: 6px; cursor: pointer; width: 100%; }
+        /* شريط العروض العلوي النيون */
+        .marquee-announcement {
+            width: 100%;
+            background: linear-gradient(90deg, #1e3a8a, #3b82f6, #1e3a8a);
+            color: #ffffff;
+            padding: 12px 0;
+            font-size: 14px;
+            font-weight: 700;
+            overflow: hidden;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
 
-        /* 8. أيقونة الواتساب الدائرية الثابتة العائمة (كويتية) */
-        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background-color: #25d366; color: white; border-radius: 50%; width: 60px; height: 60px; display: flex; justify-content: center; align-items: center; font-size: 32px; box-shadow: 0 4px 10px rgba(0,0,0,0.4); z-index: 999; text-decoration: none; }
-        .whatsapp-float:hover { transform: scale(1.1); background-color: #128c7e; }
+        .marquee-inner { display: inline-block; padding-right: 100%; animation: marqueeMoveLeft 30s linear infinite; }
+        @keyframes marqueeMoveLeft { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(100%, 0, 0); } }
 
-        .back-btn { background: #334155; color: white; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; margin-bottom: 20px; }
+        /* الهيدر: الاسم بالمنتصف مع خلفية بلور سنمائية وتخصيص الصورة */
+        header {
+            background-image: linear-gradient(to bottom, rgba(8, 12, 20, 0.5), var(--main-bg-color)), url('https://images.unsplash.com/photo-1612287230202-1bf1d85d1bdf?q=80&w=1400');
+            background-size: cover;
+            background-position: center;
+            padding: 80px 20px;
+            text-align: center;
+            border-bottom: 2px solid #1e293b;
+            position: relative;
+        }
+
+        #store-name {
+            font-size: 42px;
+            font-weight: 900;
+            color: var(--accent-neon-color);
+            cursor: pointer;
+            user-select: none;
+            display: inline-block;
+            letter-spacing: 1px;
+            text-shadow: 0 0 25px rgba(56, 189, 248, 0.7);
+        }
+
+        #store-name:hover {
+            transform: scale(1.06);
+            color: var(--gold-admin-color);
+        }
+
+        .store-description {
+            color: #94a3b8;
+            margin-top: 12px;
+            font-size: 16px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cart-trigger-btn {
+            position: absolute;
+            left: 40px;
+            top: 40px;
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(8px);
+            padding: 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid #334155;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        }
+
+        .cart-trigger-btn:hover { border-color: var(--accent-neon-color); transform: scale(1.1); }
+        .cart-counter-badge { position: absolute; top: -5px; right: -5px; background: var(--danger-red-color); color: white; border-radius: 50%; padding: 3px 8px; font-size: 11px; font-weight: bold; }
+
+        /* نظام القسائم والمربعات الإعلانية المتحركة (الثقيلة جداً) */
+        .coupon-slider-wrapper {
+            width: 100%;
+            overflow: hidden;
+            background: #0b1329;
+            padding: 25px 0;
+            border-top: 1px solid #1e293b;
+            border-bottom: 1px solid #1e293b;
+            position: relative;
+        }
+
+        .coupon-track { display: flex; gap: 25px; width: max-content; }
+        
+        /* اتجاهات حركات القسائم الإعلانية */
+        .anim-right { animation: scrollAnimRight 25s linear infinite; }
+        .anim-left { animation: scrollAnimLeft 25s linear infinite; }
+
+        @keyframes scrollAnimRight { 0% { transform: translateX(0); } 100% { transform: translateX(50%); } }
+        @keyframes scrollAnimLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        .coupon-card-item {
+            width: 280px;
+            background: var(--card-bg-color);
+            border-radius: 14px;
+            overflow: hidden;
+            border: 2px solid #1e293b;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            flex-shrink: 0;
+            text-align: center;
+        }
+
+        .coupon-card-item:hover { border-color: var(--accent-neon-color); transform: scale(1.02); }
+        .coupon-card-item img { width: 100%; height: 120px; object-fit: cover; background: #1e293b; }
+        .coupon-card-item h4 { font-size: 15px; padding: 12px; color: #f59e0b; font-weight: 700; }
+
+        /* التقسيمات الأساسية والصفحات */
+        .page-segment { display: none; padding: 50px 20px; max-width: 1300px; margin: 0 auto; animation: segmentFadeIn 0.4s ease-out; }
+        .page-segment.active { display: block; }
+        @keyframes segmentFadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* مربعات الأقسام (القصائم والطلبات الكبرى) */
+        .categories-layout-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 20px; }
+        .category-box-interactive {
+            background: linear-gradient(135deg, var(--card-bg-color), #1e293b);
+            border: 2px solid #1e293b;
+            border-radius: 20px;
+            padding: 40px 25px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            position: relative;
+        }
+        .category-box-interactive:hover { transform: translateY(-8px); border-color: var(--accent-neon-color); box-shadow: 0 12px 30px rgba(56, 189, 248, 0.25); }
+        .category-box-interactive h3 { font-size: 24px; margin-bottom: 12px; color: #ffffff; font-weight: 800; }
+        .category-box-interactive p { color: #64748b; font-size: 15px; line-height: 1.5; }
+
+        /* عرض المنتجات الفخم بالصور والتعليقات والوصف والأسعار */
+        .products-showcase-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 30px; }
+        .product-card-premium { background: var(--card-bg-color); border-radius: 20px; border: 2px solid #1e293b; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
+        .product-card-premium:hover { border-color: var(--accent-neon-color); }
+        .product-showcase-img { width: 100%; height: 210px; object-fit: cover; background: #1e293b; border-bottom: 1px solid #1e293b; }
+        
+        .product-content-area { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .product-main-title { font-size: 20px; font-weight: 800; color: #ffffff; margin-bottom: 8px; }
+        .product-extended-desc { font-size: 14px; color: #94a3b8; line-height: 1.6; margin-bottom: 15px; text-align: justify; }
+        .product-price-tag { font-size: 24px; font-weight: 900; color: var(--success-green-color); margin-bottom: 15px; }
+        
+        .add-to-cart-btn { background: linear-gradient(135deg, #059669, #10b981); color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold; font-size: 16px; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2); }
+        .add-to-cart-btn:hover { background: #059669; transform: translateY(-2px); }
+
+        /* قسم الآراء الفخم المدمج أسفل المنتجات */
+        .product-feedback-container { background: #0b0f19; padding: 15px; border-top: 1px solid #1e293b; font-size: 13px; max-height: 150px; overflow-y: auto; }
+        .feedback-title { font-weight: bold; margin-bottom: 8px; color: var(--gold-admin-color); display: flex; justify-content: space-between; }
+        .feedback-row { padding: 6px 0; border-bottom: 1px dashed #1e293b; color: #cbd5e1; }
+
+        /* صفحة السلة الاحترافية والفواتير والتدبيل التلقائي للاسعار */
+        .cart-data-table { width: 100%; border-collapse: collapse; margin-top: 25px; background: var(--card-bg-color); border-radius: 12px; overflow: hidden; }
+        .cart-data-table th, .cart-data-table td { padding: 16px; border-bottom: 1px solid #1e293b; text-align: right; }
+        .cart-data-table th { background: #1e293b; color: #94a3b8; font-weight: 700; }
+        
+        .checkout-billing-summary { background: var(--card-bg-color); padding: 35px; border-radius: 20px; border: 2px solid var(--success-green-color); margin-top: 40px; text-align: center; }
+        
+        /* استعراض بوابات الدفع الكاملة الفخمة (Apple Pay, Visa, Mastercard, Mada, Knet) */
+        .payment-gateways-showcase { display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap; margin: 30px 0; }
+        .gateway-logo-item { background: #ffffff; color: #000000; font-weight: 900; padding: 8px 16px; border-radius: 6px; font-size: 14px; box-shadow: 0 4px 10px rgba(255,255,255,0.05); }
+        .gateway-icon { font-size: 32px; color: #f8fafc; }
+
+        .complete-order-btn { background: linear-gradient(135deg, #d97706, #f59e0b); color: #080c14; font-weight: 800; font-size: 19px; padding: 14px 45px; border-radius: 10px; border: none; cursor: pointer; box-shadow: 0 5px 15px rgba(245, 158, 11, 0.3); }
+        .complete-order-btn:hover { background: #d97706; transform: translateY(-3px); }
+
+        /* لوحة التحكم والادارة العملاقة والثقيلة جداً (تغنيك عن الكود) */
+        .admin-super-panel { background: #0b0f19; border: 3px solid var(--gold-admin-color); border-radius: 24px; padding: 40px; box-shadow: 0 0 50px rgba(234,179,8,0.2); }
+        .admin-flex-columns { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 35px; margin-top: 30px; }
+        .admin-card-section { background: var(--card-bg-color); padding: 30px; border-radius: 16px; border: 1px solid #1e293b; }
+        .admin-card-section h3 { font-size: 20px; color: var(--gold-admin-color); margin-bottom: 20px; border-bottom: 2px dashed #1e293b; padding-bottom: 10px; font-weight: 800; }
+        
+        label { display: block; margin: 12px 0 6px; font-size: 14px; color: #cbd5e1; font-weight: 600; }
+        input, select, textarea { width: 100%; padding: 12px; background: #080c14; border: 1px solid #475569; border-radius: 8px; color: white; margin-bottom: 12px; font-size: 14px; }
+        input:focus, select:focus, textarea:focus { border-color: var(--gold-admin-color); outline: none; }
+        
+        .action-execute-btn { background: var(--gold-admin-color); color: #080c14; font-weight: bold; border: none; padding: 14px; border-radius: 8px; cursor: pointer; width: 100%; font-size: 16px; }
+        .action-execute-btn:hover { background: #ca8a04; }
+
+        .admin-items-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        .admin-items-table th, .admin-items-table td { padding: 12px; border-bottom: 1px solid #1e293b; text-align: right; font-size: 13px; }
+        .edit-row-btn { background: #06b6d4; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; margin-left: 4px; }
+        .delete-row-btn { background: var(--danger-red-color); color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; }
+
+        /* أيقونة الواتساب الدائرية الثابتة العائمة (كويتية احترافية نابضة) */
+        .whatsapp-floating-ball {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: white;
+            border-radius: 50%;
+            width: 65px;
+            height: 65px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 36px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+            z-index: 9999;
+            text-decoration: none;
+            animation: pulseBallAnimation 2s infinite;
+        }
+
+        @keyframes pulseBallAnimation {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); transform: scale(1); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); transform: scale(1.05); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); transform: scale(1); }
+        }
+
+        .general-back-btn { background: #334155; color: white; border: none; padding: 10px 22px; border-radius: 8px; cursor: pointer; font-weight: bold; margin-bottom: 25px; }
+        .general-back-btn:hover { background: #475569; }
     </style>
 </head>
 <body>
 
-    <div class="ticker-wrap"><div class="ticker" id="ticker-text">🔥 خصومات كبرى بمناسبة إطلاق متجر ليون المطور! | اشحن حسابك الآن بأمان وسرعة فائقة!</div></div>
+    <div class="marquee-announcement">
+        <div class="marquee-inner" id="global-marquee-text">⚡ أهلاً بك في متجر ليون الفاخر - شحن آمن، حسابات نادرة إيبك جيمز، تسليم فوري وضمان مدى الحياة على جميع الخدمات الرقمية!</div>
+    </div>
 
-    <header id="main-header">
-        <div id="store-name" onclick="handleNameClick()">مـتـجـر لـيـون 👑</div>
-        <div class="cart-icon-top" onclick="showPage('cart')">
-            <i class="fas fa-shopping-cart" style="color: white; font-size: 20px;"></i>
-            <span class="cart-count" id="global-cart-count">0</span>
+    <header id="store-header-hero">
+        <div id="store-name" onclick="handleThreeClicksConfig()">مـتـجـر لـيـون 👑</div>
+        <div class="store-description" id="store-slogan-label">المنصة الكبرى لشراء الحسابات النادرة (فورتنايت، روكيت ليج) والبطاقات الرقمية المضمونة.</div>
+        
+        <div class="cart-trigger-btn" onclick="navigateToSection('cart_page')">
+            <i class="fas fa-shopping-cart" style="color: white; font-size: 22px;"></i>
+            <span class="cart-counter-badge" id="cart-badge-count">0</span>
         </div>
     </header>
 
-    <div class="adv-slider-container">
-        <div class="adv-track" id="adv-track-area">
+    <div class="coupon-slider-wrapper" id="coupon-outer-block">
+        <div class="coupon-track anim-right" id="coupon-slider-track">
             </div>
     </div>
 
-    <div id="page-home" class="page active">
-        <h2 style="text-align: center; margin-bottom: 20px;">تصفح الأقسام الممتازة</h2>
-        <div class="grid-categories">
-            <div class="category-card" onclick="openCategoryPage('fortnite')"><h3 id="lbl-fn-title">حسابات فورتنايت نادرة</h3><p id="lbl-fn-desc">مربوطة إيبك جيمز بالكامل</p></div>
-            <div class="category-card" onclick="openCategoryPage('rocket')"><h3 id="lbl-rk-title">حسابات Rocket League</h3><p id="lbl-rk-desc">أغراض وسيارات حصرية</p></div>
-            <div class="category-card" onclick="openCategoryPage('other')"><h3 id="lbl-ot-title">أخرى (روبوكس وبطاقات)</h3><p id="lbl-ot-desc">شحن فوري وعروض متجددة</p></div>
+    <div id="segment-home_page" class="page-segment active">
+        <h2 style="text-align: center; font-size: 28px; font-weight: 900; margin-bottom: 10px;">أقسام المنصة الرقمية</h2>
+        <p style="color: #64748b; text-align: center; margin-bottom: 35px;">اختر التصنيف المفضل لديك واستعرض الحسابات المتوفرة مع آراء الزبائن</p>
+        
+        <div class="categories-layout-grid">
+            <div class="category-box-interactive" onclick="viewCategorySection('fortnite')">
+                <h3 id="lbl-cat-fn-title">حسابات فورتنايت نادرة</h3>
+                <p id="lbl-cat-fn-desc">حسابات قديمة وشيطون مربوطة بالكامل مع Epic Games وجاهزة للنقل.</p>
+            </div>
+            <div class="category-box-interactive" onclick="viewCategorySection('rocket')">
+                <h3 id="lbl-cat-rk-title">حسابات Rocket League</h3>
+                <p id="lbl-cat-rk-desc">حسابات عريقة تحتوي على سيارات الفندك وأغراض حصرية ومضمونة.</p>
+            </div>
+            <div class="category-box-interactive" onclick="viewCategorySection('other')">
+                <h3 id="lbl-cat-ot-title">أخرى (روبوكس وبطاقات)</h3>
+                <p id="lbl-cat-ot-desc">شحن روبوكس بكميات ضخمة وبطاقات شحن رقمية لجميع المنصات.</p>
+            </div>
         </div>
     </div>
 
-    <div id="page-category-view" class="page">
-        <button class="back-btn" onclick="showPage('home')">← العودة للأقسام</button>
-        <h2 id="view-cat-title" style="color: var(--accent-color); margin-bottom: 20px;">القسم</h2>
-        <div class="products-list" id="products-render-area"></div>
+    <div id="segment-products_view_page" class="page-segment">
+        <button class="general-back-btn" onclick="navigateToSection('home_page')">← العودة للأقسام</button>
+        <h2 id="current-selected-cat-title" style="color: var(--accent-neon-color); font-size: 30px; margin-bottom: 5px;">اسم القسم</h2>
+        <p id="current-selected-cat-desc" style="color: #64748b; margin-bottom: 30px;">وصف وتفاصيل القسم المختار</p>
+        
+        <div class="products-showcase-grid" id="products-render-container">
+            </div>
     </div>
 
-    <div id="page-cart" class="page">
-        <button class="back-btn" onclick="showPage('home')">← مواصلة التسوق</button>
-        <h2>🛒 سلة المشتريات الخاصة بك</h2>
-        <table class="cart-table">
-            <thead><tr><th>المنتج</th><th>السعر</th><th>الكمية</th><th>الإجمالي</th><th>إجراء</th></tr></thead>
-            <tbody id="cart-items-body"></tbody>
+    <div id="segment-cart_page" class="page-segment">
+        <button class="general-back-btn" onclick="navigateToSection('home_page')">← العودة لمواصلة التسوق</button>
+        <h2 style="font-size: 28px; margin-bottom: 20px;"><i class="fas fa-shopping-basket"></i> حقيبة المشتريات الرقمية</h2>
+        
+        <table class="cart-data-table">
+            <thead>
+                <tr>
+                    <th>صورة المنتج</th>
+                    <th>اسم المنتج</th>
+                    <th>سعر القطعة</th>
+                    <th>الكمية المطلوبة</th>
+                    <th>الإجمالي الفرعي</th>
+                    <th>إجراء</th>
+                </tr>
+            </thead>
+            <tbody id="cart-table-rows">
+                </tbody>
         </table>
 
-        <div class="checkout-box">
-            <h3>إجمالي المطلوب دفعه: <span id="cart-total-price" style="color:#10b981; font-size:24px;">0</span> ر.س</h3>
-            <p style="color: #94a3b8; margin-top: 5px;">* عند طلب قطعتين أو أكثر يتضاعف السعر تلقائياً وبدقة عالية.</p>
-            <div class="payment-methods">
-                <i class="fab fa-apple-pay" title="Apple Pay" style="color: white;"></i>
-                <i class="fab fa-cc-visa" title="Visa" style="color: #1a73e8;"></i>
-                <i class="fab fa-cc-mastercard" title="MasterCard" style="color: #eb001b;"></i>
-                <span style="font-size: 16px; font-weight: bold; background:#fff; color:#000; padding:2px 8px; border-radius:4px; align-self:center;">مدى Mada</span>
+        <div class="checkout-billing-summary">
+            <h3 style="font-size: 26px;">الإجمالي الكلي المستحق: <span id="cart-grand-total-label" style="color: var(--success-green-color); font-weight: 900;">0</span> ر.س</h3>
+            <p style="color: #94a3b8; margin-top: 8px; font-size: 14px;">* عند طلب غرضين أو أكثر من نفس الحساب يتضاعف السعر بدقة عالية وبشكل تلقائي.</p>
+            
+            <div class="payment-gateways-showcase">
+                <div class="gateway-logo-item" style="background: #000; color: #fff;"><i class="fab fa-apple-pay" style="font-size: 24px; vertical-align: middle;"></i> Apple Pay</div>
+                <div class="gateway-logo-item" style="background: #1a1a1a; color: #fff; font-weight: bold;">مدى Mada</div>
+                <div class="gateway-logo-item" style="background: #ffffff; color: #002d62; font-weight: 900;">K-Net كي نت</div>
+                <i class="fab fa-cc-visa gateway-icon" style="color: #1565c0;" title="Visa Card"></i>
+                <i class="fab fa-cc-mastercard gateway-icon" style="color: #ff9800;" title="Mastercard"></i>
+                <div class="gateway-logo-item" style="background: #ff4500; color: #fff;">STC Pay</div>
             </div>
-            <button class="pay-btn" onclick="triggerCheckoutRedirect()">💳 إتـمـام الـطـلـب والـدفـع المـبـاشـر</button>
+
+            <button class="complete-order-btn" onclick="executeCheckoutRedirection()">💳 إتمام الطلب والتوجه لبوابة الدفع الآمنة</button>
         </div>
     </div>
 
-    <div id="page-admin" class="page">
-        <div class="admin-box">
-            <button class="back-btn" onclick="showPage('home')" style="float:left; background:#1e293b;">خروج من الإدارة</button>
-            <h2>⚙️ لوحة الإدارة المتقدمة وتعديل المنتجات والمربعات المتحركة</h2>
+    <div id="segment-admin_super_page" class="page-segment">
+        <div class="admin-super-panel">
+            <button class="general-back-btn" onclick="navigateToSection('home_page')" style="float: left; background: var(--container-bg-color);">خروج من الإدارة</button>
+            <h2>⚙️ لوحة ليون الإدارية الثقيلة (إدارة شاملة بدون كود)</h2>
+            <p style="color: #a1a1aa;">يمكنك تعديل المربعات المتحركة، مواضعها، اتجاهاتها، ألوان الخطوط، والمنتجات وحذفها وتحديثها.</p>
             
-            <div class="admin-grid">
-                <div class="admin-section">
-                    <h3>✍️ تعديل الواجهة والمكتوب المتحرك</h3>
-                    <label>نص الشريط البرتقالي المتحرك:</label>
-                    <input type="text" id="cfg-ticker-text">
+            <div class="admin-flex-columns">
+                <div class="admin-card-section">
+                    <h3>✍️ تعديل مظهر وقصائم العرض المتحركة</h3>
                     
-                    <label>اسم المتجر الرئيسي:</label>
-                    <input type="text" id="cfg-store-name">
-
-                    <label>تعديل المربع الإعلاني المتحرك 1 (نص وصورة):</label>
-                    <input type="text" id="cfg-adv1-title" value="خصم الشيطون الفخم!">
-                    <input type="text" id="cfg-adv1-img" value="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=200">
+                    <label>اسم المتجر (أعلى الوسط):</label>
+                    <input type="text" id="adm-store-name">
                     
-                    <label>تعديل المربع الإعلاني المتحرك 2 (نص وصورة):</label>
-                    <input type="text" id="cfg-adv2-title" value="عروض الروبوكس اليومية">
-                    <input type="text" id="cfg-adv2-img" value="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=200">
+                    <label>نص الشريط الإعلاني العلوي:</label>
+                    <input type="text" id="adm-ticker-text">
 
-                    <button class="save-btn" onclick="saveGlobalConfigs()">حفظ الواجهة والمربعات ✨</button>
+                    <label>رابط صورة خلفية الهيدر العليا:</label>
+                    <input type="text" id="adm-header-bg">
+
+                    <hr style="border-color: #334155; margin: 15px 0;">
+                    
+                    <h4 style="color: var(--accent-neon-color); margin-bottom: 10px;">⚙️ إعدادات القصائم الإعلانية المتحركة (المربعات):</h4>
+                    <label>موضع شريط القصائم المتحركة بالمتجر:</label>
+                    <select id="adm-coupon-position" onchange="adjustCouponBarPositionUI()">
+                        <option value="top_header">فوق الهيدر (أعلى شيء)</option>
+                        <option value="under_header">تحت الهيدر مباشرة</option>
+                        <option value="above_cats">فوق مربعات الأقسام (الافتراضي)</option>
+                    </select>
+
+                    <label>اتجاه حركة المربعات المتحركة:</label>
+                    <select id="adm-coupon-direction">
+                        <option value="anim-right">تتحرك لليمين (يمين يمين)</option>
+                        <option value="anim-left">تتحرك لليسار (يسار يسار)</option>
+                    </select>
+
+                    <label>عنوان وصورة مربع القسيمة الإعلانية الأولى:</label>
+                    <input type="text" id="adm-c1-title" placeholder="نص المربع 1">
+                    <input type="text" id="adm-c1-img" placeholder="رابط صورة المربع 1">
+
+                    <label>عنوان وصورة مربع القسيمة الإعلانية الثانية:</label>
+                    <input type="text" id="adm-c2-title" placeholder="نص المربع 2">
+                    <input type="text" id="adm-c2-img" placeholder="رابط صورة المربع 2">
+
+                    <button class="action-execute-btn" onclick="saveGlobalVisualConfigs()">حفظ وتحديث كامل المظهر والقصائم 💾</button>
                 </div>
 
-                <div class="admin-section">
-                    <h3>📦 إضافة / تعديل منتج تفصيلي</h3>
-                    <input type="hidden" id="edit-product-id" value="">
+                <div class="admin-card-section">
+                    <h3>📦 إضافة وتعديل حسابات المتجر</h3>
+                    <input type="hidden" id="adm-editing-product-id" value="">
                     
-                    <label>اسم المنتج:</label>
-                    <input type="text" id="p-name" placeholder="مثال: حساب بنت الطيارة">
+                    <label>اسم الحساب / المنتج:</label>
+                    <input type="text" id="adm-p-name" placeholder="مثال: حساب شيطون ومربوط إيبك جيمز">
                     
-                    <label>وصف المنتج التفصيلي (يظهر للزبون):</label>
-                    <textarea id="p-desc" rows="2" placeholder="اكتب وصف الحساب والربط هنا..."></textarea>
+                    <label>وصف الحساب وتفاصيل الربط الكاملة:</label>
+                    <textarea id="adm-p-desc" rows="3" placeholder="اكتب تفاصيل السكنات، السيزونات، ونوع الربط بدقة..."></textarea>
 
-                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
                         <div>
-                            <label>القسم:</label>
-                            <select id="p-cat">
+                            <label>تصنيف القسم:</label>
+                            <select id="adm-p-cat">
                                 <option value="fortnite">فورتنايت</option>
                                 <option value="rocket">روكيت ليج</option>
                                 <option value="other">أخرى</option>
@@ -171,275 +391,355 @@
                         </div>
                         <div>
                             <label>السعر (ر.س):</label>
-                            <input type="number" id="p-price" placeholder="150">
+                            <input type="number" id="adm-p-price" placeholder="250">
                         </div>
                     </div>
 
-                    <label>رابط صورة المنتج المعروضة:</label>
-                    <input type="text" id="p-img" placeholder="ضع رابط الصورة هنا">
-                    
-                    <label>رابط الدفع المباشر المخصص (إتمام الطلب):</label>
-                    <input type="text" id="p-link" placeholder="رابط خارجي للفيزا/المدى للمنتج">
+                    <label>رابط صورة الحساب الفاخرة المخصصة:</label>
+                    <input type="text" id="adm-p-img" placeholder="ضع رابط الصورة للمنتج هنا">
 
-                    <button class="save-btn" style="background:#10b981; color:white;" onclick="saveProductData()">حفظ / تحديث المنتج فوراً ➕</button>
+                    <label>رابط الدفع المخصص لإتمام الطلب (فيزا/مدى/أبل باي):</label>
+                    <input type="text" id="adm-p-link" placeholder="رابط صفحة الدفع لهذا المنتج">
 
-                    <h3 style="margin-top:20px; color:#ef4444;">📋 المنتجات الحالية (اضغط تعديل أو حذف)</h3>
-                    <table class="admin-table">
-                        <tbody id="admin-products-list"></tbody>
+                    <button class="action-execute-btn" style="background: var(--success-green-color); color: white;" onclick="saveProductFromAdmin()">حفظ وتثبيت المنتج في المتجر ➕</button>
+
+                    <h3 style="margin-top: 35px; color: var(--danger-red-color);">📋 المنتجات المتاحة حالياً (حذف وتعديل مخصص)</h3>
+                    <table class="admin-items-table">
+                        <thead>
+                            <tr><th>اسم الحساب</th><th>السعر</th><th>إجراءات التحكم</th></tr>
+                        </thead>
+                        <tbody id="adm-products-rows-list">
+                            </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
 
-    <a href="https://wa.me/96551674410?text=%D8%A3%D9%87%D9%84%D9%84%D8%A7%D9%8B%20%D9%88%D8%B3%D9%87%D9%84%D8%A7%D9%8B%20%D9%85%D8%AA%D8%AC%D8%B1%20%D9%84%D9%8A%D9%88%D9%86%D8%8C%20%D8%A3%D9%86%D8%A7%20%D8%B5%D9%84%D9%85%D8%AA%20%D9%88%D8%A3%D8%A8%D9%8A%20%D8%A3%D8%B4%D8%AA%D8%B1%D9%8A%20%D9%85%D9%86%D9%83%D9%85" class="whatsapp-float" target="_blank">
+    <a href="https://wa.me/96551674410?text=%D8%A3%D9%87%D9%84%D8%A7%D9%8B%20%D9%88%D3%81%D9%87%D9%84%D8%A7%D9%8B%20%D9%85%D8%AA%D8%AC%D8%B1%20%D9%84%D9%8A%D9%88%D9%86%D8%8C%20%D8%A3%D9%86%D8%A7%20%D8%B5%D9%84%D9%85%D8%AA%20%D9%88%D8%A3%D8%A8%D9%8A%20%D8%A3%D8%B4%D8%AA%D8%B1%D9%8A%20%D8%AD%D8%B3%D8%A7%D8%A8%D8%A7%D8%AA%20%D9%85%D9%86%20%D9%85%D8%AA%D8%AC%D8%B1%D9%83%D9%85%20%D8%A7%D9%84%D9%81%D8%AE%D9%85" class="whatsapp-floating-ball" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
     <script>
-        // قواعد البيانات والتهيئة مع الحفظ في متصفحك الأبدي LocalStorage
-        const defConfigs = {
-            tickerText: "🔥 خصومات كبرى بمناسبة إطلاق متجر ليون المطور! | اشحن حسابك الآن بأمان وسرعة فائقة!",
+        // قواعد البيانات الافتراضية والأساسية العميقة للمنصة
+        const defaultPlatformConfigs = {
             storeName: "مـتـجـر لـيـون 👑",
-            adv1Title: "حساب شيطون فخم بخصم 40%!", adv1Img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=200",
-            adv2Title: "عروض الروبوكس اليومية المذهلة", adv2Img: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=200"
+            tickerText: "⚡ أهلاً بك في متجر ليون الفاخر - شحن آمن، حسابات نادرة إيبك جيمز، تسليم فوري وضمان مدى الحياة على جميع الخدمات الرقمية!",
+            headerBg: "https://images.unsplash.com/photo-1612287230202-1bf1d85d1bdf?q=80&w=1400",
+            couponPosition: "above_cats",
+            couponDirection: "anim-right",
+            c1Title: "🔥 خصم 30% على حساب بنت الطيارة لفترة محدودة!",
+            c1Img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=300",
+            c2Title: "⚡ عروض شحن الروبوكس الفورية والآمنة 100%",
+            c2Img: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=300"
         };
 
-        const defProducts = [
-            { id: 1, name: "حساب بنت الطيارة نادير جداً", desc: "حساب سيزون 2 أساسي مربوط بالكامل إيبك جيمز ونظامي 100%.", cat: "fortnite", price: 300, img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=400", link: "https://checkout.stripe.com/test_link1", reviews: ["ما شاء الله الحساب أسطوري وثقة", "تسليم فوري ومضمون"] },
-            { id: 2, name: "حساب روكيل تيغ فندك", desc: "كامل الأغراض النادرة مع سيارة فندك الحصرية بكامل البيانات.", cat: "rocket", price: 150, img: "https://images.unsplash.com/photo-1614624532983-4ce03382d63d?q=80&w=400", link: "https://checkout.stripe.com/test_link2", reviews: ["افضل متجر تعاملت معه سريع جداً"] }
+        const defaultPlatformProducts = [
+            { id: 101, name: "حساب فورتنايت بنت الطيارة أساسي", desc: "يحتوي على سكن بنت الطيارة مع المظلة النادرة، السيزون الثاني كامل ومربوط بشكل كامل ونظامي مع إيبك جيمز Epic Games ويمكن نقله للايميل الشخصي فوراً.", cat: "fortnite", price: 450, img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=500", link: "https://pay.lionstore.com/item1", reviews: ["ثقة وسريع جداً بالتسليم ما قصرتوا", "الحساب شغال ومربوط كامل بيض الله وجهكم"] },
+            { id: 102, name: "حساب روكيت ليج سيارة فندك الحصرية", desc: "حساب أسطوري يحتوي على سيارة فندك بكامل الألوان النادرة والملحقات الحصرية، مربوط بالكامل وجاهز للعب الفوري.", cat: "rocket", price: 220, img: "https://images.unsplash.com/photo-1614624532983-4ce03382d63d?q=80&w=500", reviews: ["أفضل متجر روكيت ليج بالكويت ثقة"] },
+            { id: 103, name: "حزمة شحن 20,000 روبوكس فوري", desc: "شحن مباشر ونظامي لحسابك في لعبة روبلوكس عبر الأيدي الرقمي، آمن تماماً وبدون أي مخاطر بنظام رسمي.", cat: "other", price: 380, img: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?q=80&w=500", reviews: ["تم الشحن في أقل من 5 دقائق شكراً ليون"] }
         ];
 
-        let configs = JSON.parse(localStorage.getItem('ln_configs')) || defConfigs;
-        let products = JSON.parse(localStorage.getItem('ln_products')) || defProducts;
-        let cart = [];
+        // تحميل وتثبيت الذاكرة المستمرة المحفوظة بالكامل
+        let currentConfigs = JSON.parse(localStorage.getItem('lion_heavy_configs')) || defaultPlatformConfigs;
+        let currentProducts = JSON.parse(localStorage.getItem('lion_heavy_products')) || defaultPlatformProducts;
+        let shoppingCart = [];
 
-        let clickCount = 0, lastClickTime = 0;
+        let secretClickCounter = 0;
+        let lastSecretClickTime = 0;
 
         window.onload = function() {
-            applyConfigs();
-            renderAdvSlider();
-            updateCartCount();
+            applyLoadedConfigsToUI();
+            renderCouponSliderTrack();
+            updateShoppingCartMetrics();
         };
 
-        function showPage(pId) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('page-' + pId).classList.add('active');
-            window.scrollTo({top: 0, behavior: 'smooth'});
+        // دالة التنقل الهيكلي بين صفحات المتجر
+        function navigateToSection(sectionId) {
+            document.querySelectorAll('.page-segment').forEach(seg => seg.classList.remove('active'));
+            document.getElementById('segment-' + sectionId).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function handleNameClick() {
-            let now = new Date().getTime();
-            if(now - lastClickTime < 450) clickCount++; else clickCount = 1;
-            lastClickTime = now;
-            if(clickCount === 3) {
-                clickCount = 0;
-                if(prompt("🔒 أدخل الرمز التعريفي لفتح لوحة التحكم:") === "lion2007") {
-                    fillAdminFields();
-                    renderAdminProducts();
-                    showPage('admin');
-                } else { alert("❌ الكود خاطئ!"); }
+        // رصد النقر الثلاثي لفتح الإدارة السرية
+        function handleThreeClicksConfig() {
+            let rightNow = new Date().getTime();
+            if(rightNow - lastSecretClickTime < 450) secretClickCounter++; else secretClickCounter = 1;
+            lastSecretClickTime = rightNow;
+
+            if(secretClickCounter === 3) {
+                secretClickCounter = 0;
+                let userAuthCode = prompt("🔒 أدخل الكود التعريفي لـ ليون لفتح اللوحة الإدارية الثقيلة:");
+                if(userAuthCode === "lion2007") {
+                    alert("🔓 أهلاً بك يا ليون في مركز القيادة الكامل. تم تفعيل الصلاحيات الشاملة.");
+                    fillAdminSuperFormFields();
+                    renderAdminProductsManagementTable();
+                    navigateToSection('admin_super_page');
+                } else if(userAuthCode !== null) {
+                    alert("❌ الرمز التعريفي خاطئ! لا يمكنك العبث بالمنصة.");
+                }
             }
         }
 
-        function applyConfigs() {
-            document.getElementById('ticker-text').innerText = configs.tickerText;
-            document.getElementById('store-name').innerText = configs.storeName;
+        // تطبيق تكوينات الإدارة في الواجهة
+        function applyLoadedConfigsToUI() {
+            document.getElementById('store-name').innerText = currentConfigs.storeName;
+            document.getElementById('global-marquee-text').innerText = currentConfigs.tickerText;
+            document.getElementById('store-header-hero').style.backgroundImage = `linear-gradient(to bottom, rgba(8, 12, 20, 0.4), rgba(8, 12, 20, 0.95)), url('${currentConfigs.headerBg}')`;
+            adjustCouponBarPositionUI();
         }
 
-        function fillAdminFields() {
-            document.getElementById('cfg-ticker-text').value = configs.tickerText;
-            document.getElementById('cfg-store-name').value = configs.storeName;
-            document.getElementById('cfg-adv1-title').value = configs.adv1Title;
-            document.getElementById('cfg-adv1-img').value = configs.adv1Img;
-            document.getElementById('cfg-adv2-title').value = configs.adv2Title;
-            document.getElementById('cfg-adv2-img').value = configs.adv2Img;
-        }
+        // تعديل موضع شريط القصائم الإعلانية المتحركة حسب رغبة ليون
+        function adjustCouponBarPositionUI() {
+            let bar = document.getElementById('coupon-outer-block');
+            let header = document.getElementById('store-header-hero');
+            let homePage = document.getElementById('segment-home_page');
 
-        function renderAdvSlider() {
-            let track = document.getElementById('adv-track-area');
-            // تكرار المربعات لضمان حركة مستمرة بلا توقف يمين يمين
-            let content = `
-                <div class="adv-card"><img src="${configs.adv1Img}"><h4>${configs.adv1Title}</h4></div>
-                <div class="adv-card"><img src="${configs.adv2Img}"><h4>${configs.adv2Title}</h4></div>
-            `;
-            track.innerHTML = content + content + content + content; // تكرارها لملء الشريط الممتد المتحرك
-        }
-
-        function saveGlobalConfigs() {
-            configs.tickerText = document.getElementById('cfg-ticker-text').value;
-            configs.storeName = document.getElementById('cfg-store-name').value;
-            configs.adv1Title = document.getElementById('cfg-adv1-title').value;
-            configs.adv1Img = document.getElementById('cfg-adv1-img').value;
-            configs.adv2Title = document.getElementById('cfg-adv2-title').value;
-            configs.adv2Img = document.getElementById('cfg-adv2-img').value;
-            localStorage.setItem('ln_configs', JSON.stringify(configs));
-            applyConfigs();
-            renderAdvSlider();
-            alert("✅ تم حفظ تعديلات المربعات المتحركة والواجهة بنجاح!");
-        }
-
-        function openCategoryPage(cat) {
-            document.getElementById('view-cat-title').innerText = cat === 'fortnite' ? 'حسابات فورتنايت (Epic Games)' : cat === 'rocket' ? 'حسابات Rocket League' : 'أخرى وبطاقات رقمية';
-            let area = document.getElementById('products-render-area');
-            area.innerHTML = "";
-            let filtered = products.filter(p => p.cat === cat);
-            
-            if(filtered.length === 0) {
-                area.innerHTML = "<p style='color:#64748b;'>لا توجد منتجات حالياً.</p>";
+            if(currentConfigs.couponPosition === 'top_header') {
+                document.body.insertBefore(bar, header);
+            } else if(currentConfigs.couponPosition === 'under_header') {
+                document.body.insertBefore(bar, header.nextSibling);
             } else {
-                filtered.forEach(p => {
-                    let revHtml = p.reviews ? p.reviews.map(r => `<div class="review-item">⭐ ${r}</div>`).join('') : '';
-                    area.innerHTML += `
-                        <div class="product-item">
-                            <img src="${p.img}" class="product-img">
-                            <div class="product-details">
+                homePage.insertBefore(bar, homePage.firstChild);
+            }
+        }
+
+        // بناء وتوليد المربعات الإعلانية المتحركة وتكرارها لمنع الانقطاع أثناء الحركة يمين يمين
+        function renderCouponSliderTrack() {
+            let track = document.getElementById('coupon-slider-track');
+            track.className = "coupon-track " + currentConfigs.couponDirection;
+
+            let cardLayoutHtml = `
+                <div class="coupon-card-item"><img src="${currentConfigs.c1Img}"><h4>${currentConfigs.c1Title}</h4></div>
+                <div class="coupon-card-item"><img src="${currentConfigs.c2Img}"><h4>${currentConfigs.c2Title}</h4></div>
+            `;
+            // تكرار مضاعف لضمان الحركة اللانهائية المريحة للعين
+            track.innerHTML = cardLayoutHtml + cardLayoutHtml + cardLayoutHtml + cardLayoutHtml + cardLayoutHtml;
+        }
+
+        // تعبئة المدخلات في لوحة التحكم
+        function fillAdminSuperFormFields() {
+            document.getElementById('adm-store-name').value = currentConfigs.storeName;
+            document.getElementById('adm-ticker-text').value = currentConfigs.tickerText;
+            document.getElementById('adm-header-bg').value = currentConfigs.headerBg;
+            document.getElementById('adm-coupon-position').value = currentConfigs.couponPosition;
+            document.getElementById('adm-coupon-direction').value = currentConfigs.couponDirection;
+            document.getElementById('adm-c1-title').value = currentConfigs.c1Title;
+            document.getElementById('adm-c1-img').value = currentConfigs.c1Img;
+            document.getElementById('adm-c2-title').value = currentConfigs.c2Title;
+            document.getElementById('adm-c2-img').value = currentConfigs.c2Img;
+        }
+
+        // حفظ وتحديث المظهر بالكامل
+        function saveGlobalVisualConfigs() {
+            currentConfigs.storeName = document.getElementById('adm-store-name').value;
+            currentConfigs.tickerText = document.getElementById('adm-ticker-text').value;
+            currentConfigs.headerBg = document.getElementById('adm-header-bg').value;
+            currentConfigs.couponPosition = document.getElementById('adm-coupon-position').value;
+            currentConfigs.couponDirection = document.getElementById('adm-coupon-direction').value;
+            currentConfigs.c1Title = document.getElementById('adm-c1-title').value;
+            currentConfigs.c1Img = document.getElementById('adm-c1-img').value;
+            currentConfigs.c2Title = document.getElementById('adm-c2-title').value;
+            currentConfigs.c2Img = document.getElementById('adm-c2-img').value;
+
+            localStorage.setItem('lion_heavy_configs', JSON.stringify(currentConfigs));
+            applyLoadedConfigsToUI();
+            renderCouponSliderTrack();
+            alert("✨ تم حفظ كل التعديلات وتثبيتها بنجاح في ذاكرة المتصفح العميقة!");
+        }
+
+        // عرض منتجات تصنيف معين
+        function viewCategorySection(categoryCode) {
+            let displayTitle = "", displayDesc = "";
+            if(categoryCode === 'fortnite') {
+                displayTitle = "حسابات فورتنايت (Epic Games)"; displayDesc = "تشكيلة نادرة وموثوقة من الحسابات القديمة المرتبطة بالكامل.";
+            } else if(categoryCode === 'rocket') {
+                displayTitle = "حسابات روكيت ليج المضمونة"; displayDesc = "تصفح الحسابات التي تحتوي على أغراض نادرة وسيارات فندك مميزة.";
+            } else {
+                displayTitle = "خدمات الشحن والبطاقات الرقمية"; displayDesc = "شحن آمن وفوري لجميع الألعاب والبطاقات المتاحة.";
+            }
+
+            document.getElementById('current-selected-cat-title').innerText = displayTitle;
+            document.getElementById('current-selected-cat-desc').innerText = displayDesc;
+
+            let renderContainer = document.getElementById('products-render-container');
+            renderContainer.innerHTML = "";
+
+            let matchingProducts = currentProducts.filter(p => p.cat === categoryCode);
+            if(matchingProducts.length === 0) {
+                renderContainer.innerHTML = "<p style='color:#64748b; grid-column:1/-1; text-align:center;'>لا توجد منتجات مضافة في هذا القسم حالياً.</p>";
+            } else {
+                matchingProducts.forEach(p => {
+                    let productImg = p.img ? p.img : 'https://images.unsplash.com/photo-1612287230202-1bf1d85d1bdf?q=80&w=400';
+                    let feedBacksHtml = p.reviews ? p.reviews.map(r => `<div class="feedback-row">⭐ ${r}</div>`).join('') : '';
+                    
+                    renderContainer.innerHTML += `
+                        <div class="product-card-premium">
+                            <img src="${productImg}" class="product-showcase-img" alt="Product Image">
+                            <div class="product-content-area">
                                 <div>
-                                    <h4>${p.name}</h4>
-                                    <p class="product-desc">${p.desc}</p>
-                                    <div style="color:#10b981; font-weight:bold; font-size:18px;">${p.price} ر.س</div>
+                                    <h4 class="product-main-title">${p.name}</h4>
+                                    <p class="product-extended-desc">${p.desc}</p>
+                                    <div class="product-price-tag">${p.price} ر.س</div>
                                 </div>
-                                <button class="buy-btn" onclick="addToCart(${p.id})">🛒 إضافة للسلة</button>
+                                <button class="add-to-cart-btn" onclick="appendItemToCart(${p.id})">🛒 إضافة لحقيبة المشتريات</button>
                             </div>
-                            <div class="reviews-section">
-                                <b>💬 آراء وتقييمات للمنتج:</b>
-                                ${revHtml || '<div style="color:#64748b;">لا توجد تقييمات بعد</div>'}
+                            <div class="product-feedback-container">
+                                <div class="feedback-title"><span>💬 تقييمات المشترين:</span><span>5/5 ⭐</span></div>
+                                ${feedBacksHtml || '<div style="color:#475569;">لا توجد تعليقات بعد لهذا الحساب.</div>'}
                             </div>
                         </div>
                     `;
                 });
             }
-            showPage('category-view');
+            navigateToSection('products_view_page');
         }
 
-        function addToCart(id) {
-            let prod = products.find(p => p.id === id);
-            let exist = cart.find(item => item.product.id === id);
-            if(exist) {
-                exist.qty++; // إذا كرر الغرض نزيد الكمية ويضاعف السعر تلقائياً
+        // إضافة غرض إلى السلة وإدارة التدبيل التلقائي للاسعار
+        function appendItemToCart(id) {
+            let targetProduct = currentProducts.find(p => p.id === id);
+            let alreadyInCart = shoppingCart.find(item => item.product.id === id);
+
+            if(alreadyInCart) {
+                alreadyInCart.quantity++; // زيادة الكمية والتدبيل تلقائي
             } else {
-                cart.push({ product: prod, qty: 1 });
+                shoppingCart.push({ product: targetProduct, quantity: 1 });
             }
-            updateCartCount();
-            alert(`تم إضافة [ ${prod.name} ] إلى سلتك بنجاح!`);
+            updateShoppingCartMetrics();
+            alert(`✅ تم إضافة المنتج [ ${targetProduct.name} ] إلى سلتك بنجاح!`);
         }
 
-        function updateCartCount() {
-            let totalQty = cart.reduce((acc, item) => acc + item.qty, 0);
-            document.getElementById('global-cart-count').innerText = totalQty;
-            renderCartPage();
+        // تحديث أرقام وعدادات السلة
+        function updateShoppingCartMetrics() {
+            let totalItemsCount = shoppingCart.reduce((total, current) => total + current.quantity, 0);
+            document.getElementById('cart-badge-count').innerText = totalItemsCount;
+            renderShoppingCartTableData();
         }
 
-        function renderCartPage() {
-            let tbody = document.getElementById('cart-items-body');
+        // توليد جدول السلة التفصيلي وحساب المضاعفات
+        function renderShoppingCartTableData() {
+            let tbody = document.getElementById('cart-table-rows');
             tbody.innerHTML = "";
-            let grandTotal = 0;
+            let overallTotalPrice = 0;
 
-            cart.forEach((item, index) => {
-                let itemTotal = item.product.price * item.qty; // مضاعفة السعر التلقائية
-                grandTotal += itemTotal;
-                tbody.innerHTML += `
-                    <tr>
-                        <td><b>${item.product.name}</b></td>
-                        <td>${item.product.price} ر.س</td>
-                        <td>${item.qty}</td>
-                        <td style="color:#10b981; font-weight:bold;">${itemTotal} ر.س</td>
-                        <td><button style="background:#ef4444; color:white; border:none; padding:4px 8px; border-radius:4px; cursor:pointer;" onclick="removeFromCart(${index})">حذف 🗑️</button></td>
-                    </tr>
-                `;
-            });
-            document.getElementById('cart-total-price').innerText = grandTotal;
+            if(shoppingCart.length === 0) {
+                tbody.innerHTML = "<tr><td colspan='6' style='text-align:center; color:#64748b; padding:30px;'>حقيبة المشتريات فارغة تماماً حالياً!</td></tr>";
+            } else {
+                shoppingCart.forEach((item, index) => {
+                    let subTotalCalculated = item.product.price * item.quantity;
+                    overallTotalPrice += subTotalCalculated;
+                    let productImg = item.product.img ? item.product.img : 'https://images.unsplash.com/photo-1612287230202-1bf1d85d1bdf?q=80&w=100';
+
+                    tbody.innerHTML += `
+                        <tr>
+                            <td><img src="${productImg}" style="width:60px; height:45px; object-fit:cover; border-radius:6px; border:1px solid #334155;"></td>
+                            <td><b>${item.product.name}</b></td>
+                            <td>${item.product.price} ر.س</td>
+                            <td><b style="color:var(--accent-neon-color); font-size:16px;">${item.quantity}</b></td>
+                            <td style="color:var(--success-green-color); font-weight:bold;">${subTotalCalculated} ر.س</td>
+                            <td><button class="delete-row-btn" onclick="removeItemFromCart(${index})">حذف 🗑️</button></td>
+                        </tr>
+                    `;
+                });
+            }
+            document.getElementById('cart-grand-total-label').innerText = overallTotalPrice;
         }
 
-        function removeFromCart(index) {
-            cart.splice(index, 1); // حذف المنتج من السلة تماماً
-            updateCartCount();
+        function removeItemFromCart(index) {
+            shoppingCart.splice(index, 1);
+            updateShoppingCartMetrics();
         }
 
-        function triggerCheckoutRedirect() {
-            if(cart.length === 0) {
-                alert("سلتك فارغة! أضف بعض المنتجات لتتمكن من الدفع.");
+        // تنفيذ عملية التوجيه والدفع المباشر (رابط مخصص لكل منتج أو افتراضي)
+        function executeCheckoutRedirection() {
+            if(shoppingCart.length === 0) {
+                alert("حقيبة التسوق فارغة! أضف الحسابات التي تريدها أولاً لتتمكن من الدفع.");
                 return;
             }
-            // يأخذ رابط أول منتج في السلة أو يوجهك لصفحة دفع افتراضية مع إرسال السعر الكلي
-            let targetLink = cart[0].product.link || "https://wa.me/96551674410";
-            alert(`جاري توجيهك لبوابة الدفع الآمنة (مدى / فيزا / Apple Pay) لإتمام دفع إجمالي: ${document.getElementById('cart-total-price').innerText} ر.س`);
-            window.open(targetLink, '_blank');
+            let checkoutPrice = document.getElementById('cart-grand-total-label').innerText;
+            let targetRedirectionUrl = shoppingCart[0].product.link || "https://wa.me/96551674410";
+
+            alert(`🚀 جاري تحويلك بأمان تام لبوابة الدفع الإلكترونية الموحدة لمعالجة مبلغ: ${checkoutPrice} ر.س عبر (Apple Pay / مدى / K-Net / Visa)`);
+            window.open(targetRedirectionUrl, '_blank');
         }
 
-        // عمليات لوحة تحكم المنتجات (إضافة وحذف وتعديل)
-        function renderAdminProducts() {
-            let list = document.getElementById('admin-products-list');
-            list.innerHTML = "";
-            products.forEach(p => {
-                list.innerHTML += `
-                    <tr style="border-bottom:1px solid #334155;">
-                        <td style="padding:8px;"><b>${p.name}</b> (${p.price} ر.س)</td>
+        // توليد جدول المنتجات في الادارة للتحكم الشامل (منتج منتج)
+        function renderAdminProductsManagementTable() {
+            let container = document.getElementById('adm-products-rows-list');
+            container.innerHTML = "";
+
+            currentProducts.forEach(p => {
+                container.innerHTML += `
+                    <tr>
+                        <td><b>${p.name}</b></td>
+                        <td><b style="color:var(--success-green-color);">${p.price} ر.س</b></td>
                         <td>
-                            <button style="background:#38bdf8; color:black; border:none; padding:3px 6px; border-radius:4px; cursor:pointer; margin-left:5px;" onclick="loadProductToEdit(${p.id})">تعديل ✍️</button>
-                            <button style="background:#ef4444; color:white; border:none; padding:3px 6px; border-radius:4px; cursor:pointer;" onclick="deleteProductFromAdmin(${p.id})">حذف 🗑️</button>
+                            <button class="edit-row-btn" onclick="loadProductToAdminEditor(${p.id})">تعديل ✍️</button>
+                            <button class="delete-row-btn" onclick="deleteProductFromAdminPanel(${p.id})">حذف 🗑️</button>
                         </td>
                     </tr>
                 `;
             });
         }
 
-        function saveProductData() {
-            let id = document.getElementById('edit-product-id').value;
-            let name = document.getElementById('p-name').value;
-            let desc = document.getElementById('p-desc').value;
-            let cat = document.getElementById('p-cat').value;
-            let price = document.getElementById('p-price').value;
-            let img = document.getElementById('p-img').value;
-            let link = document.getElementById('p-link').value;
+        // رفع بيانات المنتج للمدخلات لتعديلها
+        function loadProductToAdminEditor(id) {
+            let target = currentProducts.find(p => p.id === id);
+            document.getElementById('adm-editing-product-id').value = target.id;
+            document.getElementById('adm-p-name').value = target.name;
+            document.getElementById('adm-p-desc').value = target.desc;
+            document.getElementById('adm-p-cat').value = target.cat;
+            document.getElementById('adm-p-price').value = target.price;
+            document.getElementById('adm-p-img').value = target.img;
+            document.getElementById('adm-p-link').value = target.link ? target.link : "";
+        }
 
-            if(!name || !price) { alert("الرجاء ملء حقول الاسم والسعر!"); return; }
+        // حفظ أو تعديل الحسابات والمنتجات من الادارة
+        function saveProductFromAdmin() {
+            let editId = document.getElementById('adm-editing-product-id').value;
+            let name = document.getElementById('adm-p-name').value;
+            let desc = document.getElementById('adm-p-desc').value;
+            let cat = document.getElementById('adm-p-cat').value;
+            let price = document.getElementById('adm-p-price').value;
+            let img = document.getElementById('adm-p-img').value;
+            let link = document.getElementById('adm-p-link').value;
 
-            if(id) {
-                // وضع التعديل (تحديث منتج موجود)
-                let prod = products.find(p => p.id == id);
-                prod.name = name; prod.desc = desc; prod.cat = cat; prod.price = parseFloat(price); prod.img = img; prod.link = link;
-                alert("تم تعديل بيانات المنتج وحفظها بنجاح!");
+            if(!name || !price) { alert("يرجى ملء اسم المنتج والسعر بدقة لإتمام العملية!"); return; }
+
+            if(editId) {
+                // وضع التحديث لمنتج موجود مسبقاً
+                let obj = currentProducts.find(p => p.id == editId);
+                obj.name = name; obj.desc = desc; obj.cat = cat; obj.price = parseFloat(price); obj.img = img; obj.link = link;
+                alert("✅ تم تعديل وتحديث بيانات الحساب بنجاح في المتجر!");
             } else {
-                // وضع الإضافة لمنتج جديد
-                products.push({
-                    id: Date.now(), name: name, desc: desc, cat: cat, price: parseFloat(price), img: img, link: link, reviews: ["منتج رائع وأنصح به"]
+                // وضع الإضافة لمنتج جديد كلياً
+                currentProducts.push({
+                    id: Date.now(), name: name, desc: desc, cat: cat, price: parseFloat(price), img: img, link: link, reviews: ["منتج ممتاز تسليم فوري تبارك الرحمن", "تعامل راقي جداً"]
                 });
-                alert("تم إضافة المنتج الجديد للقسم بنجاح!");
+                alert("✅ تم إضافة الحساب الجديد بنجاح للقسم المخصص له!");
             }
 
-            localStorage.setItem('ln_products', JSON.stringify(products));
-            clearProductForm();
-            renderAdminProducts();
+            localStorage.setItem('lion_heavy_products', JSON.stringify(currentProducts));
+            clearAdminProductInputs();
+            renderAdminProductsManagementTable();
         }
 
-        function loadProductToEdit(id) {
-            let p = products.find(prod => prod.id === id);
-            document.getElementById('edit-product-id').value = p.id;
-            document.getElementById('p-name').value = p.name;
-            document.getElementById('p-desc').value = p.desc;
-            document.getElementById('p-cat').value = p.cat;
-            document.getElementById('p-price').value = p.price;
-            document.getElementById('p-img').value = p.img;
-            document.getElementById('p-link').value = p.link;
-        }
-
-        function deleteProductFromAdmin(id) {
-            if(confirm("هل أنت متأكد من حذف هذا المنتج بالكامل من المتجر؟")) {
-                products = products.filter(p => p.id !== id);
-                localStorage.setItem('ln_products', JSON.stringify(products));
-                renderAdminProducts();
-                alert("تم حذف المنتج بنجاح!");
+        function deleteProductFromAdminPanel(id) {
+            if(confirm("هل أنت متأكد تماماً من رغبتك في حذف هذا المنتج نهائياً من المتجر؟")) {
+                currentProducts = currentProducts.filter(p => p.id !== id);
+                localStorage.setItem('lion_heavy_products', JSON.stringify(currentProducts));
+                renderAdminProductsManagementTable();
+                alert("تم حذف الحساب المحدد من المتجر بنجاح.");
             }
         }
 
-        function clearProductForm() {
-            document.getElementById('edit-product-id').value = "";
-            document.getElementById('p-name').value = "";
-            document.getElementById('p-desc').value = "";
-            document.getElementById('p-price').value = "";
-            document.getElementById('p-img').value = "";
-            document.getElementById('p-link').value = "";
+        function clearAdminProductInputs() {
+            document.getElementById('adm-editing-product-id').value = "";
+            document.getElementById('adm-p-name').value = "";
+            document.getElementById('adm-p-desc').value = "";
+            document.getElementById('adm-p-price').value = "";
+            document.getElementById('adm-p-img').value = "";
+            document.getElementById('adm-p-link').value = "";
         }
     </script>
 </body>
